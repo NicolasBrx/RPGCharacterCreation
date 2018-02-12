@@ -23,4 +23,37 @@ public class RPGCharacterCreation {
     new RPGCharacterCreationIHM().setVisible(true);
   }
   
+  /*
+  Pour chaque type de jeu, on veut une interface qui permet de saisir les caracteristiques
+  tout en prenant en compte les restrictions, les obligations et tout ce qui peut
+  etre utilisé selon les regles du jeu.
+  
+  Il faut aussi pouvoir sauvegarder les personnage créé dans un format qui pourra etre réutilisé
+  dans un autre plugin ou logiciel.
+  
+   - 1 classe specifique pour chaque type de personnage ?
+   - des fichiers de data ? => organisation ?
+
+  Ajouter les PNJ
+  
+  ADD
+  
+  
+  SR
+  
+  
+  AC
+  
+  
+  FS
+  
+  
+  P13
+  
+  
+  Generic?!
+  
+  
+  */
+  
 }
