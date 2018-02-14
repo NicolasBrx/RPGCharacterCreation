@@ -1,6 +1,8 @@
 package rpgcharactercreation;
 
 import ihm.RPGCharacterCreationIHM;
+import javax.swing.UnsupportedLookAndFeelException;
+import tools.RPGCCException;
 
 /**
  *
@@ -9,9 +11,16 @@ import ihm.RPGCharacterCreationIHM;
 public class RPGCharacterCreation {
 
   /**
+   * The IHM related to the plugin
+   */
+  private static RPGCharacterCreationIHM ihm;
+  
+  /**
+   * The main method to launch the IHM and initialize the user interface
+   * 
    * @param args the command line arguments
    */
-  public static void main(String[] args) {
+  public static void main(String[] args) throws RPGCCException{
     try {
       for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
         if ("Nimbus".equals(info.getName())) {
@@ -19,8 +28,18 @@ public class RPGCharacterCreation {
           break;
         }
       }
-    }catch(Exception ex){}
-    new RPGCharacterCreationIHM().setVisible(true);
+    }catch(ClassNotFoundException | InstantiationException | 
+            IllegalAccessException | UnsupportedLookAndFeelException ex){
+      throw new RPGCCException("Can't set the UI Look and Feel.");
+    }
+    ihm = new RPGCharacterCreationIHM();
+    if(args.length != 0){
+      ihm.setGame(args[0]);
+    }
+    else{
+      ihm.setGame("P13");
+    }
+    ihm.setVisible(true);
   }
   
   /*

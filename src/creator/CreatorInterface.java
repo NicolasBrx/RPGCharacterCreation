@@ -14,18 +14,13 @@ import java.util.HashMap;
  *  - when an error is possible, the method should check and store indication
  *    if one occurs;
  *  - internal information should be user transparent and specified if it not
- *    possible to do otherwise.
+ *    possible to do otherwise;
+ *  - a method should be set for "God Mode", i.e. the ability to go through
+ *    the normal player limitations.
  * 
  * @author Nicolas Brax
  */
 public interface CreatorInterface {
-  
-  
-  /**
-   * 
-   * @return 
-   */
-  public HashMap<String,Integer> getAttributes();
   
   /**
    * This method is used to validate a created character. It is validated when
@@ -43,5 +38,17 @@ public interface CreatorInterface {
    * @return A quick description of the last error that occured.
    */
   public String lastError();
+  
+  /**
+   * This method is used to save the current character for further uses. It 
+   * returns an boolean value to indicate if the save has been correctly done
+   * or if errors or corruptions occured.
+   * 
+   * It has to be noted that verification about the current character are to be
+   * made before this call if wanted.
+   * 
+   * @return True if the charachter is save, false otherwise.
+   */
+  public boolean saveCharacter();
   
 }

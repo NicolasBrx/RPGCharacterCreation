@@ -5,6 +5,9 @@
  */
 package ihm;
 
+import ihm.p13.P13NPCPanel;
+import ihm.p13.P13PCPanel;
+
 /**
  *
  * @author nicolas
@@ -12,10 +15,50 @@ package ihm;
 public class RPGCharacterCreationIHM extends javax.swing.JFrame {
 
   /**
+   * The game that is played of for which the dice launcher is needed.
+   */
+  private String game;
+  
+  /**
    * Creates new form RPGCharacterCreationIHM
    */
   public RPGCharacterCreationIHM() {
     initComponents();
+  }
+  
+  /**
+   * Load the right game mechanisms according to what has been choosen. It is 
+   * dedicated to be set by the plugin RPGGameChooser. To be set by another
+   * component, whatever it is, it MUST consider the game as follows:
+   * - ADD for Advanced Dungeons and Dragons;
+   * - SR for Shadowrun;
+   * - Ac for Call of Cthulhu;
+   * - P13 for Patient 13;
+   * - FS for Feng Shui;
+   * - Generic for Generic game (default choice is none is recognized).
+   * 
+   * @param game The game choosen.
+   */
+  public void setGame(String game){
+    this.game = game;
+    switch(this.game){
+      case "ADD":
+        break;
+      case "SR":
+        break;
+      case "AC":
+        break;
+      case "P13":
+        jtbCreationPanels.add("Player Characters", new P13PCPanel());
+        jtbCreationPanels.add("Non Player Characters", new P13NPCPanel());
+        revalidate();
+        repaint();
+        break;
+      case "FS":
+        break;
+      default:
+        break;
+    }
   }
 
   /**
@@ -27,25 +70,51 @@ public class RPGCharacterCreationIHM extends javax.swing.JFrame {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
+    jtbCreationPanels = new javax.swing.JTabbedPane();
+    jbtnQuit = new javax.swing.JButton();
+
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setTitle("RPG Character Creation v.0.0.0");
     setMaximumSize(new java.awt.Dimension(1024, 700));
     setMinimumSize(new java.awt.Dimension(1024, 700));
-    setPreferredSize(new java.awt.Dimension(1024, 700));
+    setResizable(false);
+
+    jbtnQuit.setText("Quit");
+    jbtnQuit.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jbtnQuitActionPerformed(evt);
+      }
+    });
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 1024, Short.MAX_VALUE)
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jtbCreationPanels)
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGap(0, 943, Short.MAX_VALUE)
+            .addComponent(jbtnQuit)))
+        .addContainerGap())
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 700, Short.MAX_VALUE)
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(jtbCreationPanels, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(jbtnQuit)
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
+
+  private void jbtnQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnQuitActionPerformed
+    System.exit(0);
+  }//GEN-LAST:event_jbtnQuitActionPerformed
 
   /**
    * @param args the command line arguments
@@ -83,5 +152,7 @@ public class RPGCharacterCreationIHM extends javax.swing.JFrame {
   }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JButton jbtnQuit;
+  private javax.swing.JTabbedPane jtbCreationPanels;
   // End of variables declaration//GEN-END:variables
 }
