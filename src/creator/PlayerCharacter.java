@@ -6,18 +6,23 @@ package creator;
  * 
  * @author Nicolas Brax
  */
-public class PlayerCharacter {
+public abstract class PlayerCharacter implements CreatorInterface {
   
   /**
    * 
    */
-  private String playerName;
+  protected String playerName;
+  
+  /**
+   * 
+   */
+  protected String lastError;
   
   /**
    * 
    * @param playerName 
    */
-  PlayerCharacter(String playerName){
+  public PlayerCharacter(String playerName){
     this.playerName = playerName;
   }
   
@@ -35,6 +40,19 @@ public class PlayerCharacter {
    */
   public void setName(String playerName){
     this.playerName = playerName;
+  }
+  
+  /**
+   * This methods is used to indicate to the user what was the last error in the 
+   * creation process. This can be used by the user interface in order to inform
+   * the user and guide him for the right thing to do.
+   * 
+   * @return A quick description of the last error that occured.
+   */
+  @Override
+  public String lastError(){
+    
+    return "";
   }
   
 }

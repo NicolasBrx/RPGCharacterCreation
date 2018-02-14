@@ -7,8 +7,8 @@ import java.util.HashMap;
  * playable) using the RPG Character Creation follows a good designed and is
  * usable in the RPG Software Suit.
  * 
- * To be compliant with the user interface, all the methods that are not defined
- * in this interface MUST use the following guidelines:
+ * To be compliant with the user interface, all the methods  and attributes that 
+ * are not defined in this interface MUST use the following guidelines:
  *  - the setter methods should return a int value equals to 0 when an 
  *    error occurs;
  *  - when an error is possible, the method should check and store indication
@@ -16,7 +16,11 @@ import java.util.HashMap;
  *  - internal information should be user transparent and specified if it not
  *    possible to do otherwise;
  *  - a method should be set for "God Mode", i.e. the ability to go through
- *    the normal player limitations.
+ *    the normal player limitations;
+ *  - each attribute of importance might see setter and getter methods as well
+ *    as modification methods in order to be used by other plugins;
+ *  - as the user interface is fully independant, design will be based onto
+ *    the methods in the creation class so plan well.
  * 
  * @author Nicolas Brax
  */

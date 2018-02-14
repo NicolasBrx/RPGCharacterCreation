@@ -1,14 +1,35 @@
 package creator.p13;
 
 import creator.CreatorInterface;
+import creator.PlayerCharacter;
 
 /**
  *
  * @author Nicolas Brax
  */
-public class P13PCCreation implements CreatorInterface{
+public class P13PCCreation extends PlayerCharacter{
   
-  public P13PCCreation(){
+  /**
+   * 
+   */
+  private int lucidity;
+  
+  /**
+   * 
+   */
+  private int coldblood;
+  
+  /**
+   * 
+   */
+  private int vitality;
+  
+  
+  /**
+   * 
+   */
+  public P13PCCreation(String playerName){
+    super(playerName);
     
   }
   
@@ -18,23 +39,15 @@ public class P13PCCreation implements CreatorInterface{
    * This method is used to validate a created character. It is validated when
    * it complies with all the rules and specific scores according to the rules.
    * 
+   * In Patient 13, this means:
+   *  - 
+   * 
    * @return True if the character is consistant with the rules, false otherwise.
    */
+  @Override
   public boolean validateCharacter(){
     
     return false;
-  }
-  
-  /**
-   * This methods is used to indicate to the user what was the last error in the 
-   * creation process. This can be used by the user interface in order to inform
-   * the user and guide him for the right thing to do.
-   * 
-   * @return A quick description of the last error that occured.
-   */
-  public String lastError(){
-    
-    return "";
   }
   
   /**
@@ -47,9 +60,82 @@ public class P13PCCreation implements CreatorInterface{
    * 
    * @return True if the charachter is save, false otherwise.
    */
+  @Override
   public boolean saveCharacter(){
     
     return false;
+  }
+
+  /**
+   * 
+   * @return 
+   */
+  public int getLucidity() {
+    return lucidity;
+  }
+
+  /**
+   * 
+   * @param lucidity 
+   */
+  public void setLucidity(int lucidity) {
+    this.lucidity = lucidity;
+  }
+  
+  /**
+   * 
+   * @param modifier 
+   */
+  public void modifyLucidity(int modifier){
+    
+  }
+
+  /**
+   * 
+   * @return 
+   */
+  public int getColdblood() {
+    return coldblood;
+  }
+
+  /**
+   * 
+   * @param coldblood 
+   */
+  public void setColdblood(int coldblood) {
+    this.coldblood = coldblood;
+  }
+  
+  /**
+   * 
+   * @param modifier 
+   */
+  public void modifyColdblood(int modifier){
+    
+  }
+
+  /**
+   * 
+   * @return 
+   */
+  public int getVitality() {
+    return vitality;
+  }
+
+  /**
+   * 
+   * @param vitality 
+   */
+  public void setVitality(int vitality) {
+    this.vitality = vitality;
+  }
+  
+  /**
+   * 
+   * @param modifier 
+   */
+  public void modifyVitality(int modifier){
+    
   }
   
 }
