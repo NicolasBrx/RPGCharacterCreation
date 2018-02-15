@@ -455,9 +455,11 @@ public class P13PCPanel extends javax.swing.JPanel {
       switch(((JRadioButton)evt.getSource()).getName()){
         case "jrbSane":
           creator.setSane(true);
+          creator.setGodMode(false);
           break;
         case "jrbAffected":
           creator.setSane(false);
+          creator.setGodMode(false);
           break;
         case "jrbGod":
           creator.setGodMode(true);
