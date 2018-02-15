@@ -7,6 +7,8 @@ package ihm;
 
 import ihm.p13.P13NPCPanel;
 import ihm.p13.P13PCPanel;
+import java.net.URL;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -24,6 +26,12 @@ public class RPGCharacterCreationIHM extends javax.swing.JFrame {
    */
   public RPGCharacterCreationIHM() {
     initComponents();
+    
+    this.setTitle("RPG Character Creation v.0.0.3");                            // title of the frame and software
+    URL iconURL = getClass().getResource("favicon.png");                        // icon for the frame
+    ImageIcon icon = new ImageIcon(iconURL);
+    this.setIconImage(icon.getImage());
+    
   }
   
   /**

@@ -22,6 +22,9 @@ import java.util.HashMap;
  *  - as the user interface is fully independant, design will be based onto
  *    the methods in the creation class so plan well.
  * 
+ * Finally note that this plugin is ONLY dedicated to the character creation, 
+ * it CANNOT be used for character management.
+ * 
  * @author Nicolas Brax
  */
 public interface CreatorInterface {

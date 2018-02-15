@@ -12,6 +12,11 @@ public class P13PCCreation extends PlayerCharacter{
   /**
    * 
    */
+  private boolean sane;
+  
+  /**
+   * 
+   */
   private int lucidity;
   
   /**
@@ -85,9 +90,33 @@ public class P13PCCreation extends PlayerCharacter{
   /**
    * 
    * @param modifier 
+   * @return  
    */
-  public void modifyLucidity(int modifier){
-    
+  public boolean modifyLucidity(int modifier){
+    boolean toReturn = true;
+    if(!godMode){
+      if(remainingPoints() == 0 && modifier > 0){
+        lastError = "There are no points left.";
+        toReturn = false;
+      }
+      else if((this.lucidity + modifier < 5) || (this.lucidity + modifier > 13)){
+        lastError = "Attribute value should be between 5 and 13.";
+        toReturn = false;
+      }
+      else if((this.lucidity + this.coldblood + this.vitality) > (sane ? 26 : 29)){
+        lastError = "The sum of the attributes values can not exceed " 
+                  + (sane ? 26 : 29)
+                  + ".";
+        toReturn = false;
+      }
+      else{
+        this.lucidity += modifier;
+      }
+    }//if godMode
+    else{
+      this.lucidity += modifier;
+    }
+    return toReturn;
   }
 
   /**
@@ -109,9 +138,33 @@ public class P13PCCreation extends PlayerCharacter{
   /**
    * 
    * @param modifier 
+   * @return  
    */
-  public void modifyColdblood(int modifier){
-    
+  public boolean modifyColdblood(int modifier){
+    boolean toReturn = true;
+    if(!godMode){
+      if(remainingPoints() == 0 && modifier > 0){
+        lastError = "There are no points left.";
+        toReturn = false;
+      }
+      else if((this.coldblood + modifier < 5) || (this.coldblood + modifier > 13)){
+        lastError = "Attribute value should be between 5 and 13.";
+        toReturn = false;
+      }
+      else if((this.lucidity + this.coldblood + this.vitality) > (sane ? 26 : 29)){
+        lastError = "The sum of the attributes values can not exceed " 
+                  + (sane ? 26 : 29)
+                  + ".";
+        toReturn = false;
+      }
+      else{
+        this.coldblood += modifier;
+      }
+    }//if godMode
+    else{
+      this.coldblood += modifier;
+    }
+    return toReturn;
   }
 
   /**
@@ -133,9 +186,53 @@ public class P13PCCreation extends PlayerCharacter{
   /**
    * 
    * @param modifier 
+   * @return  
    */
-  public void modifyVitality(int modifier){
-    
+  public boolean modifyVitality(int modifier){
+    boolean toReturn = true;
+    if(!godMode){
+      if(remainingPoints() == 0 && modifier > 0){
+        lastError = "There are no points left.";
+        toReturn = false;
+      }
+      else if((this.vitality + modifier < 5) || (this.vitality + modifier > 13)){
+        lastError = "Attribute value should be between 5 and 13.";
+        toReturn = false;
+      }
+      else if((this.lucidity + this.coldblood + this.vitality) > (sane ? 26 : 29)){
+        lastError = "The sum of the attributes values can not exceed " 
+                  + (sane ? 26 : 29)
+                  + ".";
+        toReturn = false;
+      }
+      else{
+        this.vitality += modifier;
+      }
+    }//if godMode
+    else{
+      this.vitality += modifier;
+    }
+    return toReturn;
+  }
+  
+  /**
+   * 
+   * @param sane 
+   */
+  public void setSane(boolean sane){
+    this.sane = sane;
+  }
+  
+  public boolean isSane(){
+    return this.sane;
+  }
+  
+  /**
+   * 
+   * @return 
+   */
+  public int remainingPoints(){
+    return ((sane ? 26 : 29) - this.lucidity - this.coldblood - this.vitality);
   }
   
 }

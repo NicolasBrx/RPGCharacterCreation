@@ -1,18 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ihm.p13;
 
+import creator.p13.P13PCCreation;
 import java.awt.Dimension;
+import java.net.URL;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 
 /**
  *
- * @author nicolas
+ * @author Nicolas Brax
  */
 public class P13PCPanel extends javax.swing.JPanel {
+  
+  /**
+   * 
+   */
+  private P13PCCreation creator;
+  
+  /**
+   * 
+   */
+  private boolean saveNeeded;
+  
+  /**
+   * 
+   */
+  private boolean started;
 
   /**
    * Creates new form AcPCPanel
@@ -23,6 +38,30 @@ public class P13PCPanel extends javax.swing.JPanel {
     this.setMinimumSize(new Dimension(1000,600));
     this.setMaximumSize(new Dimension(1000,600));
     this.setPreferredSize(new Dimension(1000,600));
+    
+    jlblLucidity.setText("");
+    jlblColdblood.setText("");
+    jlblVitality.setText("");
+    jlblRemaining.setText("");
+    
+    jbtnColdbloodMinus.setEnabled(false);
+    jbtnColdbloodPlus.setEnabled(false);
+    jbtnVitalityMinus.setEnabled(false);
+    jbtnVitalityPlus.setEnabled(false);
+    jbtnLucidityMinus.setEnabled(false);
+    jbtnLucidityPlus.setEnabled(false);
+    jbtnSave.setEnabled(false);
+    jbtnErase.setEnabled(false);
+    jbtnHelp.setEnabled(false);
+    jrbSane.setEnabled(false);
+    jrbAffected.setEnabled(false);
+    jrbGod.setEnabled(false);
+    
+    jtfPatientName.setEnabled(false);
+    jtfPatientAge.setEnabled(false);
+    
+    saveNeeded = false;
+    started = false;
     
   }
 
@@ -35,9 +74,11 @@ public class P13PCPanel extends javax.swing.JPanel {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
+    buttonGroup1 = new javax.swing.ButtonGroup();
     jPanel1 = new javax.swing.JPanel();
     jLabel3 = new javax.swing.JLabel();
     jtfPlayerName = new javax.swing.JTextField();
+    jbtnCreate = new javax.swing.JButton();
     jLabel1 = new javax.swing.JLabel();
     jtfPatientName = new javax.swing.JTextField();
     jLabel5 = new javax.swing.JLabel();
@@ -56,9 +97,14 @@ public class P13PCPanel extends javax.swing.JPanel {
     jbtnColdbloodMinus = new javax.swing.JButton();
     jbtnVitalityPlus = new javax.swing.JButton();
     jbtnVitalityMinus = new javax.swing.JButton();
-    jButton1 = new javax.swing.JButton();
-    jButton2 = new javax.swing.JButton();
-    jButton3 = new javax.swing.JButton();
+    jbtnSave = new javax.swing.JButton();
+    jbtnErase = new javax.swing.JButton();
+    jbtnHelp = new javax.swing.JButton();
+    jlblRemaining = new javax.swing.JLabel();
+    jLabel6 = new javax.swing.JLabel();
+    jrbSane = new javax.swing.JRadioButton();
+    jrbAffected = new javax.swing.JRadioButton();
+    jrbGod = new javax.swing.JRadioButton();
 
     setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
     setMaximumSize(new java.awt.Dimension(1000, 600));
@@ -69,6 +115,13 @@ public class P13PCPanel extends javax.swing.JPanel {
 
     jLabel3.setText("Player Name:");
 
+    jbtnCreate.setText("Create");
+    jbtnCreate.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jbtnCreateActionPerformed(evt);
+      }
+    });
+
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
@@ -77,8 +130,12 @@ public class P13PCPanel extends javax.swing.JPanel {
         .addContainerGap()
         .addComponent(jLabel3)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(jtfPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+        .addComponent(jtfPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
         .addContainerGap())
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(jbtnCreate)
+        .addGap(19, 19, 19))
     );
     jPanel1Layout.setVerticalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,6 +144,8 @@ public class P13PCPanel extends javax.swing.JPanel {
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabel3)
           .addComponent(jtfPlayerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(3, 3, 3)
+        .addComponent(jbtnCreate)
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
@@ -102,15 +161,9 @@ public class P13PCPanel extends javax.swing.JPanel {
 
     jLabel4.setText("Lucidity:");
 
-    jlblLucidity.setText("5");
-
     jLabel7.setText("Cold Blood:");
 
-    jlblColdblood.setText("5");
-
     jLabel9.setText("Vitality:");
-
-    jlblVitality.setText("5");
 
     jbtnLucidityPlus.setText("-");
     jbtnLucidityPlus.setName("lMinus"); // NOI18N
@@ -121,10 +174,10 @@ public class P13PCPanel extends javax.swing.JPanel {
     });
 
     jbtnLucidityMinus.setText("+");
-    jbtnLucidityMinus.setMaximumSize(new java.awt.Dimension(43, 24));
-    jbtnLucidityMinus.setMinimumSize(new java.awt.Dimension(43, 24));
+    jbtnLucidityMinus.setMaximumSize(new java.awt.Dimension(38, 24));
+    jbtnLucidityMinus.setMinimumSize(new java.awt.Dimension(38, 24));
     jbtnLucidityMinus.setName("lPlus"); // NOI18N
-    jbtnLucidityMinus.setPreferredSize(new java.awt.Dimension(43, 24));
+    jbtnLucidityMinus.setPreferredSize(new java.awt.Dimension(38, 24));
     jbtnLucidityMinus.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         attributeActionPerformed(evt);
@@ -140,7 +193,10 @@ public class P13PCPanel extends javax.swing.JPanel {
     });
 
     jbtnColdbloodMinus.setText("+");
+    jbtnColdbloodMinus.setMaximumSize(new java.awt.Dimension(38, 24));
+    jbtnColdbloodMinus.setMinimumSize(new java.awt.Dimension(38, 24));
     jbtnColdbloodMinus.setName("cPlus"); // NOI18N
+    jbtnColdbloodMinus.setPreferredSize(new java.awt.Dimension(38, 24));
     jbtnColdbloodMinus.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         attributeActionPerformed(evt);
@@ -156,18 +212,50 @@ public class P13PCPanel extends javax.swing.JPanel {
     });
 
     jbtnVitalityMinus.setText("+");
+    jbtnVitalityMinus.setMaximumSize(new java.awt.Dimension(38, 24));
+    jbtnVitalityMinus.setMinimumSize(new java.awt.Dimension(38, 24));
     jbtnVitalityMinus.setName("vPlus"); // NOI18N
+    jbtnVitalityMinus.setPreferredSize(new java.awt.Dimension(38, 24));
     jbtnVitalityMinus.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         attributeActionPerformed(evt);
       }
     });
 
-    jButton1.setText("Save Character");
+    jbtnSave.setText("Save Character");
 
-    jButton2.setText("Reset Fields");
+    jbtnErase.setText("Reset Fields");
 
-    jButton3.setText("Help");
+    jbtnHelp.setText("Help");
+
+    jLabel6.setText("remaining points.");
+
+    buttonGroup1.add(jrbSane);
+    jrbSane.setText("Sane Patient");
+    jrbSane.setName("jrbSane"); // NOI18N
+    jrbSane.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jrbPatientType(evt);
+      }
+    });
+
+    buttonGroup1.add(jrbAffected);
+    jrbAffected.setText("Affected Patient");
+    jrbAffected.setName("jrbAffected"); // NOI18N
+    jrbAffected.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jrbPatientType(evt);
+      }
+    });
+
+    buttonGroup1.add(jrbGod);
+    jrbGod.setText("God Mode");
+    jrbGod.setName("jrbGod"); // NOI18N
+    jrbGod.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jrbPatientType(evt);
+      }
+    });
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
@@ -192,10 +280,14 @@ public class P13PCPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
               .addGroup(layout.createSequentialGroup()
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jlblInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
+                .addComponent(jlblInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())))
           .addGroup(layout.createSequentialGroup()
             .addComponent(jLabel2)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(jlblRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jLabel6)
             .addGap(0, 0, Short.MAX_VALUE))
           .addGroup(layout.createSequentialGroup()
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,30 +308,35 @@ public class P13PCPanel extends javax.swing.JPanel {
                       .addComponent(jbtnLucidityPlus)
                       .addComponent(jbtnColdbloodPlus))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                      .addComponent(jbtnLucidityMinus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                      .addComponent(jbtnColdbloodMinus, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                      .addComponent(jbtnColdbloodMinus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                      .addComponent(jbtnLucidityMinus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                   .addGroup(layout.createSequentialGroup()
                     .addComponent(jbtnVitalityPlus)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(jbtnVitalityMinus)))
+                    .addComponent(jbtnVitalityMinus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addComponent(jrbGod)
+                  .addComponent(jrbSane)
+                  .addComponent(jrbAffected))
                 .addGap(0, 0, Short.MAX_VALUE))
               .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbtnHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(jbtnSave)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jbtnErase, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addContainerGap())))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jlblInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+          .addComponent(jlblInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(layout.createSequentialGroup()
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -249,65 +346,191 @@ public class P13PCPanel extends javax.swing.JPanel {
               .addComponent(jLabel5)
               .addComponent(jtfPatientAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGap(18, 18, 18)
-            .addComponent(jLabel2)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jLabel2)
+              .addComponent(jlblRemaining)
+              .addComponent(jLabel6))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
               .addComponent(jLabel4)
               .addComponent(jlblLucidity)
               .addComponent(jbtnLucidityPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(jbtnLucidityMinus, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+              .addComponent(jbtnLucidityMinus, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jrbSane))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
               .addComponent(jLabel7)
               .addComponent(jlblColdblood)
               .addComponent(jbtnColdbloodPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(jbtnColdbloodMinus, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+              .addComponent(jbtnColdbloodMinus, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jrbAffected))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
               .addComponent(jLabel9)
               .addComponent(jlblVitality)
               .addComponent(jbtnVitalityPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(jbtnVitalityMinus, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(0, 381, Short.MAX_VALUE))
+              .addComponent(jbtnVitalityMinus, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jrbGod))
+            .addGap(0, 370, Short.MAX_VALUE))
           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-              .addComponent(jButton2)
-              .addComponent(jButton1)
-              .addComponent(jButton3))
+              .addComponent(jbtnErase)
+              .addComponent(jbtnSave)
+              .addComponent(jbtnHelp))
             .addContainerGap())))
     );
   }// </editor-fold>//GEN-END:initComponents
 
   private void attributeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attributeActionPerformed
     
-    System.out.println(((JButton)evt.getSource()).getName()); // do not work, display null... ?!
+    boolean modificationReturn = true;
+    switch(((JButton)evt.getSource()).getName()){
+      case "lPlus":
+        modificationReturn = creator.modifyLucidity(1);
+        jlblLucidity.setText(String.valueOf(creator.getLucidity()));
+        break;
+      case "lMinus":
+        modificationReturn = creator.modifyLucidity(-1);
+        jlblLucidity.setText(String.valueOf(creator.getLucidity()));
+        break;
+      case "cPlus":
+        modificationReturn = creator.modifyColdblood(1);
+        jlblColdblood.setText(String.valueOf(creator.getColdblood()));
+        break;
+      case "cMinus":
+        modificationReturn = creator.modifyColdblood(-1);
+        jlblColdblood.setText(String.valueOf(creator.getColdblood()));
+        break;
+      case "vPlus":
+        modificationReturn = creator.modifyVitality(1);
+        jlblVitality.setText(String.valueOf(creator.getVitality()));
+        break;
+      case "vMinus":
+        modificationReturn = creator.modifyVitality(-1);
+        jlblVitality.setText(String.valueOf(creator.getVitality()));
+        break;
+      default:
+        System.err.println("Case should not be reached.");
+        break;
+    }//switch
+    if(!modificationReturn){
+      jlblInformation.setText("<html><body style='width:640px'>" + creator.lastError());
+    }
+    else{
+      jlblInformation.setText("<html><body style='width:640px'>" + creator.lastError());
+      jlblRemaining.setText(String.valueOf(creator.remainingPoints()));  
+    }
     
   }//GEN-LAST:event_attributeActionPerformed
 
+  private void jbtnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCreateActionPerformed
+    
+    creator = new P13PCCreation(jtfPlayerName.getText());
+    
+    jbtnCreate.setEnabled(false);
+    jtfPatientName.setEnabled(true);
+    jtfPatientAge.setEnabled(true);
+    jbtnSave.setEnabled(true);
+    jbtnErase.setEnabled(true);
+    jbtnHelp.setEnabled(true);
+    jrbSane.setEnabled(true);
+    jrbAffected.setEnabled(true);
+    jrbGod.setEnabled(true);
+    
+  }//GEN-LAST:event_jbtnCreateActionPerformed
+
+  private void jrbPatientType(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbPatientType
+    
+    int dialogResult = JOptionPane.YES_OPTION;
+    if(!started){
+      started = true;
+    }
+    else{
+      int dialogButton = JOptionPane.YES_NO_OPTION;                             
+      dialogResult = JOptionPane.showConfirmDialog (null, "Warning. Changing creation "
+              + "mode will reset attributes and traits. Pursue?","Warning",dialogButton);
+    }
+    if(dialogResult == JOptionPane.YES_OPTION){
+      switch(((JRadioButton)evt.getSource()).getName()){
+        case "jrbSane":
+          creator.setSane(true);
+          break;
+        case "jrbAffected":
+          creator.setSane(false);
+          break;
+        case "jrbGod":
+          creator.setGodMode(true);
+          break;
+        default:
+          System.err.println("Case should not be reached.");
+          break;
+      }//switch
+
+      jlblLucidity.setText("5");
+      jlblColdblood.setText("5");
+      jlblVitality.setText("5");
+      jbtnColdbloodMinus.setEnabled(true);
+      jbtnColdbloodPlus.setEnabled(true);
+      jbtnVitalityMinus.setEnabled(true);
+      jbtnVitalityPlus.setEnabled(true);
+      jbtnLucidityMinus.setEnabled(true);
+      jbtnLucidityPlus.setEnabled(true);
+      creator.setLucidity(5);
+      creator.setVitality(5);
+      creator.setColdblood(5);
+      jlblRemaining.setText(String.valueOf(creator.remainingPoints()));
+    }//YES
+    else{
+      if(creator.isGodMode()){
+        jrbSane.setSelected(false);
+        jrbAffected.setSelected(false);
+        jrbGod.setSelected(true);
+      }
+      if(creator.isSane()){
+        jrbSane.setSelected(true);
+        jrbAffected.setSelected(false);
+        jrbGod.setSelected(false);
+      }
+      else if(!creator.isSane()){
+        jrbSane.setSelected(false);
+        jrbAffected.setSelected(true);
+        jrbGod.setSelected(false);
+      }
+    }
+    
+  }//GEN-LAST:event_jrbPatientType
+
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton jButton1;
-  private javax.swing.JButton jButton2;
-  private javax.swing.JButton jButton3;
+  private javax.swing.ButtonGroup buttonGroup1;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;
   private javax.swing.JLabel jLabel3;
   private javax.swing.JLabel jLabel4;
   private javax.swing.JLabel jLabel5;
+  private javax.swing.JLabel jLabel6;
   private javax.swing.JLabel jLabel7;
   private javax.swing.JLabel jLabel9;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JButton jbtnColdbloodMinus;
   private javax.swing.JButton jbtnColdbloodPlus;
+  private javax.swing.JButton jbtnCreate;
+  private javax.swing.JButton jbtnErase;
+  private javax.swing.JButton jbtnHelp;
   private javax.swing.JButton jbtnLucidityMinus;
   private javax.swing.JButton jbtnLucidityPlus;
+  private javax.swing.JButton jbtnSave;
   private javax.swing.JButton jbtnVitalityMinus;
   private javax.swing.JButton jbtnVitalityPlus;
   private javax.swing.JLabel jlblColdblood;
   private javax.swing.JLabel jlblInformation;
   private javax.swing.JLabel jlblLucidity;
+  private javax.swing.JLabel jlblRemaining;
   private javax.swing.JLabel jlblVitality;
+  private javax.swing.JRadioButton jrbAffected;
+  private javax.swing.JRadioButton jrbGod;
+  private javax.swing.JRadioButton jrbSane;
   private javax.swing.JTextField jtfPatientAge;
   private javax.swing.JTextField jtfPatientName;
   private javax.swing.JTextField jtfPlayerName;
