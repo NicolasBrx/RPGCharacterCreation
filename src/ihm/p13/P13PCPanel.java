@@ -384,6 +384,10 @@ public class P13PCPanel extends javax.swing.JPanel {
 
   private void attributeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attributeActionPerformed
     
+    if(!started){
+      started = true;
+    }
+    
     boolean modificationReturn = true;
     switch(((JButton)evt.getSource()).getName()){
       case "lPlus":
@@ -443,14 +447,13 @@ public class P13PCPanel extends javax.swing.JPanel {
   private void jrbPatientType(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbPatientType
     
     int dialogResult = JOptionPane.YES_OPTION;
-    if(!started){
-      started = true;
-    }
-    else{
+    
+    if(started){
       int dialogButton = JOptionPane.YES_NO_OPTION;                             
       dialogResult = JOptionPane.showConfirmDialog (null, "Warning. Changing creation "
               + "mode will reset attributes and traits. Pursue?","Warning",dialogButton);
     }
+    
     if(dialogResult == JOptionPane.YES_OPTION){
       switch(((JRadioButton)evt.getSource()).getName()){
         case "jrbSane":
