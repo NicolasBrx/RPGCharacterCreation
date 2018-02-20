@@ -1,7 +1,7 @@
 package creator.p13;
 
-import creator.CreatorInterface;
 import creator.PlayerCharacter;
+import java.util.HashMap;
 
 /**
  *
@@ -29,6 +29,11 @@ public class P13PCCreation extends PlayerCharacter{
    */
   private int vitality;
   
+  
+  /**
+   * 
+   */
+  private HashMap<String,Integer> lineaments;
   
   /**
    * 
