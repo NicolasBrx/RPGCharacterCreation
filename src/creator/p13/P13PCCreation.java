@@ -40,7 +40,7 @@ public class P13PCCreation extends PlayerCharacter{
    */
   public P13PCCreation(String playerName){
     super(playerName);
-    
+    lineaments = new HashMap<>();
   }
   
   

@@ -261,7 +261,7 @@ public class P13PCPanel extends javax.swing.JPanel {
 
     jtblLineaments.setModel(new javax.swing.table.DefaultTableModel(
       new Object [][] {
-
+        {null, null}
       },
       new String [] {
         "Lineaments", "Value"
@@ -456,6 +456,25 @@ public class P13PCPanel extends javax.swing.JPanel {
     else{
       jlblInformation.setText("<html><body style='width:640px'>" + creator.lastError());
       jlblRemaining.setText(String.valueOf(creator.remainingPoints()));  
+      if(!saveNeeded){
+        saveNeeded = true;
+        //this.getParent().;
+        
+        /*
+        public void save(boolean save){
+    this.saveNeeded = save;
+    if(save){
+      if(!this.getTitle().contains("*")){
+        this.setTitle("*" + this.getTitle());
+      }  
+    }
+    else{
+      this.setTitle(this.getTitle().substring(1));
+    }
+  }
+        
+        */
+      }
     }
     
   }//GEN-LAST:event_attributeActionPerformed
@@ -520,6 +539,11 @@ public class P13PCPanel extends javax.swing.JPanel {
       jtblLineaments.setEnabled(true);
       
       DefaultTableModel model = (DefaultTableModel) jtblLineaments.getModel();
+      if (model.getRowCount() > 0) {
+        for (int i = model.getRowCount() - 1; i > -1; i--) {
+            model.removeRow(i);
+        }
+      }
       if(!creator.isSane()){
         model.addRow(new Object[]{"",3});
         model.addRow(new Object[]{"",2});
@@ -528,7 +552,7 @@ public class P13PCPanel extends javax.swing.JPanel {
       model.addRow(new Object[]{"",1});
       model.addRow(new Object[]{"",-1});
       model.addRow(new Object[]{"",-2});
-      if(!creator.isGodMode()){
+      if(creator.isGodMode()){ 
         for(int i = 0 ; i < 10 ; ++i){
           model.addRow(new Object[]{"",0});
         }

@@ -1,7 +1,5 @@
 package creator;
 
-import java.util.HashMap;
-
 /**
  * This interface ensures that every class used for character (playable or non
  * playable) using the RPG Character Creation follows a good designed and is
