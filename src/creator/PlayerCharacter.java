@@ -25,12 +25,18 @@ public abstract class PlayerCharacter implements CreatorInterface {
   
   /**
    * 
+   */
+  protected CivilStatus civilian;
+  
+  /**
+   * 
    * @param playerName 
    */
   public PlayerCharacter(String playerName){
     this.playerName = playerName;
     this.godMode = false;
     this.lastError = "";
+    this.civilian = new CivilStatus();
   }
   
   /**
@@ -63,6 +69,134 @@ public abstract class PlayerCharacter implements CreatorInterface {
    */
   public void setGodMode(boolean godMode) {
     this.godMode = godMode;
+  }
+  
+  /**
+   * 
+   * @return 
+   */
+  public boolean isFemale() {
+    return civilian.isFemale();
+  }
+
+  /**
+   * 
+   * @param female 
+   */
+  public void setFemale(boolean female) {
+    civilian.setFemale(female);
+  }
+
+  /**
+   * 
+   * @return 
+   */
+  public String getFamilyname() {
+    return civilian.getFamilyname();
+  }
+
+  /**
+   * 
+   * @param familyname 
+   */
+  public void setFamilyname(String familyname) {
+    civilian.setFamilyname(familyname);
+  }
+
+  /**
+   * 
+   * @return 
+   */
+  public String getFirstname() {
+    return civilian.getFirstname();
+  }
+
+  /**
+   * 
+   * @param firstname 
+   */
+  public void setFirstname(String firstname) {
+    civilian.setFirstname(firstname);
+  }
+  
+  /**
+   * 
+   * @return 
+   */
+  public String getSurname() {
+    return civilian.getSurname();
+  }
+
+  /**
+   * 
+   * @param surname 
+   */
+  public void setSurname(String surname) {
+    civilian.setSurname(surname);
+  }
+
+  /**
+   * 
+   * @return 
+   */
+  public int getAge() {
+    return civilian.getAge();
+  }
+
+  /**
+   * 
+   * @param age 
+   */
+  public void setAge(int age) {
+    civilian.setAge(age);
+  }
+
+  /**
+   * 
+   * @return 
+   */
+  public double getSize() {
+    return civilian.getSize();
+  }
+
+  /**
+   * 
+   * @param size 
+   */
+  public void setSize(double size) {
+    civilian.setSize(size);
+  }
+
+  /**
+   * 
+   * @return 
+   */
+  public double getWeigth() {
+    return civilian.getWeigth();
+  }
+
+  /**
+   * 
+   * @param weigth 
+   */
+  public void setWeigth(double weigth) {
+    civilian.setWeigth(weigth);
+  }
+
+  /**
+   * 
+   * @return 
+   */
+  public String getEyecolor() {
+    return civilian.getEyecolor();
+  }
+
+  /**
+   * 
+   * @param eyecolor 
+   */
+  public void setEyecolor(String eyecolor) {
+    civilian.setEyecolor(eyecolor);
   }
   
   /**

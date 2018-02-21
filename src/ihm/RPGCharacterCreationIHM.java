@@ -5,11 +5,11 @@
  */
 package ihm;
 
+import ihm.p13.P13NPCPanel;
 import ihm.p13.PC13Panel;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  *
@@ -65,7 +65,7 @@ public class RPGCharacterCreationIHM extends javax.swing.JFrame {
       case "P13":
         creation = new PC13Panel();
         jtbCreationPanels.add("Player Characters", (PC13Panel)creation);
-        //jtbCreationPanels.add("Non Player Characters", new P13NPCPanel());
+        jtbCreationPanels.add("Non Player Characters", new P13NPCPanel());
         revalidate();
         repaint();
         break;
@@ -132,7 +132,7 @@ public class RPGCharacterCreationIHM extends javax.swing.JFrame {
       int dialogButton = JOptionPane.YES_NO_OPTION;                             // proposes to do so
       int dialogResult = JOptionPane.showConfirmDialog (null, "Would you like to save before quit?","Warning",dialogButton);
       if(dialogResult == JOptionPane.YES_OPTION){
-        //saveScenario();
+        creation.saveCharacter();
       }
     }
     System.exit(0);

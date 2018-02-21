@@ -30,10 +30,17 @@ public interface CreatorInterface {
   /**
    * This method is used to validate a created character. It is validated when
    * it complies with all the rules and specific scores according to the rules.
+   * It return the sequence "OK" when the character has pass the checks and a
+   * sequence containing information on the fields preventing the validation
+   * success.
    * 
-   * @return True if the character is consistant with the rules, false otherwise.
+   * This last sequence has to be documented in each class implementing
+   * this method.
+   * 
+   * @return "OK" if the character is consistant with the rules, another
+   *           sequence if not.
    */
-  public boolean validateCharacter();
+  public String validateCharacter();
   
   /**
    * This methods is used to indicate to the user what was the last error in the 

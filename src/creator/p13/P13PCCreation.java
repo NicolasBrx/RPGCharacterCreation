@@ -29,7 +29,6 @@ public class P13PCCreation extends PlayerCharacter{
    */
   private int vitality;
   
-  
   /**
    * 
    */
@@ -56,14 +55,53 @@ public class P13PCCreation extends PlayerCharacter{
    * it complies with all the rules and specific scores according to the rules.
    * 
    * In Patient 13, this means:
-   *  - 
+   *  - 26 or 29 points for the attributes according to the sane or affected 
+   *    state of the patient;
+   *  - each attribute score must be between 5 and 13 included;
+   *  - {+2;+1;-1;-2} or {+3;+2+2;+1;-1;-2} for the lineaments scores according
+   *    to the sane or affected of the patient;
+   *  - some information: name, age, surname.
+   * 
+   * In case of error while validating, the method returns a sequence containing 
+   * the following options (preceeded by '-'):
+   *  - "name": the name is not given;
+   *  - "surname": the surname is not given and the character is affected;
+   *  - "age": the age is not given
+   *  - "attribute": attribute points are not correct
+   *  - "remaining": it remains at least one attribute point to spend
+   *  - "lineaments": lineaments are not correct (number, names, ...)
+   * 
+   * It has to be noted that a character in God Mode will always be validated.
    * 
    * @return True if the character is consistant with the rules, false otherwise.
    */
   @Override
-  public boolean validateCharacter(){
-    
-    return false;
+  public String validateCharacter(){
+    String toReturn = "OK";
+    if(!isGodMode()){
+      // check attributes
+      if((this.vitality < 5) || (this.vitality > 13)
+      || (this.coldblood < 5) || (this.coldblood > 13)
+      || (this.lucidity < 5) || (this.lucidity > 13)
+      ){
+        toReturn.replace("OK","");
+        toReturn +="-attribute";
+      }
+      
+      if(remainingPoints() != 0){
+        toReturn.replace("OK","");
+        toReturn +="-remaining";
+      }
+      
+      // check lineaments
+      
+      // check name
+      
+      // check surname
+      
+      // check age
+    }
+    return toReturn;
   }
   
   /**
@@ -74,7 +112,7 @@ public class P13PCCreation extends PlayerCharacter{
    * It has to be noted that verification about the current character are to be
    * made before this call if wanted.
    * 
-   * @return True if the charachter is save, false otherwise.
+   * @return True if the charachter is saved, false otherwise.
    */
   @Override
   public boolean saveCharacter(){
@@ -234,8 +272,29 @@ public class P13PCCreation extends PlayerCharacter{
     this.sane = sane;
   }
   
+  /**
+   * 
+   * @return 
+   */
   public boolean isSane(){
     return this.sane;
+  }
+  
+  /**
+   * 
+   * @param lineament
+   * @param score 
+   */
+  public void addLineament(String lineament, int score){
+    this.lineaments.put(lineament, score);
+  }
+  
+  /**
+   * 
+   * @return 
+   */
+  public HashMap<String,Integer> getLineaments(){
+    return this.lineaments;
   }
   
   /**
