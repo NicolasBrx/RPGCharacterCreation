@@ -37,9 +37,15 @@ public class P13PCCreation extends PlayerCharacter{
   
   /**
    * 
+   * @param playerName
+   * @param sane
    */
-  public P13PCCreation(String playerName){
+  public P13PCCreation(String playerName,boolean sane){
     super(playerName);
+    this.sane = sane;
+    this.lucidity = 5;
+    this.coldblood = 5;
+    this.vitality = 5;
     lineaments = new HashMap<>();
   }
   

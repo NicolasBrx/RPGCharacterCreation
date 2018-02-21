@@ -7,12 +7,14 @@ package ihm.p13;
 
 import creator.p13.P13PCCreation;
 import java.awt.Dimension;
+import javax.swing.JButton;
+import ihm.CreationInterface;
 
 /**
  *
  * @author nicolas
  */
-public class PC13Panel extends javax.swing.JPanel {
+public class PC13Panel extends javax.swing.JPanel implements CreationInterface {
   
   /**
    * 
@@ -39,13 +41,14 @@ public class PC13Panel extends javax.swing.JPanel {
     this.setMaximumSize(new Dimension(1000,600));
     this.setPreferredSize(new Dimension(1000,600));
     
-    /* deactivate all but player name and create button */
-    jtfPatientName.setEnabled(false);
-    jtfPatientSurname.setEnabled(false);
-    jtfPatientAge.setEnabled(false);
+    setInformation("Please enter a player name to start the creation process.");
     
     saveNeeded = false;
     started = false;
+  }
+  
+  private void setInformation(String message){
+    jlblInformation.setText("<html><body style='width: 450px'>" + message);
   }
 
   /**
@@ -69,6 +72,21 @@ public class PC13Panel extends javax.swing.JPanel {
     jtfPatientAge = new javax.swing.JTextField();
     jcbSane = new javax.swing.JCheckBox();
     jcbGod = new javax.swing.JCheckBox();
+    jlblInformation = new javax.swing.JLabel();
+    jLabel5 = new javax.swing.JLabel();
+    jLabel6 = new javax.swing.JLabel();
+    jLabel7 = new javax.swing.JLabel();
+    jlblLucidity = new javax.swing.JLabel();
+    jlblColdblood = new javax.swing.JLabel();
+    jlblVitality = new javax.swing.JLabel();
+    jbtnPL = new javax.swing.JButton();
+    jbtnML = new javax.swing.JButton();
+    jbtnMC = new javax.swing.JButton();
+    jbtnPC = new javax.swing.JButton();
+    jbtnPV = new javax.swing.JButton();
+    jbtnMV = new javax.swing.JButton();
+    jLabel8 = new javax.swing.JLabel();
+    jlblRemaining = new javax.swing.JLabel();
 
     setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
     setMaximumSize(new java.awt.Dimension(1000, 600));
@@ -115,13 +133,137 @@ public class PC13Panel extends javax.swing.JPanel {
 
     jLabel2.setText("Patient Name:");
 
+    jtfPatientName.setEnabled(false);
+
     jLabel3.setText("Patient Surname:");
+
+    jtfPatientSurname.setEnabled(false);
 
     jLabel4.setText("Patient Age:");
 
+    jtfPatientAge.setEnabled(false);
+
     jcbSane.setText("Patient is Sane?");
+    jcbSane.setEnabled(false);
+    jcbSane.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jcbSaneActionPerformed(evt);
+      }
+    });
 
     jcbGod.setText("Patient is God?");
+    jcbGod.setEnabled(false);
+    jcbGod.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jcbGodActionPerformed(evt);
+      }
+    });
+
+    jlblInformation.setMaximumSize(new java.awt.Dimension(576, 75));
+    jlblInformation.setMinimumSize(new java.awt.Dimension(576, 75));
+    jlblInformation.setPreferredSize(new java.awt.Dimension(576, 75));
+
+    jLabel5.setText("Lucidity:");
+
+    jLabel6.setText("Cold Blood:");
+
+    jLabel7.setText("Vitality: ");
+
+    jlblLucidity.setMaximumSize(new java.awt.Dimension(50, 14));
+    jlblLucidity.setMinimumSize(new java.awt.Dimension(50, 14));
+    jlblLucidity.setPreferredSize(new java.awt.Dimension(50, 14));
+
+    jlblColdblood.setMaximumSize(new java.awt.Dimension(50, 14));
+    jlblColdblood.setMinimumSize(new java.awt.Dimension(50, 14));
+    jlblColdblood.setPreferredSize(new java.awt.Dimension(50, 14));
+
+    jlblVitality.setMaximumSize(new java.awt.Dimension(50, 14));
+    jlblVitality.setMinimumSize(new java.awt.Dimension(50, 14));
+    jlblVitality.setPreferredSize(new java.awt.Dimension(50, 14));
+
+    jbtnPL.setFont(new java.awt.Font("Dialog", 0, 8)); // NOI18N
+    jbtnPL.setText("+");
+    jbtnPL.setEnabled(false);
+    jbtnPL.setMaximumSize(new java.awt.Dimension(40, 18));
+    jbtnPL.setMinimumSize(new java.awt.Dimension(40, 18));
+    jbtnPL.setName("btnPlusL"); // NOI18N
+    jbtnPL.setPreferredSize(new java.awt.Dimension(40, 18));
+    jbtnPL.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        changeAttribute(evt);
+      }
+    });
+
+    jbtnML.setFont(new java.awt.Font("Dialog", 0, 8)); // NOI18N
+    jbtnML.setText("-");
+    jbtnML.setEnabled(false);
+    jbtnML.setMaximumSize(new java.awt.Dimension(40, 18));
+    jbtnML.setMinimumSize(new java.awt.Dimension(40, 18));
+    jbtnML.setName("btnMinusL"); // NOI18N
+    jbtnML.setPreferredSize(new java.awt.Dimension(40, 18));
+    jbtnML.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        changeAttribute(evt);
+      }
+    });
+
+    jbtnMC.setFont(new java.awt.Font("Dialog", 0, 8)); // NOI18N
+    jbtnMC.setText("-");
+    jbtnMC.setEnabled(false);
+    jbtnMC.setMaximumSize(new java.awt.Dimension(40, 18));
+    jbtnMC.setMinimumSize(new java.awt.Dimension(40, 18));
+    jbtnMC.setName("btnMinusC"); // NOI18N
+    jbtnMC.setPreferredSize(new java.awt.Dimension(40, 18));
+    jbtnMC.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        changeAttribute(evt);
+      }
+    });
+
+    jbtnPC.setFont(new java.awt.Font("Dialog", 0, 8)); // NOI18N
+    jbtnPC.setText("+");
+    jbtnPC.setEnabled(false);
+    jbtnPC.setMaximumSize(new java.awt.Dimension(40, 18));
+    jbtnPC.setMinimumSize(new java.awt.Dimension(40, 18));
+    jbtnPC.setName("btnPlusC"); // NOI18N
+    jbtnPC.setPreferredSize(new java.awt.Dimension(40, 18));
+    jbtnPC.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        changeAttribute(evt);
+      }
+    });
+
+    jbtnPV.setFont(new java.awt.Font("Dialog", 0, 8)); // NOI18N
+    jbtnPV.setText("+");
+    jbtnPV.setEnabled(false);
+    jbtnPV.setMaximumSize(new java.awt.Dimension(40, 18));
+    jbtnPV.setMinimumSize(new java.awt.Dimension(40, 18));
+    jbtnPV.setName("btnPlusV"); // NOI18N
+    jbtnPV.setPreferredSize(new java.awt.Dimension(40, 18));
+    jbtnPV.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        changeAttribute(evt);
+      }
+    });
+
+    jbtnMV.setFont(new java.awt.Font("Dialog", 0, 8)); // NOI18N
+    jbtnMV.setText("-");
+    jbtnMV.setEnabled(false);
+    jbtnMV.setMaximumSize(new java.awt.Dimension(40, 18));
+    jbtnMV.setMinimumSize(new java.awt.Dimension(40, 18));
+    jbtnMV.setName("btnMinusV"); // NOI18N
+    jbtnMV.setPreferredSize(new java.awt.Dimension(40, 18));
+    jbtnMV.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        changeAttribute(evt);
+      }
+    });
+
+    jLabel8.setText("Remaining points to allocate:");
+
+    jlblRemaining.setMaximumSize(new java.awt.Dimension(30, 14));
+    jlblRemaining.setMinimumSize(new java.awt.Dimension(30, 14));
+    jlblRemaining.setPreferredSize(new java.awt.Dimension(30, 14));
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
@@ -130,32 +272,68 @@ public class PC13Panel extends javax.swing.JPanel {
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(jlblInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
           .addGroup(layout.createSequentialGroup()
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(jLabel2)
-              .addComponent(jLabel4))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addGroup(layout.createSequentialGroup()
-                .addComponent(jtfPatientName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jLabel3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addComponent(jLabel2)
+                  .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfPatientSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addGroup(layout.createSequentialGroup()
+                    .addComponent(jtfPatientName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(10, 10, 10)
+                    .addComponent(jLabel3)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jtfPatientSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                  .addGroup(layout.createSequentialGroup()
+                    .addComponent(jtfPatientAge, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(46, 46, 46)
+                    .addComponent(jcbSane)
+                    .addGap(28, 28, 28)
+                    .addComponent(jcbGod))))
               .addGroup(layout.createSequentialGroup()
-                .addComponent(jtfPatientAge, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(jcbSane)
-                .addGap(28, 28, 28)
-                .addComponent(jcbGod)))))
-        .addContainerGap(421, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addComponent(jLabel6)
+                  .addComponent(jLabel7)
+                  .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                  .addComponent(jlblVitality, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(jlblColdblood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                  .addComponent(jlblLucidity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addGroup(layout.createSequentialGroup()
+                    .addComponent(jbtnPC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jbtnMC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                  .addGroup(layout.createSequentialGroup()
+                    .addComponent(jbtnPL, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jbtnML, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                  .addGroup(layout.createSequentialGroup()
+                    .addComponent(jbtnPV, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jbtnMV, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+              .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlblRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGap(0, 0, Short.MAX_VALUE)))
+        .addContainerGap())
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
-        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+          .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(jlblInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addGap(18, 18, 18)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabel2)
@@ -168,13 +346,122 @@ public class PC13Panel extends javax.swing.JPanel {
           .addComponent(jtfPatientAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(jcbSane)
           .addComponent(jcbGod))
-        .addContainerGap(441, Short.MAX_VALUE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+          .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+            .addComponent(jlblLucidity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jbtnPL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jbtnML, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jLabel6)
+          .addComponent(jlblColdblood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jbtnPC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jbtnMC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 12, Short.MAX_VALUE)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jLabel7)
+          .addComponent(jlblVitality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jbtnPV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jbtnMV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jLabel8)
+          .addComponent(jlblRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(334, 334, 334))
     );
   }// </editor-fold>//GEN-END:initComponents
 
   private void jbtnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCreateActionPerformed
+    creator = new P13PCCreation(jtfPlayerName.getText(),true);
+    jbtnCreate.setEnabled(false);
     
+    setInformation("You can now create a new Patient. Please note that the "
+            + "form is initialised for a new sane patient. (Un)Check boxes "
+            + "if you want another type of patient. It impacts the number of "
+            + "points to allocate as well as the number of lineaments.");
+    
+    jtfPatientName.setEnabled(true);
+    jtfPatientSurname.setEnabled(true);
+    jtfPatientAge.setEnabled(true);
+    jcbSane.setEnabled(true);
+    jcbSane.setSelected(true);
+    jcbGod.setEnabled(true);
+    jbtnPL.setEnabled(true);
+    jbtnML.setEnabled(true);
+    jbtnPC.setEnabled(true);
+    jbtnMC.setEnabled(true);
+    jbtnPV.setEnabled(true);
+    jbtnMV.setEnabled(true);
+    
+    jlblLucidity.setText(String.valueOf(creator.getLucidity()));
+    jlblColdblood.setText(String.valueOf(creator.getColdblood()));
+    jlblVitality.setText(String.valueOf(creator.getVitality()));
+    jlblRemaining.setText(String.valueOf(creator.remainingPoints()));
   }//GEN-LAST:event_jbtnCreateActionPerformed
+
+  private void jcbSaneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSaneActionPerformed
+    creator.setSane(jcbSane.isSelected());
+    setInformation("Your character is now a " 
+            + (jcbSane.isSelected() ? "sane" : "affected") 
+            + " patient. It impacts the number of points to allocate and the "
+            + "number of lineaments to add.");
+    // TODO: check remaining point in order to "fix" if needed when going from affected to sane patient
+    jlblRemaining.setText(String.valueOf(creator.remainingPoints()));
+  }//GEN-LAST:event_jcbSaneActionPerformed
+
+  private void jcbGodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbGodActionPerformed
+    setInformation("God Mode allows you to create a character without any "
+            + "limitation. Hope you know what you do.");
+  }//GEN-LAST:event_jcbGodActionPerformed
+
+  private void changeAttribute(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeAttribute
+    switch(((JButton)evt.getSource()).getName()){
+      case "btnPlusL":
+        if(!creator.modifyLucidity(1))
+          setInformation(creator.lastError());
+        else
+          jlblLucidity.setText(String.valueOf(creator.getLucidity()));
+        break;
+      case "btnMinusL":
+        if(!creator.modifyLucidity(-1))
+          setInformation(creator.lastError());
+        else
+          jlblLucidity.setText(String.valueOf(creator.getLucidity()));
+        break;
+      case "btnPlusC":
+        if(!creator.modifyColdblood(1))
+          setInformation(creator.lastError());
+        else
+          jlblColdblood.setText(String.valueOf(creator.getColdblood()));
+        break;
+      case "btnMinusC":
+        if(!creator.modifyColdblood(-1))
+          setInformation(creator.lastError());
+        else
+          jlblColdblood.setText(String.valueOf(creator.getColdblood()));
+        break;
+      case "btnPlusV":
+        if(!creator.modifyVitality(1))
+          setInformation(creator.lastError());
+        else
+          jlblVitality.setText(String.valueOf(creator.getVitality()));
+        break;
+      case "btnMinusV":
+        if(!creator.modifyVitality(-1))
+          setInformation(creator.lastError());
+        else
+          jlblVitality.setText(String.valueOf(creator.getVitality()));
+        break;
+      default:
+        // should not be able to be reached!
+    }//switch
+    jlblRemaining.setText(String.valueOf(creator.remainingPoints()));
+    if(!saveNeeded){
+      saveNeeded = true;
+    }
+  }//GEN-LAST:event_changeAttribute
 
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -182,13 +469,39 @@ public class PC13Panel extends javax.swing.JPanel {
   private javax.swing.JLabel jLabel2;
   private javax.swing.JLabel jLabel3;
   private javax.swing.JLabel jLabel4;
+  private javax.swing.JLabel jLabel5;
+  private javax.swing.JLabel jLabel6;
+  private javax.swing.JLabel jLabel7;
+  private javax.swing.JLabel jLabel8;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JButton jbtnCreate;
+  private javax.swing.JButton jbtnMC;
+  private javax.swing.JButton jbtnML;
+  private javax.swing.JButton jbtnMV;
+  private javax.swing.JButton jbtnPC;
+  private javax.swing.JButton jbtnPL;
+  private javax.swing.JButton jbtnPV;
   private javax.swing.JCheckBox jcbGod;
   private javax.swing.JCheckBox jcbSane;
+  private javax.swing.JLabel jlblColdblood;
+  private javax.swing.JLabel jlblInformation;
+  private javax.swing.JLabel jlblLucidity;
+  private javax.swing.JLabel jlblRemaining;
+  private javax.swing.JLabel jlblVitality;
   private javax.swing.JTextField jtfPatientAge;
   private javax.swing.JTextField jtfPatientName;
   private javax.swing.JTextField jtfPatientSurname;
   private javax.swing.JTextField jtfPlayerName;
   // End of variables declaration//GEN-END:variables
+
+  /**
+   * 
+   * @return 
+   */
+  @Override
+  public boolean isSaveNeeded(){
+    return this.saveNeeded;
+  }
 }
+
+
