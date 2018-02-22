@@ -35,8 +35,6 @@ public class P13PCCreation extends PlayerCharacter{
    */
   private HashMap<String,Integer> lineaments;
   
-  private boolean stored;
-  
   /**
    * 
    * @param playerName
@@ -49,7 +47,6 @@ public class P13PCCreation extends PlayerCharacter{
     this.coldblood = 5;
     this.vitality = 5;
     this.lineaments = new HashMap<>();
-    this.stored = false;
   }
   
   
@@ -330,19 +327,4 @@ public class P13PCCreation extends PlayerCharacter{
     return ((sane ? 26 : 29) - this.lucidity - this.coldblood - this.vitality);
   }
 
-  /**
-   * 
-   * @return 
-   */
-  public boolean isStored() {
-    return stored;
-  }
-
-  /**
-   * 
-   * @param stored 
-   */
-  public void setStored(boolean stored) {
-    this.stored = stored;
-  }
 }
