@@ -2,6 +2,7 @@ package creator.p13;
 
 import creator.PlayerCharacter;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  *
@@ -34,6 +35,8 @@ public class P13PCCreation extends PlayerCharacter{
    */
   private HashMap<String,Integer> lineaments;
   
+  private boolean stored;
+  
   /**
    * 
    * @param playerName
@@ -45,7 +48,8 @@ public class P13PCCreation extends PlayerCharacter{
     this.lucidity = 5;
     this.coldblood = 5;
     this.vitality = 5;
-    lineaments = new HashMap<>();
+    this.lineaments = new HashMap<>();
+    this.stored = false;
   }
   
   
@@ -84,22 +88,43 @@ public class P13PCCreation extends PlayerCharacter{
       || (this.coldblood < 5) || (this.coldblood > 13)
       || (this.lucidity < 5) || (this.lucidity > 13)
       ){
-        toReturn.replace("OK","");
+        toReturn = toReturn.replace("OK","");
         toReturn +="-attribute";
       }
       
       if(remainingPoints() != 0){
-        toReturn.replace("OK","");
+        toReturn = toReturn.replace("OK","");
         toReturn +="-remaining";
       }
       
       // check lineaments
+      boolean ok = true;
+      Iterator it = this.lineaments.entrySet().iterator();
+      while(ok && it.hasNext()){
+        HashMap.Entry pair = (HashMap.Entry)it.next();
+        //System.out.println(pair.getKey() + " = " + pair.getValue());
+        it.remove(); // avoids a ConcurrentModificationException
+      }
       
       // check name
+      if(civilian.getFamilyname().equalsIgnoreCase("")
+      || civilian.getFirstname().equalsIgnoreCase("")
+      ){
+       toReturn = toReturn.replace("OK","");
+        toReturn +="-name"; 
+      }
       
       // check surname
+      if(civilian.getSurname().equalsIgnoreCase("")){
+        toReturn = toReturn.replace("OK","");
+        toReturn +="-surname";
+      }
       
       // check age
+      if(civilian.getAge() <= 0){
+        toReturn = toReturn.replace("OK","");
+        toReturn +="-age";
+      }
     }
     return toReturn;
   }
@@ -304,5 +329,20 @@ public class P13PCCreation extends PlayerCharacter{
   public int remainingPoints(){
     return ((sane ? 26 : 29) - this.lucidity - this.coldblood - this.vitality);
   }
-  
+
+  /**
+   * 
+   * @return 
+   */
+  public boolean isStored() {
+    return stored;
+  }
+
+  /**
+   * 
+   * @param stored 
+   */
+  public void setStored(boolean stored) {
+    this.stored = stored;
+  }
 }
