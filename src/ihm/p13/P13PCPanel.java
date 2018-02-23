@@ -185,7 +185,7 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
           if(results[i].equalsIgnoreCase("surname")){
             jlblSurname.setForeground(Color.RED);
           }
-          else if(results[i].equalsIgnoreCase("surname")){
+          else if(results[i].equalsIgnoreCase("name")){
             jlblName.setForeground(Color.RED);
           }
           else if(results[i].equalsIgnoreCase("age")){
