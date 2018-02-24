@@ -6,7 +6,7 @@
 package ihm;
 
 import ihm.p13.P13NPCPanel;
-import ihm.p13.PC13Panel;
+import ihm.p13.P13PCPanel;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -63,8 +63,8 @@ public class RPGCharacterCreationIHM extends javax.swing.JFrame {
       case "AC":
         break;
       case "P13":
-        creation = new PC13Panel();
-        jtbCreationPanels.add("Player Characters", (PC13Panel)creation);
+        creation = new P13PCPanel();
+        jtbCreationPanels.add("Player Characters", (P13PCPanel)creation);
         jtbCreationPanels.add("Non Player Characters", new P13NPCPanel());
         revalidate();
         repaint();

@@ -51,13 +51,13 @@ public class CivilStatus {
    */
   public CivilStatus() {
     female = true;
-    familyname = "unknown";
-    firstname = "unknown";
-    surname = "unknown";
+    familyname = "";
+    firstname = "";
+    surname = "";
     age = 0;
     size = 0.0;
     weigth = 0.0;
-    eyecolor = "unknown";
+    eyecolor = "";
   }
 
   /**

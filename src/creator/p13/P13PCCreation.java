@@ -102,6 +102,11 @@ public class P13PCCreation extends PlayerCharacter{
       Iterator it = this.lineaments.entrySet().iterator();
       while(ok && it.hasNext()){
         HashMap.Entry pair = (HashMap.Entry)it.next();
+        if(((String)pair.getKey()).equalsIgnoreCase("")){
+          ok = false;
+          toReturn = toReturn.replace("OK","");
+          toReturn +="-lineaments"; 
+        }
         //System.out.println(pair.getKey() + " = " + pair.getValue());
         it.remove(); // avoids a ConcurrentModificationException
       }
@@ -110,7 +115,7 @@ public class P13PCCreation extends PlayerCharacter{
       if(civilian.getFamilyname().equalsIgnoreCase("")
       || civilian.getFirstname().equalsIgnoreCase("")
       ){
-       toReturn = toReturn.replace("OK","");
+        toReturn = toReturn.replace("OK","");
         toReturn +="-name"; 
       }
       

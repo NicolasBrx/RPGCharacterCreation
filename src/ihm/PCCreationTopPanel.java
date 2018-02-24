@@ -11,6 +11,7 @@ public class PCCreationTopPanel extends javax.swing.JPanel {
    */
   public PCCreationTopPanel() {
     initComponents();
+    jtfPlayerName.setText("");
   }
   
   public void setInformation(String message){
