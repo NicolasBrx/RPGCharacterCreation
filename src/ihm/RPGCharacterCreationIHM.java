@@ -5,8 +5,6 @@
  */
 package ihm;
 
-import ihm.p13.P13NPCPanel;
-import ihm.p13.P13PCPanel;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -18,14 +16,9 @@ import javax.swing.JOptionPane;
 public class RPGCharacterCreationIHM extends javax.swing.JFrame {
 
   /**
-   * The game that is played of for which the dice launcher is needed.
-   */
-  private String game;
-  
-  /**
    * 
    */
-  private CreationInterface creation;
+  private PCGenericPanel generic;
   
   /**
    * Creates new form RPGCharacterCreationIHM
@@ -54,26 +47,11 @@ public class RPGCharacterCreationIHM extends javax.swing.JFrame {
    * @param game The game choosen.
    */
   public void setGame(String game){
-    this.game = game;
-    switch(this.game){
-      case "ADD":
-        break;
-      case "SR":
-        break;
-      case "AC":
-        break;
-      case "P13":
-        creation = new P13PCPanel();
-        jtbCreationPanels.add("Player Characters", (P13PCPanel)creation);
-        jtbCreationPanels.add("Non Player Characters", new P13NPCPanel());
-        revalidate();
-        repaint();
-        break;
-      case "FS":
-        break;
-      default:
-        break;
-    }
+    generic = new PCGenericPanel();
+    generic.setGame(game);
+    jtbCreationPanels.add("Player Characters",generic);
+    revalidate();
+    repaint();
   }
 
   /**
@@ -128,11 +106,11 @@ public class RPGCharacterCreationIHM extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
   private void jbtnQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnQuitActionPerformed
-    if(creation.isSaveNeeded()){                                                // if a save is needed while closing
+    if(generic.isSaveNeeded()){                                                // if a save is needed while closing
       int dialogButton = JOptionPane.YES_NO_OPTION;                             // proposes to do so
       int dialogResult = JOptionPane.showConfirmDialog (null, "Would you like to save before quit?","Warning",dialogButton);
       if(dialogResult == JOptionPane.YES_OPTION){
-        creation.saveCharacter();
+        generic.saveCharacter();
       }
     }
     System.exit(0);

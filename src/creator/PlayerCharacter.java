@@ -30,6 +30,16 @@ public abstract class PlayerCharacter implements CreatorInterface {
   
   /**
    * 
+   */
+  protected boolean stored;
+  
+  /**
+   * 
+   */
+  protected boolean complete;
+  
+  /**
+   * 
    * @param playerName 
    */
   public PlayerCharacter(String playerName){
@@ -37,6 +47,8 @@ public abstract class PlayerCharacter implements CreatorInterface {
     this.godMode = false;
     this.lastError = "";
     this.civilian = new CivilStatus();
+    this.stored = false;
+    this.complete = false;
   }
   
   /**
@@ -197,6 +209,54 @@ public abstract class PlayerCharacter implements CreatorInterface {
    */
   public void setEyecolor(String eyecolor) {
     civilian.setEyecolor(eyecolor);
+  }
+
+  /**
+   * 
+   * @return 
+   */
+  public String getPlayerName() {
+    return playerName;
+  }
+
+  /**
+   * 
+   * @param playerName 
+   */
+  public void setPlayerName(String playerName) {
+    this.playerName = playerName;
+  }
+
+  /**
+   * 
+   * @return 
+   */
+  public boolean isStored() {
+    return stored;
+  }
+
+  /**
+   * 
+   * @param stored 
+   */
+  public void setStored(boolean stored) {
+    this.stored = stored;
+  }
+
+  /**
+   * 
+   * @return 
+   */
+  public boolean isComplete() {
+    return complete;
+  }
+
+  /**
+   * 
+   */
+  @Override
+  public void setComplete() {
+    this.complete = true;
   }
   
   /**

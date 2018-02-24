@@ -63,4 +63,9 @@ public interface CreatorInterface {
    */
   public boolean saveCharacter();
   
+  /**
+   * 
+   */
+  public void setComplete();
+  
 }
