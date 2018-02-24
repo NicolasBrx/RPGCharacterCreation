@@ -34,9 +34,7 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
    */
   public P13PCPanel() {
     initComponents();
-    
     topPanel.setInformation("Please enter a player name to start the creation process.");
-    
     saveNeeded = false;
   }
   
@@ -67,8 +65,11 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
             + "points to allocate as well as the number of lineaments.");
     
     jtfPatientName.setEnabled(true);
+    jtfPatientName.setText("");
     jtfPatientSurname.setEnabled(true);
+    jtfPatientSurname.setText("");
     jtfPatientAge.setEnabled(true);
+    jtfPatientAge.setText("");
     jcbSane.setEnabled(true);
     jcbSane.setSelected(true);
     jcbGod.setEnabled(true);
@@ -147,8 +148,14 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
   }
   
   private void storeCharacter(){
-    creator.setFamilyname(jtfPatientName.getText().split(" ")[1]);
     creator.setFirstname(jtfPatientName.getText().split(" ")[0]);
+    for(int i = 1 ; i < jtfPatientName.getText().split(" ").length ; ++i){
+      creator.setFamilyname(creator.getFamilyname() 
+                           + " " 
+                           + jtfPatientName.getText().split(" ")[i]);
+    }
+    
+    
     creator.setSurname(jtfPatientSurname.getText());
     creator.setAge(Integer.parseInt(jtfPatientAge.getText()));
     
@@ -170,6 +177,7 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
     jlblAttC.setForeground(Color.BLACK);
     jlblAttV.setForeground(Color.BLACK);
     jlblRemain.setForeground(Color.BLACK);
+    jtLineaments.setForeground(Color.BLACK);
     if(creator.isStored()){
       String validated = creator.validateCharacter();
       if(validated.equalsIgnoreCase("ok")){
@@ -200,7 +208,7 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
             jlblRemain.setForeground(Color.RED);
           }
           else if(results[i].equalsIgnoreCase("lineaments")){
-            //jlblSurname.setForeground(Color.RED);
+            jtLineaments.setForeground(Color.RED);
           }
         }
       }
