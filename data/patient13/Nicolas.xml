@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Nicolas>
+  <character godmode="no" name="Cedric" firstname="Laurens" affected="no">
+    <sex>man</sex>
+    <surname>Ducon</surname>
+    <age>34</age>
+    <weight>64.0</weight>
+    <size>1.78</size>
+    <eye>brown</eye>
+    <supervisor>Stein</supervisor>
+    <room>A19</room>
+    <seniority>0</seniority>
+    <attributes>
+      <vitality>13</vitality>
+      <coldblood>5</coldblood>
+      <lucidity>8</lucidity>
+    </attributes>
+    <lineaments>
+      <Pervers>2</Pervers>
+      <Genereux>-2</Genereux>
+      <Altruiste>-1</Altruiste>
+      <Narcissique>1</Narcissique>
+    </lineaments>
+  </character>
+</Nicolas>

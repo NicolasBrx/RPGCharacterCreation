@@ -39,6 +39,10 @@ public class PCGenericPanel extends javax.swing.JPanel {
     topPanel.setInformation(message);
   }
   
+  public void reset(){
+    topPanel.enable();
+  }
+  
   /**
    * 
    * @param game 

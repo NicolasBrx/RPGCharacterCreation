@@ -3,6 +3,9 @@ package creator.p13;
 import creator.PlayerCharacter;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.concurrent.ThreadLocalRandom;
+import tools.RPGCCException;
+import tools.XMLParser;
 
 /**
  *
@@ -29,6 +32,21 @@ public class P13PCCreation extends PlayerCharacter{
    * 
    */
   private int vitality;
+  
+  /**
+   * 
+   */
+  private int seniority;
+  
+  /**
+   * 
+   */
+  private String room;
+  
+  /**
+   * 
+   */
+  private String supervisor;
   
   /**
    * 
@@ -105,7 +123,7 @@ public class P13PCCreation extends PlayerCharacter{
           toReturn +="-lineaments"; 
         }
         //System.out.println(pair.getKey() + " = " + pair.getValue());
-        it.remove(); // avoids a ConcurrentModificationException
+        //it.remove(); // avoids a ConcurrentModificationException
       }
       
       // check name
@@ -143,8 +161,28 @@ public class P13PCCreation extends PlayerCharacter{
    */
   @Override
   public boolean saveCharacter(){
+    finalizeCharacter();
+    boolean toReturn = true;
+    try{
+      XMLParser xml = new XMLParser();
+      xml.saveCharacter(this);
+    }
+    catch(RPGCCException e){
+      toReturn = false;
+    }
     
-    return false;
+    return toReturn;
+  }
+  
+  /**
+   * 
+   */
+  private void finalizeCharacter(){
+    room = ((ThreadLocalRandom.current().nextInt(1, 3) == 1) ? "A" : "B")
+         + (ThreadLocalRandom.current().nextInt(1, 21));
+    String[] supervisors = {"Kemper","Marche","Vigorsen","Stein"};   //TODO: change to load...
+    supervisor = supervisors[ThreadLocalRandom.current().nextInt(0, supervisors.length)];
+    seniority = (sane ? 0 : ThreadLocalRandom.current().nextInt(1, 11));
   }
 
   /**
@@ -258,6 +296,32 @@ public class P13PCCreation extends PlayerCharacter{
   public void setVitality(int vitality) {
     this.vitality = vitality;
   }
+
+  /**
+   * 
+   * @return 
+   */
+  public int getSeniority() {
+    return seniority;
+  }
+
+  /**
+   * 
+   * @return 
+   */
+  public String getRoom() {
+    return room;
+  }
+
+  /**
+   * 
+   * @return 
+   */
+  public String getSupervisor() {
+    return supervisor;
+  }
+  
+  
   
   /**
    * 

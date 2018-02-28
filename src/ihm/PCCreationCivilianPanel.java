@@ -101,6 +101,14 @@ public class PCCreationCivilianPanel extends javax.swing.JPanel {
   
   /**
    * 
+   * @return 
+   */
+  public String getCharacterEyeColor(){
+    return jtfEyeColour.getText();
+  }
+  
+  /**
+   * 
    * @param color 
    */
   public void colorSurname(Color color){
@@ -129,6 +137,14 @@ public class PCCreationCivilianPanel extends javax.swing.JPanel {
    */
   public void colorAge(Color color){
     jlblAge.setForeground(color);
+  }
+  
+  /**
+   * 
+   * @param color 
+   */
+  public void colorEye(Color color){
+    jlblEyeColour.setForeground(color);
   }
   
 
