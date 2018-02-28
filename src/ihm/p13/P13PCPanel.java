@@ -34,6 +34,7 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
    */
   public P13PCPanel() {
     initComponents();
+    jpCivil.enable(false);
     saveNeeded = false;
   }
   
@@ -63,12 +64,7 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
             + "if you want another type of patient. It impacts the number of "
             + "points to allocate as well as the number of lineaments.");
     
-    jtfPatientName.setEnabled(true);
-    jtfPatientName.setText("");
-    jtfPatientSurname.setEnabled(true);
-    jtfPatientSurname.setText("");
-    jtfPatientAge.setEnabled(true);
-    jtfPatientAge.setText("");
+    jpCivil.enable(true);
     jcbSane.setEnabled(true);
     jcbSane.setSelected(true);
     jcbGod.setEnabled(true);
@@ -135,29 +131,23 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
     model.addRow(new Object[]{"",-2});
   }
   
-  /**
-   * 
-   */
-  private void resetCivilFields(){
-    jtfPatientName.setText("");
-    jtfPatientSurname.setText("");
-    jtfPatientAge.setText("");
-  }
-
   /**  
    * 
    */
   private void storeCharacter(){
-    creator.setFirstname(jtfPatientName.getText().split(" ")[0]);
-    for(int i = 1 ; i < jtfPatientName.getText().split(" ").length ; ++i){
-      creator.setFamilyname(creator.getFamilyname() 
-                           + " " 
-                           + jtfPatientName.getText().split(" ")[i]);
-    }
-    
-    
-    creator.setSurname(jtfPatientSurname.getText());
-    creator.setAge(Integer.parseInt(jtfPatientAge.getText()));
+    if(!jpCivil.getCharacterName().equalsIgnoreCase(""))
+      creator.setFamilyname(jpCivil.getCharacterName());
+    if(!jpCivil.getCharacterFirstname().equalsIgnoreCase(""))
+      creator.setFirstname(jpCivil.getCharacterFirstname());
+    if(!jpCivil.getCharacterSurname().equalsIgnoreCase(""))
+      creator.setSurname(jpCivil.getCharacterSurname());
+    if(!jpCivil.getCharacterAge().equalsIgnoreCase(""))
+      creator.setAge(Integer.parseInt(jpCivil.getCharacterAge()));
+    if(!jpCivil.getCharacterWeight().equalsIgnoreCase(""))
+      creator.setAge(Integer.parseInt(jpCivil.getCharacterWeight()));
+    if(!jpCivil.getCharacterSize().equalsIgnoreCase(""))
+      creator.setAge(Integer.parseInt(jpCivil.getCharacterSize()));
+    creator.setFemale(jpCivil.isWoman());
     
     for(int i = 0 ; i < jtLineaments.getRowCount() ; ++i){
       creator.addLineament((String)jtLineaments.getValueAt(i,0),
@@ -169,10 +159,11 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
   /**
    * 
    */
-  private void validateCharacter(){
-    jlblSurname.setForeground(Color.BLACK);
-    jlblName.setForeground(Color.BLACK);
-    jlblAge.setForeground(Color.BLACK);
+  private boolean validateCharacter(){
+    jpCivil.colorSurname(Color.BLACK);
+    jpCivil.colorName(Color.BLACK);
+    jpCivil.colorFirstname(Color.BLACK);
+    jpCivil.colorAge(Color.BLACK);
     jlblAttL.setForeground(Color.BLACK);
     jlblAttC.setForeground(Color.BLACK);
     jlblAttV.setForeground(Color.BLACK);
@@ -183,6 +174,7 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
       if(validated.equalsIgnoreCase("ok")){
         setInformation("The character is validated as a correct Patient "
                 + "13 patient.");
+        return true;
       }
       else{
         setInformation("The character is not validated as a correct "
@@ -190,13 +182,14 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
         String[] results = validated.split("-");
         for(int i = 0 ; i < results.length ; ++i){
           if(results[i].equalsIgnoreCase("surname")){
-            jlblSurname.setForeground(Color.RED);
+            jpCivil.colorSurname(Color.RED);
           }
           else if(results[i].equalsIgnoreCase("name")){
-            jlblName.setForeground(Color.RED);
+            jpCivil.colorFirstname(Color.RED);
+            jpCivil.colorName(Color.RED);
           }
           else if(results[i].equalsIgnoreCase("age")){
-            jlblAge.setForeground(Color.RED);
+            jpCivil.colorAge(Color.RED);
           }
           else if(results[i].equalsIgnoreCase("attribute")){
             jlblAttL.setForeground(Color.RED);
@@ -210,11 +203,13 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
             jtLineaments.setForeground(Color.RED);
           }
         }
+        return false;
       }
     }
     else{
       setInformation("No character is stored into the creator. Maybe "
               + "check the code or sequence called.");
+      return false;
     }
   }
   
@@ -235,12 +230,6 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    jlblName = new javax.swing.JLabel();
-    jtfPatientName = new javax.swing.JTextField();
-    jlblSurname = new javax.swing.JLabel();
-    jtfPatientSurname = new javax.swing.JTextField();
-    jlblAge = new javax.swing.JLabel();
-    jtfPatientAge = new javax.swing.JTextField();
     jcbSane = new javax.swing.JCheckBox();
     jcbGod = new javax.swing.JCheckBox();
     jlblAttL = new javax.swing.JLabel();
@@ -264,23 +253,12 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
     jbtnValidate = new javax.swing.JButton();
     jbtnSave = new javax.swing.JButton();
     jbtnHelp = new javax.swing.JButton();
+    jpCivil = new ihm.PCCreationCivilianPanel();
 
     setBorder(javax.swing.BorderFactory.createEtchedBorder());
     setMaximumSize(new java.awt.Dimension(974, 520));
     setMinimumSize(new java.awt.Dimension(974, 520));
     setPreferredSize(new java.awt.Dimension(974, 520));
-
-    jlblName.setText("Patient Name:");
-
-    jtfPatientName.setEnabled(false);
-
-    jlblSurname.setText("Patient Surname:");
-
-    jtfPatientSurname.setEnabled(false);
-
-    jlblAge.setText("Patient Age:");
-
-    jtfPatientAge.setEnabled(false);
 
     jcbSane.setText("Patient is Sane?");
     jcbSane.setEnabled(false);
@@ -477,24 +455,6 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
           .addGroup(layout.createSequentialGroup()
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(jlblName)
-              .addComponent(jlblAge))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addGroup(layout.createSequentialGroup()
-                .addComponent(jtfPatientName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jlblSurname)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfPatientSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-              .addGroup(layout.createSequentialGroup()
-                .addComponent(jtfPatientAge, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(jcbSane)
-                .addGap(28, 28, 28)
-                .addComponent(jcbGod))))
-          .addGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addComponent(jlblAttC)
               .addComponent(jlblAttV)
               .addComponent(jlblAttL))
@@ -520,8 +480,14 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
           .addGroup(layout.createSequentialGroup()
             .addComponent(jlblRemain)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jlblRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        .addContainerGap(395, Short.MAX_VALUE))
+            .addComponent(jlblRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(jcbSane)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(jcbGod)))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 307, Short.MAX_VALUE)
+        .addComponent(jpCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addContainerGap())
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addComponent(jbtnHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -535,47 +501,42 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jlblName)
-          .addComponent(jtfPatientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jlblSurname)
-          .addComponent(jtfPatientSurname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jlblAge)
-          .addComponent(jtfPatientAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jcbSane)
-          .addComponent(jcbGod))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(jlblAttL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-            .addComponent(jlblLucidity, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jbtnPL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jbtnML, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jlblAttC)
-          .addComponent(jlblColdblood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jbtnPC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jbtnMC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jlblAttV)
-          .addComponent(jlblVitality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jbtnPV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jbtnMV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jlblRemain)
-          .addComponent(jlblRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jcbSane)
+              .addComponent(jcbGod))
+            .addGap(35, 35, 35)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+              .addComponent(jlblAttL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jlblLucidity, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbtnPL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbtnML, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jlblAttC)
+              .addComponent(jlblColdblood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jbtnPC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jbtnMC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jlblAttV)
+              .addComponent(jlblVitality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jbtnPV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jbtnMV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jlblRemain)
+              .addComponent(jlblRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(jpCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jbtnRemove)
           .addComponent(jbtnAdd))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jbtnHelp)
           .addComponent(jbtnValidate)
@@ -716,11 +677,15 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
   }//GEN-LAST:event_jbtnAddActionPerformed
 
   private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
-    //TODO: save only what is needed ==> not a store ?! make the difference ?
     storeCharacter();
-    validateCharacter();
-    creator.saveCharacter();
-    modifySaveState(false);
+    if(validateCharacter()){
+      creator.saveCharacter();
+      modifySaveState(false);
+      setInformation("Save is done.");
+    }
+    else{
+      setInformation("Save is not done, some validation problems appeared. See the red fields.");
+    }
   }//GEN-LAST:event_jbtnSaveActionPerformed
 
   private void jbtnValidateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnValidateActionPerformed
@@ -762,21 +727,16 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
   private javax.swing.JButton jbtnValidate;
   private javax.swing.JCheckBox jcbGod;
   private javax.swing.JCheckBox jcbSane;
-  private javax.swing.JLabel jlblAge;
   private javax.swing.JLabel jlblAttC;
   private javax.swing.JLabel jlblAttL;
   private javax.swing.JLabel jlblAttV;
   private javax.swing.JLabel jlblColdblood;
   private javax.swing.JLabel jlblLucidity;
-  private javax.swing.JLabel jlblName;
   private javax.swing.JLabel jlblRemain;
   private javax.swing.JLabel jlblRemaining;
-  private javax.swing.JLabel jlblSurname;
   private javax.swing.JLabel jlblVitality;
+  private ihm.PCCreationCivilianPanel jpCivil;
   private javax.swing.JTable jtLineaments;
-  private javax.swing.JTextField jtfPatientAge;
-  private javax.swing.JTextField jtfPatientName;
-  private javax.swing.JTextField jtfPatientSurname;
   // End of variables declaration//GEN-END:variables
 }
 

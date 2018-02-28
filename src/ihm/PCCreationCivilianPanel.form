@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <Properties>
+    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+      <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+        <EtchetBorder/>
+      </Border>
+    </Property>
+    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[186, 232]"/>
+    </Property>
+    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[186, 232]"/>
+    </Property>
+  </Properties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -16,13 +29,137 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jcbWoman" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jlblName" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jlblFirstname" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlblSize" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlblWeight" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlblEyeColour" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jlblAge" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlblSurname" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jtfFirstname" min="-2" pref="80" max="-2" attributes="0"/>
+                          <Component id="jtfName" min="-2" pref="80" max="-2" attributes="0"/>
+                          <Component id="jtfAge" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
+                          <Component id="jtfSurname" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
+                          <Component id="jtfSize" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
+                          <Component id="jtfWeight" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
+                          <Component id="jtfEyeColour" min="-2" pref="80" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jcbWoman" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jlblName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfName" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jlblFirstname" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfFirstname" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jtfAge" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlblAge" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jtfSurname" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlblSurname" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jlblSize" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfSize" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jlblWeight" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfWeight" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jlblEyeColour" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfEyeColour" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JCheckBox" name="jcbWoman">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Woman?"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlblAge">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Age:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfAge">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlblSurname">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Surname:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfSurname">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlblName">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Name:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfName">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlblFirstname">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="First Name:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfFirstname">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlblSize">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Size:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlblWeight">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Weight:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlblEyeColour">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Eye Colour:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfSize">
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfWeight">
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfEyeColour">
+    </Component>
+  </SubComponents>
 </Form>

@@ -45,29 +45,6 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jlblName" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jlblAge" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jtfPatientName" min="-2" pref="200" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                              <Component id="jlblSurname" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jtfPatientSurname" min="-2" pref="150" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="jtfPatientAge" min="-2" pref="80" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                              <Component id="jcbSane" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="jcbGod" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jlblAttC" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jlblAttV" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jlblAttL" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -90,7 +67,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jbtnML" min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="jbtnPV" min="-2" pref="40" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jbtnMV" min="-2" pref="40" max="-2" attributes="0"/>
@@ -102,8 +79,15 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jlblRemaining" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jcbSane" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jcbGod" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="395" max="32767" attributes="0"/>
+              <EmptySpace pref="307" max="32767" attributes="0"/>
+              <Component id="jpCivil" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
@@ -120,55 +104,51 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jlblName" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jtfPatientName" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jlblSurname" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jtfPatientSurname" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jlblAge" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jtfPatientAge" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jcbSane" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jcbGod" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jlblAttL" max="32767" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="jlblLucidity" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="jbtnPL" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jbtnML" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jcbSane" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcbGod" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jlblAttL" max="32767" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="jlblLucidity" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
+                              <Component id="jbtnPL" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jbtnML" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jlblAttC" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlblColdblood" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbtnPC" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbtnMC" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jlblAttV" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlblVitality" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbtnPV" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbtnMV" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jlblRemain" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlblRemaining" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="250" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jpCivil" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jlblAttC" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jlblColdblood" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jbtnPC" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jbtnMC" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jlblAttV" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jlblVitality" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jbtnPV" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jbtnMV" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jlblRemain" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jlblRemaining" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="250" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbtnRemove" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbtnAdd" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="21" max="32767" attributes="0"/>
+              <EmptySpace pref="24" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbtnHelp" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbtnValidate" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -180,36 +160,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jlblName">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Patient Name:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jtfPatientName">
-      <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jlblSurname">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Patient Surname:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jtfPatientSurname">
-      <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jlblAge">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Patient Age:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jtfPatientAge">
-      <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JCheckBox" name="jcbSane">
       <Properties>
         <Property name="text" type="java.lang.String" value="Patient is Sane?"/>
@@ -512,6 +462,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnHelpActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="ihm.PCCreationCivilianPanel" name="jpCivil">
     </Component>
   </SubComponents>
 </Form>

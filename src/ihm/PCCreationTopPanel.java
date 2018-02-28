@@ -102,7 +102,6 @@ public class PCCreationTopPanel extends javax.swing.JPanel {
   }// </editor-fold>//GEN-END:initComponents
 
   private void jbtnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCreateActionPerformed
-    
     ((PCGenericPanel)getParent()).create(jtfPlayerName.getText());
     jbtnCreate.setEnabled(false);
     jtfPlayerName.setEnabled(false);

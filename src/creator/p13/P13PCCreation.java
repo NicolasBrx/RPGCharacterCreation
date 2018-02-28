@@ -60,7 +60,7 @@ public class P13PCCreation extends PlayerCharacter{
    *    state of the patient;
    *  - each attribute score must be between 5 and 13 included;
    *  - {+2;+1;-1;-2} or {+3;+2+2;+1;-1;-2} for the lineaments scores according
-   *    to the sane or affected of the patient;
+   *    to the sane or affected status of the patient;
    *  - some information: name, age, surname.
    * 
    * In case of error while validating, the method returns a sequence containing 
@@ -117,7 +117,7 @@ public class P13PCCreation extends PlayerCharacter{
       }
       
       // check surname
-      if(civilian.getSurname().equalsIgnoreCase("")){
+      if(civilian.getSurname().equalsIgnoreCase("") && !sane){
         toReturn = toReturn.replace("OK","");
         toReturn +="-surname";
       }
