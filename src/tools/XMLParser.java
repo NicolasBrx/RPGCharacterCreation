@@ -106,16 +106,16 @@ public class XMLParser {
         }
         person.addContent(lineaments);
       }
-      else if(AcCreator.class.isInstance(character)){                           // PATIENT 13 CHARACTER 
+      else if(AcCreator.class.isInstance(character)){                           // CTHULHU CHARACTER 
         // do some stuff...
       }
-      else if(FsCreator.class.isInstance(character)){                           // PATIENT 13 CHARACTER 
+      else if(FsCreator.class.isInstance(character)){                           // FENG SHUI CHARACTER 
         // do some stuff...
       }
-      else if(AddCreator.class.isInstance(character)){                           // PATIENT 13 CHARACTER 
+      else if(AddCreator.class.isInstance(character)){                           // D&D CHARACTER 
         // do some stuff...
       }
-      else if(SrCreator.class.isInstance(character)){                           // PATIENT 13 CHARACTER 
+      else if(SrCreator.class.isInstance(character)){                           // SHADOWRUN CHARACTER 
         // do some stuff...
       }
       else{

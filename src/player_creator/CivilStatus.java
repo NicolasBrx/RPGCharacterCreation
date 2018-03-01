@@ -45,6 +45,11 @@ public class CivilStatus {
    * 
    */
   private String eyecolor;
+  
+  /**
+   * 
+   */
+  private String ethnicity;
 
   /**
    * 
@@ -58,6 +63,7 @@ public class CivilStatus {
     size = 0.0;
     weigth = 0.0;
     eyecolor = "";
+    ethnicity = "";
   }
 
   /**
@@ -186,5 +192,21 @@ public class CivilStatus {
    */
   public void setEyecolor(String eyecolor) {
     this.eyecolor = eyecolor;
+  }
+
+  /**
+   * 
+   * @return 
+   */
+  public String getEthnicity() {
+    return ethnicity;
+  }
+
+  /**
+   * 
+   * @param ethnicity 
+   */
+  public void setEthnicity(String ethnicity) {
+    this.ethnicity = ethnicity;
   }
 }
