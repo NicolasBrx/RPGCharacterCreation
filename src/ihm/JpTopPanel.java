@@ -4,14 +4,14 @@ package ihm;
  *
  * @author Nicolas Brax
  */
-public class PCCreationTopPanel extends javax.swing.JPanel {
+public class JpTopPanel extends javax.swing.JPanel {
 
   /**
    * Creates new form PCCreationTopPanel
    */
-  public PCCreationTopPanel() {
+  public JpTopPanel() {
     initComponents();
-    setInformation("Please enter a player name to start the creation process.");
+    jlblInformation.setText("Please enter a player name to start the creation process.");
     jtfPlayerName.setText("");
   }
   

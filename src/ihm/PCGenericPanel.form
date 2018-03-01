@@ -29,7 +29,7 @@
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
   <SubComponents>
-    <Component class="ihm.PCCreationTopPanel" name="topPanel">
+    <Component class="ihm.JpTopPanel" name="topPanel">
     </Component>
   </SubComponents>
 </Form>

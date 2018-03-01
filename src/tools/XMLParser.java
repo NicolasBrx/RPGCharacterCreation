@@ -1,7 +1,7 @@
 package tools;
 
-import creator.PlayerCharacter;
-import creator.p13.P13PCCreation;
+import player_creator.PlayerCreator;
+import player_creator.games.P13Creator;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -11,6 +11,10 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
+import player_creator.games.AcCreator;
+import player_creator.games.AddCreator;
+import player_creator.games.FsCreator;
+import player_creator.games.SrCreator;
 
 /**
  * An XML Parser made to save characters for several tabletop RPGs and used by
@@ -29,7 +33,7 @@ public class XMLParser {
    * @param character
    * @throws tools.RPGCCException
    */
-  public void saveCharacter(PlayerCharacter character) throws RPGCCException{
+  public void saveCharacter(PlayerCreator character) throws RPGCCException{
     try{
       
       //TODO: chage according to type of the character...
@@ -72,38 +76,52 @@ public class XMLParser {
       person.addContent(eye);
       
       /*** Specific Elements ***/
-      if(P13PCCreation.class.isInstance(character)){                            // PATIENT 13 CHARACTER 
-        person.setAttribute(new Attribute("affected",((P13PCCreation)character).isSane() ? "no" : "yes"));
+      if(P13Creator.class.isInstance(character)){                               // PATIENT 13 CHARACTER 
+        person.setAttribute(new Attribute("affected",((P13Creator)character).isSane() ? "no" : "yes"));
         Element supervisor = new Element("supervisor");
-        supervisor.setText(((P13PCCreation)character).getSupervisor());
+        supervisor.setText(((P13Creator)character).getSupervisor());
         person.addContent(supervisor);
         Element room = new Element("room");
-        room.setText(((P13PCCreation)character).getRoom());
+        room.setText(((P13Creator)character).getRoom());
         person.addContent(room);
         Element seniority = new Element("seniority");
-        seniority.setText(String.valueOf(((P13PCCreation)character).getSeniority()));
+        seniority.setText(String.valueOf(((P13Creator)character).getSeniority()));
         person.addContent(seniority);
         Element attributes = new Element("attributes");
         Element vitality = new Element("vitality");
-        vitality.setText(String.valueOf(((P13PCCreation)character).getVitality()));
+        vitality.setText(String.valueOf(((P13Creator)character).getVitality()));
         attributes.addContent(vitality);
         Element coldblood = new Element("coldblood");
-        coldblood.setText(String.valueOf(((P13PCCreation)character).getColdblood()));
+        coldblood.setText(String.valueOf(((P13Creator)character).getColdblood()));
         attributes.addContent(coldblood);
         Element lucidity = new Element("lucidity");
-        lucidity.setText(String.valueOf(((P13PCCreation)character).getLucidity()));
+        lucidity.setText(String.valueOf(((P13Creator)character).getLucidity()));
         attributes.addContent(lucidity);
         person.addContent(attributes);
         Element lineaments = new Element("lineaments");
-        for(String lineament : ((P13PCCreation)character).getLineaments().keySet()){
+        for(String lineament : ((P13Creator)character).getLineaments().keySet()){
           Element tmpL = new Element(lineament);
-          tmpL.setText(Integer.toString(((P13PCCreation)character).getLineaments().get(lineament)));
+          tmpL.setText(Integer.toString(((P13Creator)character).getLineaments().get(lineament)));
           lineaments.addContent(tmpL);
         }
         person.addContent(lineaments);
       }
+      else if(AcCreator.class.isInstance(character)){                           // PATIENT 13 CHARACTER 
+        // do some stuff...
+      }
+      else if(FsCreator.class.isInstance(character)){                           // PATIENT 13 CHARACTER 
+        // do some stuff...
+      }
+      else if(AddCreator.class.isInstance(character)){                           // PATIENT 13 CHARACTER 
+        // do some stuff...
+      }
+      else if(SrCreator.class.isInstance(character)){                           // PATIENT 13 CHARACTER 
+        // do some stuff...
+      }
       else{
-        System.out.println("Not a P13Creation");
+        throw new RPGCCException("The creator is not recognized. The related "
+                + "game might not be supported by the RPG Software Suit. Please "
+                + "contact the creator for further information.");
       }
 
       /*** Finalize the document and close everything ***/

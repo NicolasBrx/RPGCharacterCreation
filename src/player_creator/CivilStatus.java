@@ -1,4 +1,4 @@
-package creator;
+package player_creator;
 
 /**
  *

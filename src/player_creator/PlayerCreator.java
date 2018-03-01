@@ -1,4 +1,4 @@
-package creator;
+package player_creator;
 
 /**
  * Quick class used a super class for all Player Character. This just handles
@@ -6,7 +6,7 @@ package creator;
  * 
  * @author Nicolas Brax
  */
-public abstract class PlayerCharacter implements CreatorInterface {
+public abstract class PlayerCreator implements CreatorInterface {
   
   /**
    * 
@@ -42,7 +42,7 @@ public abstract class PlayerCharacter implements CreatorInterface {
    * 
    * @param playerName 
    */
-  public PlayerCharacter(String playerName){
+  public PlayerCreator(String playerName){
     this.playerName = playerName;
     this.godMode = false;
     this.lastError = "";

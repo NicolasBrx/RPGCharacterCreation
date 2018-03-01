@@ -1,4 +1,4 @@
-package creator;
+package player_creator;
 
 /**
  * This interface ensures that every class used for character (playable or non

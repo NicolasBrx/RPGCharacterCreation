@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ihm;
 
 import java.net.URL;
@@ -11,7 +6,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author nicolas
+ * @author Nicolas Brax
  */
 public class RPGCharacterCreationIHM extends javax.swing.JFrame {
 
@@ -106,7 +101,7 @@ public class RPGCharacterCreationIHM extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
   private void jbtnQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnQuitActionPerformed
-    if(generic.isSaveNeeded()){                                                // if a save is needed while closing
+    if(generic.isSaveNeeded()){                                                 // if a save is needed while closing
       int dialogButton = JOptionPane.YES_NO_OPTION;                             // proposes to do so
       int dialogResult = JOptionPane.showConfirmDialog (null, "Would you like to save before quit?","Warning",dialogButton);
       if(dialogResult == JOptionPane.YES_OPTION){

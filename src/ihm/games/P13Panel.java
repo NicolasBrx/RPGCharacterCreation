@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package ihm.p13;
+package ihm.games;
 
-import creator.p13.P13PCCreation;
+import player_creator.games.P13Creator;
 import javax.swing.JButton;
 import ihm.CreationInterface;
 import ihm.PCGenericPanel;
@@ -15,14 +10,14 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author nicolas
+ * @author Nicolas Brax
  */
-public class P13PCPanel extends javax.swing.JPanel implements CreationInterface {
+public class P13Panel extends javax.swing.JPanel implements CreationInterface {
   
   /**
    * 
    */
-  private P13PCCreation creator;
+  private P13Creator creator;
   
   /**
    * 
@@ -32,7 +27,7 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
   /**
    * Creates new form PC13Panel
    */
-  public P13PCPanel() {
+  public P13Panel() {
     initComponents();
     jpCivil.enable(false);
     saveNeeded = false;
@@ -61,7 +56,7 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
    */
   @Override
   public void create(String playerName){
-    creator = new P13PCCreation(playerName,true);
+    creator = new P13Creator(playerName,true);
     
     setInformation("You can now create a new Patient. Please note that the "
             + "form is initialised for a new sane patient. (Un)Check boxes "
@@ -264,7 +259,7 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
     jbtnValidate = new javax.swing.JButton();
     jbtnSave = new javax.swing.JButton();
     jbtnHelp = new javax.swing.JButton();
-    jpCivil = new ihm.PCCreationCivilianPanel();
+    jpCivil = new ihm.JpCivilianStatus();
     jbtnReset = new javax.swing.JButton();
 
     setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -794,7 +789,7 @@ public class P13PCPanel extends javax.swing.JPanel implements CreationInterface 
   private javax.swing.JLabel jlblRemain;
   private javax.swing.JLabel jlblRemaining;
   private javax.swing.JLabel jlblVitality;
-  private ihm.PCCreationCivilianPanel jpCivil;
+  private ihm.JpCivilianStatus jpCivil;
   private javax.swing.JTable jtLineaments;
   // End of variables declaration//GEN-END:variables
 }

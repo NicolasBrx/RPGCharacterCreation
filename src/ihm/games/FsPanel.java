@@ -3,20 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ihm.sr;
-
-import ihm.ac.*;
+package ihm.games;
 
 /**
  *
  * @author nicolas
  */
-public class SrNPCPanel extends javax.swing.JPanel {
+public class FsPanel extends javax.swing.JPanel {
 
   /**
-   * Creates new form AcNPCPanel
+   * Creates new form AcPCPanel
    */
-  public SrNPCPanel() {
+  public FsPanel() {
     initComponents();
   }
 

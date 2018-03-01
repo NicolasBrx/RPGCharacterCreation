@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ihm;
 
-import ihm.p13.P13PCPanel;
+import ihm.games.P13Panel;
 import javax.swing.JTabbedPane;
 
 /**
  *
- * @author nicolas
+ * @author Nicolas Brax
  */
 public class PCGenericPanel extends javax.swing.JPanel {
 
@@ -57,8 +52,8 @@ public class PCGenericPanel extends javax.swing.JPanel {
       case "AC":
         break;
       case "P13":
-        creation = new P13PCPanel();
-        add((P13PCPanel)creation);
+        creation = new P13Panel();
+        add((P13Panel)creation);
         setInformation("Please enter a player name to start the creation process.");
         revalidate();
         repaint();
@@ -113,7 +108,7 @@ public class PCGenericPanel extends javax.swing.JPanel {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    topPanel = new ihm.PCCreationTopPanel();
+    topPanel = new ihm.JpTopPanel();
 
     setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
     setMaximumSize(new java.awt.Dimension(1000, 600));
@@ -123,6 +118,6 @@ public class PCGenericPanel extends javax.swing.JPanel {
 
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private ihm.PCCreationTopPanel topPanel;
+  private ihm.JpTopPanel topPanel;
   // End of variables declaration//GEN-END:variables
 }

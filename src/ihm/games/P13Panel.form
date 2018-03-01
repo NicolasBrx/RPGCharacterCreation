@@ -473,7 +473,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnHelpActionPerformed"/>
       </Events>
     </Component>
-    <Component class="ihm.PCCreationCivilianPanel" name="jpCivil">
+    <Component class="ihm.JpCivilianStatus" name="jpCivil">
     </Component>
     <Component class="javax.swing.JButton" name="jbtnReset">
       <Properties>

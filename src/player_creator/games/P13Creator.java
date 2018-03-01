@@ -1,6 +1,6 @@
-package creator.p13;
+package player_creator.games;
 
-import creator.PlayerCharacter;
+import player_creator.PlayerCreator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.concurrent.ThreadLocalRandom;
@@ -11,7 +11,7 @@ import tools.XMLParser;
  *
  * @author Nicolas Brax
  */
-public class P13PCCreation extends PlayerCharacter{
+public class P13Creator extends PlayerCreator{
   
   /**
    * 
@@ -58,7 +58,7 @@ public class P13PCCreation extends PlayerCharacter{
    * @param playerName
    * @param sane
    */
-  public P13PCCreation(String playerName,boolean sane){
+  public P13Creator(String playerName,boolean sane){
     super(playerName);
     this.sane = sane;
     this.lucidity = 5;
@@ -66,8 +66,6 @@ public class P13PCCreation extends PlayerCharacter{
     this.vitality = 5;
     this.lineaments = new HashMap<>();
   }
-  
-  
   
   /**
    * This method is used to validate a created character. It is validated when
@@ -146,6 +144,9 @@ public class P13PCCreation extends PlayerCharacter{
         toReturn +="-age";
       }
     }
+    this.lastError = (toReturn.equalsIgnoreCase("ok") 
+                     ? "All good!" 
+                     : "There is at least one validation error.");
     return toReturn;
   }
   
@@ -169,8 +170,8 @@ public class P13PCCreation extends PlayerCharacter{
     }
     catch(RPGCCException e){
       toReturn = false;
+      this.lastError = "Error while saving: " + e.getMessage();
     }
-    
     return toReturn;
   }
   
