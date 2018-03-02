@@ -8,6 +8,7 @@ import player_creator.games.shadowrun.personal.Skil;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 import player_creator.PlayerCreator;
+import player_creator.games.shadowrun.gears.Gear;
 import tools.RPGCCException;
 import tools.XMLParser;
 
@@ -26,19 +27,28 @@ public class SrCreator extends PlayerCreator{
   
   // attributes
   private int body;
+  private int maxBody;
   private int agility;
+  private int maxAgility;
   private int reaction;
+  private int maxReaction;
   private int strength;
+  private int maxStrength;
   private int willpower;
+  private int maxWillpower;
   private int logic;
+  private int maxLogic;
   private int intuition;
+  private int maxIntuition;
   private int charisma;
+  private int maxCharisma;
   
   // special attributes
   private boolean magician;
   private boolean technomancer;
   private boolean adept;
   private int edge;
+  private int maxEdge;
   private int magic;
   private int resonance;
   private double essence;
@@ -59,6 +69,7 @@ public class SrCreator extends PlayerCreator{
   private int memory;
   private int lift;
   private int movement;
+  private int startingNuyens;
   
   // other information and data
   private ArrayList<Identity> identityList;
@@ -80,37 +91,6 @@ public class SrCreator extends PlayerCreator{
     this.qualityList = new ArrayList<>();
     this.contactList = new ArrayList<>();
     this.augmentationList = new ArrayList<>();
-  }
-  
-  /**
-   * Compute all attributes derivated from the ones set during the 
-   * character creation process.
-   */
-  private void finalizeCharacter(){
-    this.initiative = (this.intuition + this.reaction 
-                    + ThreadLocalRandom.current().nextInt(1, 7));
-    this.matrixInitiative = (this.intuition + this.reaction 
-                          + ThreadLocalRandom.current().nextInt(1, 7));;
-    if(this.magician)
-      this.astralInitiative = this.intuition * 2
-                            + ThreadLocalRandom.current().nextInt(1, 7)
-                            + ThreadLocalRandom.current().nextInt(1, 7);  
-    
-    this.mentalLimit = Math.floorDiv((this.logic * 2 + this.body + this.willpower),3);
-    this.physicalLimit = Math.floorDiv((this.strength * 2 + this.body + this.reaction),3);
-    this.socialLimit = Math.floorDiv((this.charisma * 2 + this.willpower + (int)Math.ceil(this.essence)),3);
-    
-    this.physicalDamageTrack = 8 + Math.floorDiv(this.body, 2);
-    this.stunDamageTrack = 8 + Math.floorDiv(this.willpower, 2);
-    this.overflow = this.body;
-    
-    this.notoriety = this.publicAwareness + this.streetcred;
-    
-    this.composure = this.charisma + this.willpower;
-    this.judgeIntention = this.charisma + this.intuition;
-    this.lift = this.body + this.strength;
-    this.memory = this.logic + this.willpower;
-    this.movement = this.agility * 2;
   }
   
   /**
@@ -141,7 +121,7 @@ public class SrCreator extends PlayerCreator{
    * It has to be noted that verification about the current character are to be
    * made before this call if wanted.
    * 
-   * @return True if the charachter is saved, false otherwise.
+   * @return True if the character is saved, false otherwise.
    */
   @Override
   public boolean saveCharacter(){
@@ -158,6 +138,93 @@ public class SrCreator extends PlayerCreator{
     return toReturn;
   }
 
+  /****************************************************************************/
+  /*****                         Builder Methods                          *****/
+  /****************************************************************************/
+  
+  // TODO: prioritytable (information and selection visualisation) ==> for HMI onlyet
+  
+  // TODO: choose race  (+ special attributes amount)
+  //  > information (bonus) and initialization (attributes)
+  public boolean setRace(String race){
+    boolean toReturn = true;
+    return toReturn;
+  }
+  
+  // TODO: modify special attributes (no rules)
+  public boolean modifySpecialAttribute(String attribute, int modifier){
+    boolean toReturn = true;
+    return toReturn;
+  }
+  
+  // TODO: modify attributes:  only one at the natural limit
+  public boolean modifyAttribute(String attribute, int modifier){
+    boolean toReturn = true;
+    return toReturn;
+  }
+  
+  // TODO: choose qualities (spend and gain karma, warning for max gain/spend)
+  public boolean spendKarma(int karmaModifier){
+    boolean toReturn = true;
+    // used for qualities
+    return toReturn;
+  }
+  
+  // TODO: purchase gears by spending resources
+  public boolean addGear(Gear gear, boolean remove){
+    boolean toReturn = true;
+    return toReturn;
+  }
+  
+  // TODO: set lifestyle (and add starting nuyens to finalization, random on lifestyle)
+  public boolean setLifestyle(String lifestyle){
+    boolean toReturn = true;
+    return toReturn;
+  }
+  
+  // TODO: leftover karma to spend : contacts
+  public boolean addContact(Contact contact, boolean remove){
+    boolean toReturn = true;
+    return toReturn;
+  }
+  
+  // TODO: finalization => add starting nuyens computation
+  /**
+   * Compute all attributes derivated from the ones set during the 
+   * character creation process.
+   */
+  private void finalizeCharacter(){
+    this.initiative = (this.intuition + this.reaction 
+                    + ThreadLocalRandom.current().nextInt(1, 7));
+    this.matrixInitiative = (this.intuition + this.reaction 
+                          + ThreadLocalRandom.current().nextInt(1, 7));;
+    if(this.magician)
+      this.astralInitiative = this.intuition * 2
+                            + ThreadLocalRandom.current().nextInt(1, 7)
+                            + ThreadLocalRandom.current().nextInt(1, 7);  
+    
+    this.mentalLimit = Math.floorDiv((this.logic * 2 + this.body + this.willpower),3);
+    this.physicalLimit = Math.floorDiv((this.strength * 2 + this.body + this.reaction),3);
+    this.socialLimit = Math.floorDiv((this.charisma * 2 + this.willpower + (int)Math.ceil(this.essence)),3);
+    
+    this.physicalDamageTrack = 8 + Math.floorDiv(this.body, 2);
+    this.stunDamageTrack = 8 + Math.floorDiv(this.willpower, 2);
+    this.overflow = this.body;
+    
+    this.notoriety = this.publicAwareness + this.streetcred;
+    
+    this.composure = this.charisma + this.willpower;
+    this.judgeIntention = this.charisma + this.intuition;
+    this.lift = this.body + this.strength;
+    this.memory = this.logic + this.willpower;
+    this.movement = this.agility * 2;
+    
+    // TODO: compute starting nuyens (according to lifestyle)
+    // TODO: compute new attribute values (according to gear and other bonuses/maluses)
+  }
+  
+  // TODO: final touches => check what can be done
+  
   /****************************************************************************/
   /*****                    Getter and Setter Methods                     *****/
   /****************************************************************************/
