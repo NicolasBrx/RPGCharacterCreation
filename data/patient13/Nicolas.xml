@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Nicolas>
-  <character godmode="no" name="Cedric" firstname="Laurens" affected="no">
+  <character godmode="no" name="Herbert" firstname="Hugues" affected="no">
     <sex>man</sex>
-    <surname>Ducon</surname>
-    <age>34</age>
-    <weight>64.0</weight>
-    <size>1.78</size>
+    <surname>Dede</surname>
+    <age>23</age>
+    <weight>84.0</weight>
+    <size>174.0</size>
     <eye>brown</eye>
-    <supervisor>Stein</supervisor>
-    <room>A19</room>
+    <supervisor>Kemper</supervisor>
+    <room>B10</room>
     <seniority>0</seniority>
     <attributes>
-      <vitality>13</vitality>
-      <coldblood>5</coldblood>
+      <vitality>10</vitality>
+      <coldblood>8</coldblood>
       <lucidity>8</lucidity>
     </attributes>
     <lineaments>
-      <Pervers>2</Pervers>
-      <Genereux>-2</Genereux>
-      <Altruiste>-1</Altruiste>
-      <Narcissique>1</Narcissique>
+      <a>2</a>
+      <b>1</b>
+      <d>-2</d>
+      <v>-1</v>
     </lineaments>
   </character>
 </Nicolas>

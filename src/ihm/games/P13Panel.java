@@ -14,14 +14,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class P13Panel extends javax.swing.JPanel implements CreationInterface {
   
-  /**
-   * 
-   */
   private P13Creator creator;
-  
-  /**
-   * 
-   */
   private boolean saveNeeded;
   
   /**
@@ -33,18 +26,11 @@ public class P13Panel extends javax.swing.JPanel implements CreationInterface {
     saveNeeded = false;
   }
   
-  /**
-   * 
-   * @return 
-   */
   @Override
   public boolean isSaveNeeded(){
     return this.saveNeeded;
   }
   
-  /**
-   * 
-   */
   @Override
   public void saveCharacter(){
     modifySaveState(false);

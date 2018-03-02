@@ -1,10 +1,10 @@
 package player_creator.games;
 
-import ihm.games.tools.SR_Augmentation;
-import ihm.games.tools.SR_Contact;
-import ihm.games.tools.SR_Identity;
-import ihm.games.tools.SR_Quality;
-import ihm.games.tools.SR_Skill;
+import player_creator.games.shadowrun.gears.GearAugmentation;
+import player_creator.games.shadowrun.social.Contact;
+import player_creator.games.shadowrun.social.Identity;
+import player_creator.games.shadowrun.personal.Quality;
+import player_creator.games.shadowrun.personal.Skil;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 import player_creator.PlayerCreator;
@@ -61,11 +61,11 @@ public class SrCreator extends PlayerCreator{
   private int movement;
   
   // other information and data
-  private ArrayList<SR_Identity> identityList;
-  private ArrayList<SR_Skill> skillList;
-  private ArrayList<SR_Quality> qualityList;
-  private ArrayList<SR_Contact> contactList;
-  private ArrayList<SR_Augmentation> augmentationList;
+  private ArrayList<Identity> identityList;
+  private ArrayList<Skil> skillList;
+  private ArrayList<Quality> qualityList;
+  private ArrayList<Contact> contactList;
+  private ArrayList<GearAugmentation> augmentationList;
   
   /**
    * 
@@ -158,645 +158,326 @@ public class SrCreator extends PlayerCreator{
     return toReturn;
   }
 
-  /**
-   *
-   * @return
-   */
+  /****************************************************************************/
+  /*****                    Getter and Setter Methods                     *****/
+  /****************************************************************************/
   public String getMetatype() {
     return metatype;
   }
 
-  /**
-   *
-   * @param metatype
-   */
   public void setMetatype(String metatype) {
     this.metatype = metatype;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getStreetcred() {
     return streetcred;
   }
 
-  /**
-   *
-   * @param streetcred
-   */
   public void setStreetcred(int streetcred) {
     this.streetcred = streetcred;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getNotoriety() {
     return notoriety;
   }
 
-  /**
-   *
-   * @param notoriety
-   */
   public void setNotoriety(int notoriety) {
     this.notoriety = notoriety;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getPublicAwareness() {
     return publicAwareness;
   }
 
-  /**
-   *
-   * @param publicAwareness
-   */
   public void setPublicAwareness(int publicAwareness) {
     this.publicAwareness = publicAwareness;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getKarma() {
     return karma;
   }
 
-  /**
-   *
-   * @param karma
-   */
   public void setKarma(int karma) {
     this.karma = karma;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getTotalKarma() {
     return totalKarma;
   }
 
-  /**
-   *
-   * @param totalKarma
-   */
   public void setTotalKarma(int totalKarma) {
     this.totalKarma = totalKarma;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getBody() {
     return body;
   }
 
-  /**
-   *
-   * @param body
-   */
   public void setBody(int body) {
     this.body = body;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getAgility() {
     return agility;
   }
 
-  /**
-   *
-   * @param agility
-   */
   public void setAgility(int agility) {
     this.agility = agility;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getReaction() {
     return reaction;
   }
 
-  /**
-   *
-   * @param reaction
-   */
   public void setReaction(int reaction) {
     this.reaction = reaction;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getStrength() {
     return strength;
   }
 
-  /**
-   *
-   * @param strength
-   */
   public void setStrength(int strength) {
     this.strength = strength;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getWillpower() {
     return willpower;
   }
 
-  /**
-   *
-   * @param willpower
-   */
   public void setWillpower(int willpower) {
     this.willpower = willpower;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getLogic() {
     return logic;
   }
 
-  /**
-   *
-   * @param logic
-   */
   public void setLogic(int logic) {
     this.logic = logic;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getIntuition() {
     return intuition;
   }
 
-  /**
-   *
-   * @param intuition
-   */
   public void setIntuition(int intuition) {
     this.intuition = intuition;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getCharisma() {
     return charisma;
   }
 
-  /**
-   *
-   * @param charisma
-   */
   public void setCharisma(int charisma) {
     this.charisma = charisma;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getEdge() {
     return edge;
   }
 
-  /**
-   *
-   * @param edge
-   */
   public void setEdge(int edge) {
     this.edge = edge;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getMagic() {
     return magic;
   }
 
-  /**
-   *
-   * @param magic
-   */
   public void setMagic(int magic) {
     this.magic = magic;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getResonance() {
     return resonance;
   }
 
-  /**
-   *
-   * @param resonance
-   */
   public void setResonance(int resonance) {
     this.resonance = resonance;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getInitiative() {
     return initiative;
   }
 
-  /**
-   *
-   * @param initiative
-   */
   public void setInitiative(int initiative) {
     this.initiative = initiative;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getMatrixInitiative() {
     return matrixInitiative;
   }
 
-  /**
-   *
-   * @param matrixInitiative
-   */
   public void setMatrixInitiative(int matrixInitiative) {
     this.matrixInitiative = matrixInitiative;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getAstralInitiative() {
     return astralInitiative;
   }
 
-  /**
-   *
-   * @param astralInitiative
-   */
   public void setAstralInitiative(int astralInitiative) {
     this.astralInitiative = astralInitiative;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getComposure() {
     return composure;
   }
 
-  /**
-   *
-   * @param composure
-   */
   public void setComposure(int composure) {
     this.composure = composure;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getJudgeIntention() {
     return judgeIntention;
   }
 
-  /**
-   *
-   * @param judgeIntention
-   */
   public void setJudgeIntention(int judgeIntention) {
     this.judgeIntention = judgeIntention;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getMemory() {
     return memory;
   }
 
-  /**
-   *
-   * @param memory
-   */
   public void setMemory(int memory) {
     this.memory = memory;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getLift() {
     return lift;
   }
 
-  /**
-   *
-   * @param lift
-   */
   public void setLift(int lift) {
     this.lift = lift;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getMovement() {
     return movement;
   }
 
-  /**
-   *
-   * @param movement
-   */
   public void setMovement(int movement) {
     this.movement = movement;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getPhysicalDamageTrack() {
     return physicalDamageTrack;
   }
 
-  /**
-   *
-   * @param physicalDamageTrack
-   */
   public void setPhysicalDamageTrack(int physicalDamageTrack) {
     this.physicalDamageTrack = physicalDamageTrack;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getStunDamageTrack() {
     return stunDamageTrack;
   }
 
-  /**
-   *
-   * @param stunDamageTrack
-   */
   public void setStunDamageTrack(int stunDamageTrack) {
     this.stunDamageTrack = stunDamageTrack;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getPhysicalLimit() {
     return physicalLimit;
   }
 
-  /**
-   *
-   * @param physicalLimit
-   */
   public void setPhysicalLimit(int physicalLimit) {
     this.physicalLimit = physicalLimit;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getMentalLimit() {
     return mentalLimit;
   }
 
-  /**
-   *
-   * @param mentalLimit
-   */
   public void setMentalLimit(int mentalLimit) {
     this.mentalLimit = mentalLimit;
   }
 
-  /**
-   *
-   * @return
-   */
   public int getSocialLimit() {
     return socialLimit;
   }
 
-  /**
-   *
-   * @param socialLimit
-   */
   public void setSocialLimit(int socialLimit) {
     this.socialLimit = socialLimit;
   }
 
-  /**
-   *
-   * @return
-   */
-  public ArrayList<SR_Identity> getIdentityList() {
+  public ArrayList<Identity> getIdentityList() {
     return identityList;
   }
 
-  /**
-   *
-   * @param identityList
-   */
-  public void setIdentityList(ArrayList<SR_Identity> identityList) {
+  public void setIdentityList(ArrayList<Identity> identityList) {
     this.identityList = identityList;
   }
 
-  /**
-   *
-   * @return
-   */
-  public ArrayList<SR_Skill> getSkillList() {
+  public ArrayList<Skil> getSkillList() {
     return skillList;
   }
 
-  /**
-   *
-   * @param skillList
-   */
-  public void setSkillList(ArrayList<SR_Skill> skillList) {
+  public void setSkillList(ArrayList<Skil> skillList) {
     this.skillList = skillList;
   }
 
-  /**
-   *
-   * @return
-   */
-  public ArrayList<SR_Quality> getQualityList() {
+  public ArrayList<Quality> getQualityList() {
     return qualityList;
   }
 
-  /**
-   *
-   * @param qualityList
-   */
-  public void setQualityList(ArrayList<SR_Quality> qualityList) {
+  public void setQualityList(ArrayList<Quality> qualityList) {
     this.qualityList = qualityList;
   }
 
-  /**
-   *
-   * @return
-   */
-  public ArrayList<SR_Contact> getContactList() {
+  public ArrayList<Contact> getContactList() {
     return contactList;
   }
 
-  /**
-   *
-   * @param contactList
-   */
-  public void setContactList(ArrayList<SR_Contact> contactList) {
+  public void setContactList(ArrayList<Contact> contactList) {
     this.contactList = contactList;
   }
 
-  /**
-   * 
-   * @return 
-   */
   public boolean isMagician() {
     return magician;
   }
 
-  /**
-   * 
-   * @param magician 
-   */
   public void setMagician(boolean magician) {
     this.magician = magician;
   }
 
-  /**
-   * 
-   * @return 
-   */
   public boolean isTechnomancer() {
     return technomancer;
   }
 
-  /**
-   * 
-   * @param technomancer 
-   */
   public void setTechnomancer(boolean technomancer) {
     this.technomancer = technomancer;
   }
 
-  /**
-   * 
-   * @return 
-   */
   public boolean isAdept() {
     return adept;
   }
 
-  /**
-   * 
-   * @param adept 
-   */
   public void setAdept(boolean adept) {
     this.adept = adept;
   }
 
-  /**
-   * 
-   * @return 
-   */
   public double getEssence() {
     return essence;
   }
 
-  /**
-   * 
-   * @param essence 
-   */
   public void setEssence(double essence) {
     this.essence = essence;
   }
 
-  /**
-   * 
-   * @return 
-   */
   public int getOverflow() {
     return overflow;
   }
 
-  /**
-   * 
-   * @param overflow 
-   */
   public void setOverflow(int overflow) {
     this.overflow = overflow;
   }
 
-  /**
-   * 
-   * @return 
-   */
-  public ArrayList<SR_Augmentation> getAugmentationList() {
+  public ArrayList<GearAugmentation> getAugmentationList() {
     return augmentationList;
   }
 
-  /**
-   * 
-   * @param augmentationList 
-   */
-  public void setAugmentationList(ArrayList<SR_Augmentation> augmentationList) {
+  public void setAugmentationList(ArrayList<GearAugmentation> augmentationList) {
     this.augmentationList = augmentationList;
   }
-  
-  
 }

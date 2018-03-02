@@ -1,30 +1,20 @@
-package ihm.games.tools;
+package player_creator.games.shadowrun.personal;
 
 /**
  *
  * @author Nicolas Brax
  */
-public class SR_Quality {
+public class Quality {
   
-  /**
-   * 
-   */
   private String qualityName;
-  
-  /**
-   * 
-   */
   private String qualityDescription;
-  
-  /**
-   * 
-   */
   private String qualityType;
+  private String relatedSkillOrAttribute;
 
   /**
    * 
    */
-  public SR_Quality() {
+  public Quality() {
   }
 
   /**
@@ -32,58 +22,49 @@ public class SR_Quality {
    * @param qualityName
    * @param qualityDescription
    * @param qualityType 
+   * @param relatedSkillOrAttribute 
    */
-  public SR_Quality(String qualityName, String qualityDescription, String qualityType) {
+  public Quality(String qualityName, String qualityDescription, 
+          String qualityType,String relatedSkillOrAttribute){
     this.qualityName = qualityName;
     this.qualityDescription = qualityDescription;
     this.qualityType = qualityType;
+    this.relatedSkillOrAttribute = relatedSkillOrAttribute;
   }
 
-  /**
-   *
-   * @return
-   */
+  
+  /****************************************************************************/
+  /*****                    Getter and Setter Methods                     *****/
+  /****************************************************************************/
   public String getQualityName() {
     return qualityName;
   }
 
-  /**
-   *
-   * @param qualityName
-   */
   public void setQualityName(String qualityName) {
     this.qualityName = qualityName;
   }
 
-  /**
-   *
-   * @return
-   */
   public String getQualityDescription() {
     return qualityDescription;
   }
 
-  /**
-   *
-   * @param qualityDescription
-   */
   public void setQualityDescription(String qualityDescription) {
     this.qualityDescription = qualityDescription;
   }
 
-  /**
-   *
-   * @return
-   */
   public String getQualityType() {
     return qualityType;
   }
 
-  /**
-   *
-   * @param qualityType
-   */
   public void setQualityType(String qualityType) {
     this.qualityType = qualityType;
+  }
+
+  public String getRelatedSkillOrAttribute() {
+    return relatedSkillOrAttribute;
+  }
+
+  public void setRelatedSkillOrAttribute(String relatedSkillOrAttribute) {
+    this.relatedSkillOrAttribute = relatedSkillOrAttribute;
   }
 }

@@ -76,47 +76,20 @@ public class XMLParser {
       person.addContent(eye);
       
       /*** Specific Elements ***/
-      if(P13Creator.class.isInstance(character)){                               // PATIENT 13 CHARACTER 
-        person.setAttribute(new Attribute("affected",((P13Creator)character).isSane() ? "no" : "yes"));
-        Element supervisor = new Element("supervisor");
-        supervisor.setText(((P13Creator)character).getSupervisor());
-        person.addContent(supervisor);
-        Element room = new Element("room");
-        room.setText(((P13Creator)character).getRoom());
-        person.addContent(room);
-        Element seniority = new Element("seniority");
-        seniority.setText(String.valueOf(((P13Creator)character).getSeniority()));
-        person.addContent(seniority);
-        Element attributes = new Element("attributes");
-        Element vitality = new Element("vitality");
-        vitality.setText(String.valueOf(((P13Creator)character).getVitality()));
-        attributes.addContent(vitality);
-        Element coldblood = new Element("coldblood");
-        coldblood.setText(String.valueOf(((P13Creator)character).getColdblood()));
-        attributes.addContent(coldblood);
-        Element lucidity = new Element("lucidity");
-        lucidity.setText(String.valueOf(((P13Creator)character).getLucidity()));
-        attributes.addContent(lucidity);
-        person.addContent(attributes);
-        Element lineaments = new Element("lineaments");
-        for(String lineament : ((P13Creator)character).getLineaments().keySet()){
-          Element tmpL = new Element(lineament);
-          tmpL.setText(Integer.toString(((P13Creator)character).getLineaments().get(lineament)));
-          lineaments.addContent(tmpL);
-        }
-        person.addContent(lineaments);
+      if(P13Creator.class.isInstance(character)){
+        person = fillElementWithPatient13Specifics(person,(P13Creator)character);
       }
-      else if(AcCreator.class.isInstance(character)){                           // CTHULHU CHARACTER 
-        // do some stuff...
+      else if(AcCreator.class.isInstance(character)){
+        person = fillElementWithCthulhuSpecifics(person,(AcCreator)character);
       }
-      else if(FsCreator.class.isInstance(character)){                           // FENG SHUI CHARACTER 
-        // do some stuff...
+      else if(FsCreator.class.isInstance(character)){
+        person = fillElementWithFengShuiSpecifics(person,(FsCreator)character);
       }
-      else if(AddCreator.class.isInstance(character)){                           // D&D CHARACTER 
-        // do some stuff...
+      else if(AddCreator.class.isInstance(character)){
+        person = fillElementWithAddSpecifics(person,(AddCreator)character);
       }
-      else if(SrCreator.class.isInstance(character)){                           // SHADOWRUN CHARACTER 
-        // do some stuff...
+      else if(SrCreator.class.isInstance(character)){
+        person = fillElementWithShadowrunSpecifics(person,(SrCreator)character);
       }
       else{
         throw new RPGCCException("The creator is not recognized. The related "
@@ -134,7 +107,89 @@ public class XMLParser {
     catch(IOException e){
       throw new RPGCCException("Error while creating savegame file.");
     }
-    
   }
+  
+  /**
+   * 
+   * @param person
+   * @param character
+   * @return 
+   */
+  private Element fillElementWithPatient13Specifics(Element person, P13Creator character){
+    person.setAttribute(new Attribute("affected",character.isSane() ? "no" : "yes"));
+    Element supervisor = new Element("supervisor");
+    supervisor.setText(character.getSupervisor());
+    person.addContent(supervisor);
+    Element room = new Element("room");
+    room.setText(character.getRoom());
+    person.addContent(room);
+    Element seniority = new Element("seniority");
+    seniority.setText(String.valueOf(character.getSeniority()));
+    person.addContent(seniority);
+    Element attributes = new Element("attributes");
+    Element vitality = new Element("vitality");
+    vitality.setText(String.valueOf(character.getVitality()));
+    attributes.addContent(vitality);
+    Element coldblood = new Element("coldblood");
+    coldblood.setText(String.valueOf(character.getColdblood()));
+    attributes.addContent(coldblood);
+    Element lucidity = new Element("lucidity");
+    lucidity.setText(String.valueOf(character.getLucidity()));
+    attributes.addContent(lucidity);
+    person.addContent(attributes);
+    Element lineaments = new Element("lineaments");
+    for(String lineament : character.getLineaments().keySet()){
+      Element tmpL = new Element(lineament);
+      tmpL.setText(Integer.toString(character.getLineaments().get(lineament)));
+      lineaments.addContent(tmpL);
+    }
+    person.addContent(lineaments);
+    return person;
+  }
+  
+  /**
+   * 
+   * @param person
+   * @param character
+   * @return 
+   */
+  private Element fillElementWithShadowrunSpecifics(Element person, SrCreator character){
+    
+    return person;
+  }
+  
+  /**
+   * 
+   * @param person
+   * @param character
+   * @return 
+   */
+  private Element fillElementWithCthulhuSpecifics(Element person, AcCreator character){
+    
+    return person;
+  }
+  
+  /**
+   * 
+   * @param person
+   * @param character
+   * @return 
+   */
+  private Element fillElementWithFengShuiSpecifics(Element person, FsCreator character){
+    
+    return person;
+  }
+  
+  /**
+   * 
+   * @param person
+   * @param character
+   * @return 
+   */
+  private Element fillElementWithAddSpecifics(Element person, AddCreator character){
+    
+    return person;
+  }
+    
   
 }

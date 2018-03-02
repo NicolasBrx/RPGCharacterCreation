@@ -13,44 +13,13 @@ import tools.XMLParser;
  */
 public class P13Creator extends PlayerCreator{
   
-  /**
-   * 
-   */
   private boolean sane;
-  
-  /**
-   * 
-   */
   private int lucidity;
-  
-  /**
-   * 
-   */
   private int coldblood;
-  
-  /**
-   * 
-   */
   private int vitality;
-  
-  /**
-   * 
-   */
   private int seniority;
-  
-  /**
-   * 
-   */
   private String room;
-  
-  /**
-   * 
-   */
   private String supervisor;
-  
-  /**
-   * 
-   */
   private HashMap<String,Integer> lineaments;
   
   /**
@@ -185,71 +154,10 @@ public class P13Creator extends PlayerCreator{
     supervisor = supervisors[ThreadLocalRandom.current().nextInt(0, supervisors.length)];
     seniority = (sane ? 0 : ThreadLocalRandom.current().nextInt(1, 11));
   }
-
-  /**
-   * 
-   * @return 
-   */
-  public int getLucidity() {
-    return lucidity;
-  }
-
-  /**
-   * 
-   * @param lucidity 
-   */
-  public void setLucidity(int lucidity) {
-    this.lucidity = lucidity;
-  }
   
-  /**
-   * 
-   * @param modifier 
-   * @return  
-   */
-  public boolean modifyLucidity(int modifier){
-    boolean toReturn = true;
-    if(!godMode){
-      if(remainingPoints() == 0 && modifier > 0){
-        lastError = "There are no points left.";
-        toReturn = false;
-      }
-      else if((this.lucidity + modifier < 5) || (this.lucidity + modifier > 13)){
-        lastError = "Attribute value should be between 5 and 13.";
-        toReturn = false;
-      }
-      else if((this.lucidity + this.coldblood + this.vitality) > (sane ? 26 : 29)){
-        lastError = "The sum of the attributes values can not exceed " 
-                  + (sane ? 26 : 29)
-                  + ".";
-        toReturn = false;
-      }
-      else{
-        this.lucidity += modifier;
-      }
-    }//if godMode
-    else{
-      this.lucidity += modifier;
-    }
-    return toReturn;
-  }
-
-  /**
-   * 
-   * @return 
-   */
-  public int getColdblood() {
-    return coldblood;
-  }
-
-  /**
-   * 
-   * @param coldblood 
-   */
-  public void setColdblood(int coldblood) {
-    this.coldblood = coldblood;
-  }
-  
+  /****************************************************************************/
+  /*****                    Special Modifier Methods                      *****/
+  /****************************************************************************/
   /**
    * 
    * @param modifier 
@@ -281,48 +189,38 @@ public class P13Creator extends PlayerCreator{
     }
     return toReturn;
   }
-
-  /**
-   * 
-   * @return 
-   */
-  public int getVitality() {
-    return vitality;
-  }
-
-  /**
-   * 
-   * @param vitality 
-   */
-  public void setVitality(int vitality) {
-    this.vitality = vitality;
-  }
-
-  /**
-   * 
-   * @return 
-   */
-  public int getSeniority() {
-    return seniority;
-  }
-
-  /**
-   * 
-   * @return 
-   */
-  public String getRoom() {
-    return room;
-  }
-
-  /**
-   * 
-   * @return 
-   */
-  public String getSupervisor() {
-    return supervisor;
-  }
   
-  
+  /**
+   * 
+   * @param modifier
+   * @return 
+   */
+  public boolean modifyLucidity(int modifier){
+    boolean toReturn = true;
+    if(!godMode){
+      if(remainingPoints() == 0 && modifier > 0){
+        lastError = "There are no points left.";
+        toReturn = false;
+      }
+      else if((this.lucidity + modifier < 5) || (this.lucidity + modifier > 13)){
+        lastError = "Attribute value should be between 5 and 13.";
+        toReturn = false;
+      }
+      else if((this.lucidity + this.coldblood + this.vitality) > (sane ? 26 : 29)){
+        lastError = "The sum of the attributes values can not exceed " 
+                  + (sane ? 26 : 29)
+                  + ".";
+        toReturn = false;
+      }
+      else{
+        this.lucidity += modifier;
+      }
+    }//if godMode
+    else{
+      this.lucidity += modifier;
+    }
+    return toReturn;
+  }
   
   /**
    * 
@@ -355,46 +253,63 @@ public class P13Creator extends PlayerCreator{
     }
     return toReturn;
   }
+
+  /****************************************************************************/
+  /*****                    Getter and Setter Methods                     *****/
+  /****************************************************************************/
+  public int getLucidity() {
+    return lucidity;
+  }
+
+  public void setLucidity(int lucidity) {
+    this.lucidity = lucidity;
+  }
   
-  /**
-   * 
-   * @param sane 
-   */
+  public int getColdblood() {
+    return coldblood;
+  }
+
+  public void setColdblood(int coldblood) {
+    this.coldblood = coldblood;
+  }
+  
+  public int getVitality() {
+    return vitality;
+  }
+
+  public void setVitality(int vitality) {
+    this.vitality = vitality;
+  }
+
+  public int getSeniority() {
+    return seniority;
+  }
+
+  public String getRoom() {
+    return room;
+  }
+
+  public String getSupervisor() {
+    return supervisor;
+  }
+  
   public void setSane(boolean sane){
     this.sane = sane;
   }
   
-  /**
-   * 
-   * @return 
-   */
   public boolean isSane(){
     return this.sane;
   }
   
-  /**
-   * 
-   * @param lineament
-   * @param score 
-   */
   public void addLineament(String lineament, int score){
     this.lineaments.put(lineament, score);
   }
   
-  /**
-   * 
-   * @return 
-   */
   public HashMap<String,Integer> getLineaments(){
     return this.lineaments;
   }
   
-  /**
-   * 
-   * @return 
-   */
   public int remainingPoints(){
     return ((sane ? 26 : 29) - this.lucidity - this.coldblood - this.vitality);
   }
-
 }

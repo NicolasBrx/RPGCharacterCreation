@@ -5,10 +5,12 @@
  */
 package player_creator.games;
 
+import player_creator.PlayerCreator;
+
 /**
  *
  * @author nicolas
  */
-public class AcCreator {
+public class AcCreator extends PlayerCreator{
   
 }

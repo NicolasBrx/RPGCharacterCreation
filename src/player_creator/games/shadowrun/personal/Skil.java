@@ -1,10 +1,10 @@
-package ihm.games.tools;
+package player_creator.games.shadowrun.personal;
 
 /**
  *
  * @author Nicolas Brax
  */
-public class SR_Skill {
+public class Skil {
   
   private String skillName;
   private int skillRating;
@@ -13,7 +13,7 @@ public class SR_Skill {
   /**
    * 
    */
-  public SR_Skill(){
+  public Skil(){
     this.skillName = "";
     this.skillRating = -1;
     this.skillType = "";
@@ -25,60 +25,37 @@ public class SR_Skill {
    * @param rating
    * @param type 
    */
-  public SR_Skill(String name, int rating, String type){
+  public Skil(String name, int rating, String type){
     this.skillName = name;
     this.skillRating = rating;
     this.skillType = type;
   }
 
-  /**
-   * 
-   * @return 
-   */
+  
+  /****************************************************************************/
+  /*****                    Getter and Setter Methods                     *****/
+  /****************************************************************************/
   public String getSkillName() {
     return skillName;
   }
 
-  /**
-   * 
-   * @param skillName 
-   */
   public void setSkillName(String skillName) {
     this.skillName = skillName;
   }
 
-  /**
-   * 
-   * @return 
-   */
   public int getSkillRating() {
     return skillRating;
   }
 
-  /**
-   * 
-   * @param skillRating 
-   */
   public void setSkillRating(int skillRating) {
     this.skillRating = skillRating;
   }
 
-  /**
-   * 
-   * @return 
-   */
   public String getSkillType() {
     return skillType;
   }
 
-  /**
-   * 
-   * @param skillType 
-   */
   public void setSkillType(String skillType) {
     this.skillType = skillType;
   }
-  
-  
-  
 }
