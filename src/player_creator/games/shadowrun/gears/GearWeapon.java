@@ -28,7 +28,7 @@ public class GearWeapon extends Gear{
           int weaponReach, String gearName, int gearRating, int gearPrice,
           String gearAvailability)
   {
-    super(gearName, gearRating, gearPrice, gearAvailability);
+    super(gearName, gearRating, gearPrice, gearAvailability, gearClass.weapon);
     this.weaponDamage = weaponDamage;
     this.weaponDamageType = weaponDamageType;
     this.weaponAccuracy = weaponAccuracy;

@@ -28,7 +28,8 @@ public class GearAugmentation extends Gear{
           double augmentationEssenceCost, String augmentationNotes,
           String augmentationAvailability, int augmentationPrice)
   {
-    super(augmentationName,augmentationRating,augmentationPrice,augmentationAvailability);
+    super(augmentationName, augmentationRating, augmentationPrice,
+                                augmentationAvailability, gearClass.augmentation);
     this.augmentationEssenceCost = augmentationEssenceCost;
     this.augmentationNotes = augmentationNotes;
   }

@@ -14,7 +14,7 @@ public class GearArmor extends Gear{
   public GearArmor(String armorName, int armorRating, String armorNotes, int armorPrice,
           String armorAvailability)
   {
-    super(armorName,armorRating,armorPrice,armorAvailability);
+    super(armorName, armorRating, armorPrice, armorAvailability, gearClass.armor);
     this.armorNotes = armorNotes;
   }
 

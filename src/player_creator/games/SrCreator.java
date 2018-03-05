@@ -28,20 +28,28 @@ public class SrCreator extends PlayerCreator{
   // attributes
   private int body;
   private int maxBody;
+  private int minBody;
   private int agility;
   private int maxAgility;
+  private int minAgility;
   private int reaction;
   private int maxReaction;
+  private int minReaction;
   private int strength;
   private int maxStrength;
+  private int minStrength;
   private int willpower;
   private int maxWillpower;
+  private int minWillpower;
   private int logic;
   private int maxLogic;
+  private int minLogic;
   private int intuition;
   private int maxIntuition;
+  private int minIntuition;
   private int charisma;
   private int maxCharisma;
+  private int minCharisma;
   
   // special attributes
   private boolean magician;
@@ -49,6 +57,7 @@ public class SrCreator extends PlayerCreator{
   private boolean adept;
   private int edge;
   private int maxEdge;
+  private int minEdge;
   private int magic;
   private int resonance;
   private double essence;
@@ -72,6 +81,7 @@ public class SrCreator extends PlayerCreator{
   private int startingNuyens;
   
   // other information and data
+  private ArrayList<String> raceAdvantages;
   private ArrayList<Identity> identityList;
   private ArrayList<Skil> skillList;
   private ArrayList<Quality> qualityList;
@@ -86,6 +96,7 @@ public class SrCreator extends PlayerCreator{
     super(playername);
     this.streetcred = 0;
     this.publicAwareness = 0;
+    this.raceAdvantages = new ArrayList<>();
     this.identityList = new ArrayList<>();
     this.skillList = new ArrayList<>();
     this.qualityList = new ArrayList<>();
@@ -148,6 +159,36 @@ public class SrCreator extends PlayerCreator{
   //  > information (bonus) and initialization (attributes)
   public boolean setRace(String race){
     boolean toReturn = true;
+    
+    this.minBody = (race.equalsIgnoreCase("dwarf") ? 3 :    // dwarf
+                     (race.equalsIgnoreCase("ork") ? 4 :    // ork
+                       (race.equalsIgnoreCase("troll") ? 5  // troll
+                       : 1) // other race
+                      ) // end ork
+                    ); // end dwarf
+    this.maxBody = (race.equalsIgnoreCase("dwarf") ? 8 :    // dwarf
+                     (race.equalsIgnoreCase("ork") ? 9 :    // ork
+                       (race.equalsIgnoreCase("troll") ? 10  // troll
+                       : 6) // other race
+                      ) // end ork
+                    ); // end dwarf
+    
+    this.minReaction = 1;
+    this.minLogic = 1;
+    this.minIntuition = 1;
+    
+    this.body = this.minBody;
+    this.agility = this.minAgility;
+    this.reaction = this.minReaction;
+    this.strength = this.minStrength;
+    this.willpower = this.minWillpower;
+    this.logic = this.minLogic;
+    this.intuition = this.minIntuition;
+    this.charisma = this.minCharisma;
+    this.edge = this.minEdge;
+    
+    // edge and other attributes to set ?!
+    
     return toReturn;
   }
   

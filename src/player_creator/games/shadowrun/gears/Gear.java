@@ -6,12 +6,16 @@ package player_creator.games.shadowrun.gears;
  */
 public class Gear {
   
+  public enum gearClass {item, vehicle, weapon, armor, augmentation};
+  
   private String gearName;
   private int gearRating;
   private int gearPrice;
   private String gearAvailability;
-
+  private gearClass gearType;
+  
   public Gear() {
+    this.gearType = gearClass.item;
   }
 
   public Gear(String gearName, int gearRating, int gearPrice,String gearAvailability) {
@@ -19,6 +23,16 @@ public class Gear {
     this.gearRating = gearRating;
     this.gearPrice = gearPrice;
     this.gearAvailability = gearAvailability;
+    this.gearType = gearClass.item;
+  }
+  
+  public Gear(String gearName, int gearRating, int gearPrice, 
+          String gearAvailability, gearClass gearType) {
+    this.gearName = gearName;
+    this.gearRating = gearRating;
+    this.gearPrice = gearPrice;
+    this.gearAvailability = gearAvailability;
+    this.gearType = gearType;
   }
 
   /****************************************************************************/
@@ -54,5 +68,13 @@ public class Gear {
   
   public void setGearAvailability(String gearAvailability){
     this.gearAvailability = gearAvailability;
+  }
+
+  public gearClass getGearType() {
+    return gearType;
+  }
+
+  public void setGearType(gearClass gearType) {
+    this.gearType = gearType;
   }
 }
