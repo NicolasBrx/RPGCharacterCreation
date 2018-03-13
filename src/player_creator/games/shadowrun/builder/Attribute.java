@@ -6,7 +6,7 @@ package player_creator.games.shadowrun.builder;
  */
 public class Attribute {
 
-  private String attributeName;
+  private final String attributeName;
   private int minValue;
   private int maxValue;
   private int currentValue;
