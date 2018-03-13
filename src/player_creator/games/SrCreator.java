@@ -6,8 +6,10 @@ import player_creator.games.shadowrun.social.Identity;
 import player_creator.games.shadowrun.personal.Quality;
 import player_creator.games.shadowrun.personal.Skil;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 import player_creator.PlayerCreator;
+import player_creator.games.shadowrun.builder.Attribute;
 import player_creator.games.shadowrun.gears.Gear;
 import tools.RPGCCException;
 import tools.XMLParser;
@@ -26,38 +28,12 @@ public class SrCreator extends PlayerCreator{
   private int totalKarma;
   
   // attributes
-  private int body;
-  private int maxBody;
-  private int minBody;
-  private int agility;
-  private int maxAgility;
-  private int minAgility;
-  private int reaction;
-  private int maxReaction;
-  private int minReaction;
-  private int strength;
-  private int maxStrength;
-  private int minStrength;
-  private int willpower;
-  private int maxWillpower;
-  private int minWillpower;
-  private int logic;
-  private int maxLogic;
-  private int minLogic;
-  private int intuition;
-  private int maxIntuition;
-  private int minIntuition;
-  private int charisma;
-  private int maxCharisma;
-  private int minCharisma;
+  private HashMap<String,Attribute> attributes;
   
   // special attributes
   private boolean magician;
   private boolean technomancer;
   private boolean adept;
-  private int edge;
-  private int maxEdge;
-  private int minEdge;
   private int magic;
   private int resonance;
   private double essence;
@@ -88,6 +64,10 @@ public class SrCreator extends PlayerCreator{
   private ArrayList<Contact> contactList;
   private ArrayList<GearAugmentation> augmentationList;
   
+  // attributes for building TODO
+  private int maxAttributePoints;
+  private int maxSpecialAttributePoints;
+  
   /**
    * 
    * @param playername 
@@ -96,6 +76,7 @@ public class SrCreator extends PlayerCreator{
     super(playername);
     this.streetcred = 0;
     this.publicAwareness = 0;
+    this.attributes = new HashMap<>();
     this.raceAdvantages = new ArrayList<>();
     this.identityList = new ArrayList<>();
     this.skillList = new ArrayList<>();
@@ -160,45 +141,43 @@ public class SrCreator extends PlayerCreator{
   public boolean setRace(String race){
     boolean toReturn = true;
     
-    this.minBody = (race.equalsIgnoreCase("dwarf") ? 3 :    // dwarf
-                     (race.equalsIgnoreCase("ork") ? 4 :    // ork
-                       (race.equalsIgnoreCase("troll") ? 5  // troll
-                       : 1) // other race
-                      ) // end ork
-                    ); // end dwarf
-    this.maxBody = (race.equalsIgnoreCase("dwarf") ? 8 :    // dwarf
-                     (race.equalsIgnoreCase("ork") ? 9 :    // ork
-                       (race.equalsIgnoreCase("troll") ? 10  // troll
-                       : 6) // other race
-                      ) // end ork
-                    ); // end dwarf
+    this.attributes.put("body", 
+            new Attribute("body",(race.equalsIgnoreCase("dwarf") ? 3 :    // dwarf
+                                  (race.equalsIgnoreCase("ork") ? 4 :    // ork
+                                    (race.equalsIgnoreCase("troll") ? 5  // troll
+                                    : 1) // other race
+                                  ) // end ork
+                                 ) // race check
+                         )
+                       ); // end dwarf
     
-    this.minReaction = 1;
-    this.minLogic = 1;
-    this.minIntuition = 1;
+    // agility
     
-    this.body = this.minBody;
-    this.agility = this.minAgility;
-    this.reaction = this.minReaction;
-    this.strength = this.minStrength;
-    this.willpower = this.minWillpower;
-    this.logic = this.minLogic;
-    this.intuition = this.minIntuition;
-    this.charisma = this.minCharisma;
-    this.edge = this.minEdge;
+    this.attributes.put("reaction",new Attribute("reaction",1));
     
-    // edge and other attributes to set ?!
+    // strength
     
+    // willpower
+    
+    this.attributes.put("logic",new Attribute("logic",1));
+    this.attributes.put("intuition",new Attribute("intuition",1));
+    
+    //charisma
+    
+    //edge
+    this.attributes.put("edge",
+            new Attribute("edge",(race.equalsIgnoreCase("human") ? 2 : 1)));
+
     return toReturn;
   }
   
-  // TODO: modify special attributes (no rules)
+  // TODO: modify special attributes (no rules except the number of points available)
   public boolean modifySpecialAttribute(String attribute, int modifier){
     boolean toReturn = true;
     return toReturn;
   }
   
-  // TODO: modify attributes:  only one at the natural limit
+  // TODO: modify attributes:  only one at the natural limit and points available
   public boolean modifyAttribute(String attribute, int modifier){
     boolean toReturn = true;
     return toReturn;
@@ -235,30 +214,30 @@ public class SrCreator extends PlayerCreator{
    * character creation process.
    */
   private void finalizeCharacter(){
-    this.initiative = (this.intuition + this.reaction 
+    this.initiative = (getIntuition() + getReaction() 
                     + ThreadLocalRandom.current().nextInt(1, 7));
-    this.matrixInitiative = (this.intuition + this.reaction 
+    this.matrixInitiative = (getIntuition() + getReaction()
                           + ThreadLocalRandom.current().nextInt(1, 7));;
     if(this.magician)
-      this.astralInitiative = this.intuition * 2
+      this.astralInitiative = getIntuition() * 2
                             + ThreadLocalRandom.current().nextInt(1, 7)
                             + ThreadLocalRandom.current().nextInt(1, 7);  
     
-    this.mentalLimit = Math.floorDiv((this.logic * 2 + this.body + this.willpower),3);
-    this.physicalLimit = Math.floorDiv((this.strength * 2 + this.body + this.reaction),3);
-    this.socialLimit = Math.floorDiv((this.charisma * 2 + this.willpower + (int)Math.ceil(this.essence)),3);
+    this.mentalLimit = Math.floorDiv((getLogic() * 2 + getBody() + getWillpower()),3);
+    this.physicalLimit = Math.floorDiv((getStrength() * 2 + getBody() + getReaction()),3);
+    this.socialLimit = Math.floorDiv((getCharisma() * 2 + getWillpower() + (int)Math.ceil(this.essence)),3);
     
-    this.physicalDamageTrack = 8 + Math.floorDiv(this.body, 2);
-    this.stunDamageTrack = 8 + Math.floorDiv(this.willpower, 2);
-    this.overflow = this.body;
+    this.physicalDamageTrack = 8 + Math.floorDiv(getBody(), 2);
+    this.stunDamageTrack = 8 + Math.floorDiv(getWillpower(), 2);
+    this.overflow = getBody();
     
     this.notoriety = this.publicAwareness + this.streetcred;
     
-    this.composure = this.charisma + this.willpower;
-    this.judgeIntention = this.charisma + this.intuition;
-    this.lift = this.body + this.strength;
-    this.memory = this.logic + this.willpower;
-    this.movement = this.agility * 2;
+    this.composure = getCharisma() + getWillpower();
+    this.judgeIntention = getCharisma() + getIntuition();
+    this.lift = getBody() + getStrength();
+    this.memory = getLogic() + getWillpower();
+    this.movement = getAgility() * 2;
     
     // TODO: compute starting nuyens (according to lifestyle)
     // TODO: compute new attribute values (according to gear and other bonuses/maluses)
@@ -318,75 +297,75 @@ public class SrCreator extends PlayerCreator{
   }
 
   public int getBody() {
-    return body;
+    return this.attributes.get("body").getCurrentValue();
   }
 
   public void setBody(int body) {
-    this.body = body;
+    this.attributes.get("body").setCurrentValue(body);
   }
 
   public int getAgility() {
-    return agility;
+    return this.attributes.get("agility").getCurrentValue();
   }
 
   public void setAgility(int agility) {
-    this.agility = agility;
+    this.attributes.get("agility").setCurrentValue(agility);
   }
 
   public int getReaction() {
-    return reaction;
+    return this.attributes.get("reaction").getCurrentValue();
   }
 
   public void setReaction(int reaction) {
-    this.reaction = reaction;
+    this.attributes.get("reaction").setCurrentValue(reaction);
   }
 
   public int getStrength() {
-    return strength;
+    return this.attributes.get("strength").getCurrentValue();
   }
 
   public void setStrength(int strength) {
-    this.strength = strength;
+    this.attributes.get("strength").setCurrentValue(strength);
   }
 
   public int getWillpower() {
-    return willpower;
+    return this.attributes.get("willpower").getCurrentValue();
   }
 
   public void setWillpower(int willpower) {
-    this.willpower = willpower;
+    this.attributes.get("willpower").setCurrentValue(willpower);
   }
 
   public int getLogic() {
-    return logic;
+    return this.attributes.get("logic").getCurrentValue();
   }
 
   public void setLogic(int logic) {
-    this.logic = logic;
+    this.attributes.get("logic").setCurrentValue(logic);
   }
 
   public int getIntuition() {
-    return intuition;
+    return this.attributes.get("intuition").getCurrentValue();
   }
 
   public void setIntuition(int intuition) {
-    this.intuition = intuition;
+    this.attributes.get("intuition").setCurrentValue(intuition);
   }
 
   public int getCharisma() {
-    return charisma;
+    return this.attributes.get("charisma").getCurrentValue();
   }
 
   public void setCharisma(int charisma) {
-    this.charisma = charisma;
+    this.attributes.get("charisma").setCurrentValue(charisma);
   }
 
   public int getEdge() {
-    return edge;
+    return this.attributes.get("edge").getCurrentValue();
   }
 
   public void setEdge(int edge) {
-    this.edge = edge;
+    this.attributes.get("edge").setCurrentValue(edge);
   }
 
   public int getMagic() {
