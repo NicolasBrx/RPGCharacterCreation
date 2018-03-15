@@ -10,7 +10,7 @@ import tools.RPGCCException;
  */
 public class Prioritizer {
   
-  //intel on the specificity of the character
+  // intel on the specificity of the character
   private final boolean streetLevel; // cf p.64
   private final boolean primeRunner;
   private final boolean technomancer;
@@ -37,12 +37,8 @@ public class Prioritizer {
   
   /**
    * Constructor 
-   * @param streetLevel
-   * @param primeRunner
-   * @param magician
-   * @param adept
-   * @param aspectedMagician
-   * @param technomancer
+   * @param runnerLevel
+   * @param specialTrait
    * @param metatypePriority
    * @param attributesPriority
    * @param magicOrResonancePriority
@@ -50,8 +46,7 @@ public class Prioritizer {
    * @param resourcePriority
    * @throws RPGCCException 
    */
-  public Prioritizer(boolean streetLevel, boolean primeRunner, boolean magician,
-          boolean adept, boolean aspectedMagician, boolean technomancer,
+  public Prioritizer(String runnerLevel, String specialTrait,
           int metatypePriority, int attributesPriority, int magicOrResonancePriority, 
           int skillsPriority, int resourcePriority) throws RPGCCException
   {
@@ -59,12 +54,12 @@ public class Prioritizer {
     //TODO: no contradiction (techno/adept/magician/...)
     
     //intel on the specificity of the character
-    this.streetLevel = streetLevel;
-    this.primeRunner = primeRunner;
-    this.technomancer = technomancer;
-    this.magician = magician;
-    this.aspectedMagician = aspectedMagician;
-    this.adept = adept;
+    this.streetLevel = runnerLevel.equalsIgnoreCase("street");
+    this.primeRunner = runnerLevel.equalsIgnoreCase("prime");
+    this.technomancer = specialTrait.equalsIgnoreCase("technomancer");
+    this.magician = specialTrait.equalsIgnoreCase("magician");
+    this.aspectedMagician = specialTrait.equalsIgnoreCase("aspected magician");
+    this.adept = specialTrait.equalsIgnoreCase("adept");
     
     // computed according to global level (streetlevel, primeRunner or normal one)
     this.karma = determineKarma();
