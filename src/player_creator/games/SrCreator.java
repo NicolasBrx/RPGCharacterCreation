@@ -134,10 +134,6 @@ public class SrCreator extends PlayerCreator{
   /*****                         Builder Methods                          *****/
   /****************************************************************************/
   
-  // TODO: prioritytable (information and selection visualisation) ==> for HMI onlyet
-  
-  // TODO: choose race  (+ special attributes amount)
-  //  > information (bonus) and initialization (attributes)
   public boolean setRace(String race){
     boolean toReturn = true;
     
@@ -151,23 +147,39 @@ public class SrCreator extends PlayerCreator{
                          )
                        ); // end dwarf
     
-    // agility
+    this.attributes.put("strength", 
+            new Attribute("strength",(race.equalsIgnoreCase("dwarf") ? 3 :    // dwarf
+                                  (race.equalsIgnoreCase("ork") ? 3 :    // ork
+                                    (race.equalsIgnoreCase("troll") ? 5  // troll
+                                    : 1) // other race
+                                  ) // end ork
+                                 ) // race check
+                         )
+                       ); // end dwarf
     
+    this.attributes.put("agility", new Attribute("agility",(race.equalsIgnoreCase("elf") ? 2 : 1)));
     this.attributes.put("reaction",new Attribute("reaction",1));
-    
-    // strength
-    
-    // willpower
-    
+    this.attributes.put("agility", new Attribute("agility",(race.equalsIgnoreCase("dwarf") ? 2 : 1)));
     this.attributes.put("logic",new Attribute("logic",1));
     this.attributes.put("intuition",new Attribute("intuition",1));
-    
-    //charisma
-    
-    //edge
-    this.attributes.put("edge",
-            new Attribute("edge",(race.equalsIgnoreCase("human") ? 2 : 1)));
+    this.attributes.put("agility", new Attribute("agility",(race.equalsIgnoreCase("elf") ? 3 : 1)));
+    this.attributes.put("edge",new Attribute("edge",(race.equalsIgnoreCase("human") ? 2 : 1)));
 
+    if(race.equalsIgnoreCase("elf") || race.equalsIgnoreCase("ork")){
+      this.raceAdvantages.add("night vision");
+    }
+    else if(race.equalsIgnoreCase("dwarf")){
+      this.raceAdvantages.add("thermic vision");
+      this.raceAdvantages.add("+2 against illness and poisons");
+      this.raceAdvantages.add("+20% life costs");
+    }
+    else if(race.equalsIgnoreCase("elf")){
+      this.raceAdvantages.add("thermic vision");
+      this.raceAdvantages.add("+1 reach");
+      this.raceAdvantages.add("+1 skin armor");
+      this.raceAdvantages.add("+100% life costs");
+    }
+    
     return toReturn;
   }
   

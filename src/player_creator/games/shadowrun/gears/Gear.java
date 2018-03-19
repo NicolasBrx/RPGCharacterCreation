@@ -13,6 +13,8 @@ public class Gear {
   private int gearPrice;
   private String gearAvailability;
   private gearClass gearType;
+  private String bonusAttribute;
+  private int bonusValue;
   
   public Gear() {
     this.gearType = gearClass.item;
@@ -76,5 +78,21 @@ public class Gear {
 
   public void setGearType(gearClass gearType) {
     this.gearType = gearType;
+  }
+
+  public void setBonusAttribute(String bonusAttribute) {
+    this.bonusAttribute = bonusAttribute;
+  }
+
+  public void setBonusValue(int bonusValue) {
+    this.bonusValue = bonusValue;
+  }
+
+  public String getBonusAttribute() {
+    return bonusAttribute;
+  }
+
+  public int getBonusValue() {
+    return bonusValue;
   }
 }
