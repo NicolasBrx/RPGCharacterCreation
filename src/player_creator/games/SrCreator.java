@@ -34,8 +34,6 @@ public class SrCreator extends PlayerCreator{
   private boolean magician;
   private boolean technomancer;
   private boolean adept;
-  private int magic;
-  private int resonance;
   private double essence;
   
   // computed attributes
@@ -55,6 +53,7 @@ public class SrCreator extends PlayerCreator{
   private int lift;
   private int movement;
   private int startingNuyens;
+  private int lifeCostAdjustment;
   
   // other information and data
   private ArrayList<String> raceAdvantages;
@@ -63,10 +62,6 @@ public class SrCreator extends PlayerCreator{
   private ArrayList<Quality> qualityList;
   private ArrayList<Contact> contactList;
   private ArrayList<GearAugmentation> augmentationList;
-  
-  // attributes for building TODO
-  private int maxAttributePoints;
-  private int maxSpecialAttributePoints;
   
   /**
    * 
@@ -134,6 +129,11 @@ public class SrCreator extends PlayerCreator{
   /*****                         Builder Methods                          *****/
   /****************************************************************************/
   
+  /**
+   * 
+   * @param race
+   * @return 
+   */
   public boolean setRace(String race){
     boolean toReturn = true;
     
@@ -163,8 +163,7 @@ public class SrCreator extends PlayerCreator{
     this.attributes.put("logic",new Attribute("logic",1));
     this.attributes.put("intuition",new Attribute("intuition",1));
     this.attributes.put("agility", new Attribute("agility",(race.equalsIgnoreCase("elf") ? 3 : 1)));
-    this.attributes.put("edge",new Attribute("edge",(race.equalsIgnoreCase("human") ? 2 : 1)));
-
+    
     if(race.equalsIgnoreCase("elf") || race.equalsIgnoreCase("ork")){
       this.raceAdvantages.add("night vision");
     }
@@ -172,26 +171,62 @@ public class SrCreator extends PlayerCreator{
       this.raceAdvantages.add("thermic vision");
       this.raceAdvantages.add("+2 against illness and poisons");
       this.raceAdvantages.add("+20% life costs");
+      this.lifeCostAdjustment = 20;
     }
     else if(race.equalsIgnoreCase("elf")){
       this.raceAdvantages.add("thermic vision");
       this.raceAdvantages.add("+1 reach");
       this.raceAdvantages.add("+1 skin armor");
       this.raceAdvantages.add("+100% life costs");
+      this.lifeCostAdjustment = 100;
     }
+    
+    // special attributes
+    this.attributes.put("edge",new Attribute("edge",(race.equalsIgnoreCase("human") ? 2 : 1)));
+    this.attributes.put("magic",new Attribute("magic", (magician ? 1 : 0)));
+    this.attributes.put("resonance",new Attribute("resonance", (technomancer ? 1 : 0)));
     
     return toReturn;
   }
   
-  // TODO: modify special attributes (no rules except the number of points available)
-  public boolean modifySpecialAttribute(String attribute, int modifier){
+  /**
+   * 
+   * @param attribute
+   * @param modifier
+   * @param special
+   * @return 
+   */
+  public boolean modifyAttribute(String attribute, int modifier, boolean special){
     boolean toReturn = true;
+    if(((this.attributes.get(attribute).getCurrentValue() + modifier) > this.attributes.get(attribute).getMaxValue())
+    || ((this.attributes.get(attribute).getCurrentValue() + modifier) < 0)
+    ){
+      lastError = "Attribute value must be between " + this.attributes.get(attribute).getMinValue()  
+                + "and " + this.attributes.get(attribute).getMaxValue() + ".";
+      toReturn = false;
+    }
+    else{
+      if(!special 
+      && ((this.attributes.get(attribute).getCurrentValue() + modifier) == this.attributes.get(attribute).getMaxValue())
+      ){
+        toReturn = checkLimits();
+      }
+      if(toReturn){
+        this.attributes.get(attribute).setCurrentValue(this.attributes.get(attribute).getCurrentValue() + modifier);
+      }
+    }
     return toReturn;
   }
-  
-  // TODO: modify attributes:  only one at the natural limit and points available
-  public boolean modifyAttribute(String attribute, int modifier){
+
+  private boolean checkLimits(){
     boolean toReturn = true;
+    for(Attribute a : this.attributes.values()){
+      if(a.getCurrentValue() == a.getMaxValue()){
+        lastError = "There must be only one attribute up to its natural limit. As for now, "
+                  + a.getAttributeName() + " is at its limit.";
+        toReturn = false;
+      }
+    }
     return toReturn;
   }
   
@@ -202,7 +237,7 @@ public class SrCreator extends PlayerCreator{
     return toReturn;
   }
   
-  // TODO: purchase gears by spending resources
+  // TODO: purchase gears by spending resources, don't forget to add lifeCostAdjustment
   public boolean addGear(Gear gear, boolean remove){
     boolean toReturn = true;
     return toReturn;
@@ -379,21 +414,21 @@ public class SrCreator extends PlayerCreator{
   public void setEdge(int edge) {
     this.attributes.get("edge").setCurrentValue(edge);
   }
-
-  public int getMagic() {
-    return magic;
+  
+  public int getMagic(){
+    return this.attributes.get("magic").getCurrentValue();
   }
-
-  public void setMagic(int magic) {
-    this.magic = magic;
+  
+  public void setMagic(int magic){
+    this.attributes.get("magic").setCurrentValue(magic);
   }
-
-  public int getResonance() {
-    return resonance;
+  
+  public int getResonance(){
+    return this.attributes.get("resonance").getCurrentValue();
   }
-
-  public void setResonance(int resonance) {
-    this.resonance = resonance;
+  
+  public void setResonance(int resonance){
+    this.attributes.get("resonance").setCurrentValue(resonance);
   }
 
   public int getInitiative() {

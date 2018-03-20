@@ -28,9 +28,16 @@ public class Attribute {
   public Attribute(String attributeName, int minValue){
     this.attributeName = attributeName;
     this.minValue = minValue;
-    this.currentValue = this.minValue;
-    this.maxValue = this.minValue + 5;
-    this.augmentedValue = this.minValue;
+    if(minValue != 0){
+      this.currentValue = this.minValue;
+      this.maxValue = this.minValue + 5;
+      this.augmentedValue = this.minValue;
+    }
+    else{ // this magic or resonance and should be 0 if not magician or technomancer
+      this.currentValue = 0;
+      this.maxValue = 0;
+      this.augmentedValue = 0;
+    }
   }
 
   public int getMinValue() {
