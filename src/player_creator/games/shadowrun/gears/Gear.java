@@ -11,30 +11,33 @@ public class Gear {
   private String gearName;
   private int gearRating;
   private int gearPrice;
-  private String gearAvailability;
+  private int gearAvailability;
   private gearClass gearType;
   private String bonusAttribute;
   private int bonusValue;
+  private String gearLegality; // (N)ormal, (P)rohibited or (R)estricted
   
   public Gear() {
     this.gearType = gearClass.item;
   }
 
-  public Gear(String gearName, int gearRating, int gearPrice,String gearAvailability) {
+  public Gear(String gearName, int gearRating, int gearPrice,int gearAvailability, String gearLegality){
     this.gearName = gearName;
     this.gearRating = gearRating;
     this.gearPrice = gearPrice;
     this.gearAvailability = gearAvailability;
     this.gearType = gearClass.item;
+    this.gearLegality = gearLegality;
   }
   
   public Gear(String gearName, int gearRating, int gearPrice, 
-          String gearAvailability, gearClass gearType) {
+          int gearAvailability, gearClass gearType, String gearLegality){
     this.gearName = gearName;
     this.gearRating = gearRating;
     this.gearPrice = gearPrice;
     this.gearAvailability = gearAvailability;
     this.gearType = gearType;
+    this.gearLegality = gearLegality;
   }
 
   /****************************************************************************/
@@ -64,11 +67,11 @@ public class Gear {
     this.gearPrice = gearPrice;
   }
   
-  public String getGearAvailability(){
+  public int getGearAvailability(){
     return this.gearAvailability;
   }
   
-  public void setGearAvailability(String gearAvailability){
+  public void setGearAvailability(int gearAvailability){
     this.gearAvailability = gearAvailability;
   }
 
@@ -94,5 +97,13 @@ public class Gear {
 
   public int getBonusValue() {
     return bonusValue;
+  }
+
+  public String getGearLegality() {
+    return gearLegality;
+  }
+
+  public void setGearLegality(String gearLegality) {
+    this.gearLegality = gearLegality;
   }
 }

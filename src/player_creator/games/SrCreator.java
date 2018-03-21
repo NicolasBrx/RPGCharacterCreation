@@ -10,6 +10,9 @@ import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 import player_creator.PlayerCreator;
 import player_creator.games.shadowrun.builder.Attribute;
+import player_creator.games.shadowrun.builder.LifeStyle;
+import player_creator.games.shadowrun.builder.RunnerType;
+import player_creator.games.shadowrun.builder.SpecialSkill;
 import player_creator.games.shadowrun.gears.Gear;
 import tools.RPGCCException;
 import tools.XMLParser;
@@ -30,11 +33,10 @@ public class SrCreator extends PlayerCreator{
   // attributes
   private HashMap<String,Attribute> attributes;
   
-  // special attributes
-  private boolean magician;
-  private boolean technomancer;
-  private boolean adept;
-  private double essence;
+  // special knowledge
+  private SpecialSkill specialSkill;
+  private RunnerType runnerType;
+  private LifeStyle lifeStyle;
   
   // computed attributes
   private int initiative;
@@ -54,6 +56,7 @@ public class SrCreator extends PlayerCreator{
   private int movement;
   private int startingNuyens;
   private int lifeCostAdjustment;
+  private double essence;
   
   // other information and data
   private ArrayList<String> raceAdvantages;
@@ -62,6 +65,7 @@ public class SrCreator extends PlayerCreator{
   private ArrayList<Quality> qualityList;
   private ArrayList<Contact> contactList;
   private ArrayList<GearAugmentation> augmentationList;
+  private ArrayList<Gear> gearList;
   
   /**
    * 
@@ -78,6 +82,7 @@ public class SrCreator extends PlayerCreator{
     this.qualityList = new ArrayList<>();
     this.contactList = new ArrayList<>();
     this.augmentationList = new ArrayList<>();
+    this.gearList = new ArrayList<>();
   }
   
   /**
@@ -97,7 +102,11 @@ public class SrCreator extends PlayerCreator{
    */
   @Override
   public String validateCharacter(){
-    return "";
+    String toReturn = "OK";
+    if(!godMode){
+      
+    }
+    return toReturn;
   }
   
   /**
@@ -183,8 +192,8 @@ public class SrCreator extends PlayerCreator{
     
     // special attributes
     this.attributes.put("edge",new Attribute("edge",(race.equalsIgnoreCase("human") ? 2 : 1)));
-    this.attributes.put("magic",new Attribute("magic", (magician ? 1 : 0)));
-    this.attributes.put("resonance",new Attribute("resonance", (technomancer ? 1 : 0)));
+    this.attributes.put("magic",new Attribute("magic", (specialSkill == SpecialSkill.magician ? 1 : 0)));
+    this.attributes.put("resonance",new Attribute("resonance", (specialSkill == SpecialSkill.technomancer ? 1 : 0)));
     
     return toReturn;
   }
@@ -200,6 +209,7 @@ public class SrCreator extends PlayerCreator{
     boolean toReturn = true;
     if(((this.attributes.get(attribute).getCurrentValue() + modifier) > this.attributes.get(attribute).getMaxValue())
     || ((this.attributes.get(attribute).getCurrentValue() + modifier) < 0)
+    && !godMode
     ){
       lastError = "Attribute value must be between " + this.attributes.get(attribute).getMinValue()  
                 + "and " + this.attributes.get(attribute).getMaxValue() + ".";
@@ -218,13 +228,19 @@ public class SrCreator extends PlayerCreator{
     return toReturn;
   }
 
+  /**
+   * 
+   * @return 
+   */
   private boolean checkLimits(){
     boolean toReturn = true;
-    for(Attribute a : this.attributes.values()){
-      if(a.getCurrentValue() == a.getMaxValue()){
-        lastError = "There must be only one attribute up to its natural limit. As for now, "
-                  + a.getAttributeName() + " is at its limit.";
-        toReturn = false;
+    if(!godMode){
+      for(Attribute a : this.attributes.values()){
+        if(a.getCurrentValue() == a.getMaxValue()){
+          lastError = "There must be only one attribute up to its natural limit. As for now, "
+                    + a.getAttributeName() + " is at its limit.";
+          toReturn = false;
+        }
       }
     }
     return toReturn;
@@ -237,25 +253,92 @@ public class SrCreator extends PlayerCreator{
     return toReturn;
   }
   
-  // TODO: purchase gears by spending resources, don't forget to add lifeCostAdjustment
+  /**
+   * 
+   * @param gear
+   * @param remove
+   * @return 
+   */
   public boolean addGear(Gear gear, boolean remove){
     boolean toReturn = true;
+    if(!remove){
+      this.gearList.add(gear);
+    }
+    else{
+      toReturn = false;
+      lastError = "The item has not been found in the gear list of the current character.";
+      for(int i = 0 ; i < gearList.size() ; ++i){
+        if(gearList.get(i).getGearName().equals(gear.getGearName())){
+          this.gearList.remove(i);
+          toReturn = true;
+          lastError = "";
+        }
+      }
+    }
     return toReturn;
   }
   
-  // TODO: set lifestyle (and add starting nuyens to finalization, random on lifestyle)
-  public boolean setLifestyle(String lifestyle){
+  /**
+   * 
+   * @param augmentation
+   * @param remove
+   * @return 
+   */
+  public boolean addAugmentation(GearAugmentation augmentation, boolean remove){
     boolean toReturn = true;
+    if(!godMode && (essence - augmentation.getAugmentationEssenceCost() < 0) && !remove){
+      toReturn = false;
+      lastError = "With this augmentation, the essence of the current character would drop"
+                + " below 0, which is not possible in the normal creation rules.";
+    }
+    else{
+      if(!remove){
+        this.augmentationList.add(augmentation);
+        this.essence -= augmentation.getAugmentationEssenceCost();
+      }
+      else{
+        toReturn = false;
+        lastError = "The augmentation has not been found in the augmentation list of the current character.";
+        for(int i = 0 ; i < augmentationList.size() ; ++i){
+          if(augmentationList.get(i).getGearName().equals(augmentation.getGearName())){
+            this.essence += augmentation.getAugmentationEssenceCost();
+            this.augmentationList.remove(i);
+            toReturn = true;
+            lastError = "";
+          }
+        }
+      }
+    }
+    
+    
     return toReturn;
   }
   
-  // TODO: leftover karma to spend : contacts
+  /**
+   * 
+   * @param contact
+   * @param remove
+   * @return 
+   */
   public boolean addContact(Contact contact, boolean remove){
     boolean toReturn = true;
+    if(!remove){
+      this.contactList.add(contact);
+    }
+    else{
+      toReturn = false;
+      lastError = "The contact has not been found in the gear list of the current character.";
+      for(int i = 0 ; i < contactList.size() ; ++i){
+        if(contactList.get(i).getContactName().equals(contact.getContactName())){
+          this.contactList.remove(i);
+          toReturn = true;
+          lastError = "";
+        }
+      }
+    }
     return toReturn;
   }
   
-  // TODO: finalization => add starting nuyens computation
   /**
    * Compute all attributes derivated from the ones set during the 
    * character creation process.
@@ -265,7 +348,7 @@ public class SrCreator extends PlayerCreator{
                     + ThreadLocalRandom.current().nextInt(1, 7));
     this.matrixInitiative = (getIntuition() + getReaction()
                           + ThreadLocalRandom.current().nextInt(1, 7));;
-    if(this.magician)
+    if(specialSkill == SpecialSkill.magician)
       this.astralInitiative = getIntuition() * 2
                             + ThreadLocalRandom.current().nextInt(1, 7)
                             + ThreadLocalRandom.current().nextInt(1, 7);  
@@ -286,7 +369,10 @@ public class SrCreator extends PlayerCreator{
     this.memory = getLogic() + getWillpower();
     this.movement = getAgility() * 2;
     
-    // TODO: compute starting nuyens (according to lifestyle)
+    this.startingNuyens = (Integer.parseInt(lifeStyle.getStartingNuyens(this.lifeStyle).split("D")[0]) 
+                        * ThreadLocalRandom.current().nextInt(1, 7))
+                        + Integer.parseInt(lifeStyle.getStartingNuyens(this.lifeStyle).split("\\+")[1]);
+    
     // TODO: compute new attribute values (according to gear and other bonuses/maluses)
   }
   
@@ -566,29 +652,13 @@ public class SrCreator extends PlayerCreator{
   public void setContactList(ArrayList<Contact> contactList) {
     this.contactList = contactList;
   }
-
-  public boolean isMagician() {
-    return magician;
+  
+  public SpecialSkill getSpecialSkill(){
+    return this.specialSkill;
   }
-
-  public void setMagician(boolean magician) {
-    this.magician = magician;
-  }
-
-  public boolean isTechnomancer() {
-    return technomancer;
-  }
-
-  public void setTechnomancer(boolean technomancer) {
-    this.technomancer = technomancer;
-  }
-
-  public boolean isAdept() {
-    return adept;
-  }
-
-  public void setAdept(boolean adept) {
-    this.adept = adept;
+  
+  public RunnerType getRunnerType(){
+    return this.runnerType;
   }
 
   public double getEssence() {
@@ -614,4 +684,46 @@ public class SrCreator extends PlayerCreator{
   public void setAugmentationList(ArrayList<GearAugmentation> augmentationList) {
     this.augmentationList = augmentationList;
   }
+
+  public int getStartingNuyens() {
+    return startingNuyens;
+  }
+
+  public void setStartingNuyens(int startingNuyens) {
+    this.startingNuyens = startingNuyens;
+  }
+
+  public int getLifeCostAdjustment() {
+    return lifeCostAdjustment;
+  }
+
+  public void setLifeCostAdjustment(int lifeCostAdjustment) {
+    this.lifeCostAdjustment = lifeCostAdjustment;
+  }
+
+  public LifeStyle getLifeStyle() {
+    return lifeStyle;
+  }
+
+  public void setLifeStyle(LifeStyle lifeStyle) {
+    this.lifeStyle = lifeStyle;
+  }
+
+  public ArrayList<String> getRaceAdvantages() {
+    return raceAdvantages;
+  }
+
+  public void setRaceAdvantages(ArrayList<String> raceAdvantages) {
+    this.raceAdvantages = raceAdvantages;
+  }
+
+  public ArrayList<Gear> getGearList() {
+    return gearList;
+  }
+
+  public void setGearList(ArrayList<Gear> gearList) {
+    this.gearList = gearList;
+  }
+  
+  
 }

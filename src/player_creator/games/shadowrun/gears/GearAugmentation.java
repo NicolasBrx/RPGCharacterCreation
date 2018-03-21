@@ -23,13 +23,14 @@ public class GearAugmentation extends Gear{
    * @param augmentationNotes 
    * @param augmentationAvailability 
    * @param augmentationPrice 
+   * @param legality 
    */
   public GearAugmentation(String augmentationName, int augmentationRating, 
           double augmentationEssenceCost, String augmentationNotes,
-          String augmentationAvailability, int augmentationPrice)
+          int augmentationAvailability, int augmentationPrice,String legality)
   {
     super(augmentationName, augmentationRating, augmentationPrice,
-                                augmentationAvailability, gearClass.augmentation);
+                                augmentationAvailability, gearClass.augmentation,legality);
     this.augmentationEssenceCost = augmentationEssenceCost;
     this.augmentationNotes = augmentationNotes;
   }

@@ -20,9 +20,9 @@ public class GearVehicle extends Gear{
 
   public GearVehicle(String vehicleName, int vehicleAcceleration, int vehicleHandling, 
           int vehiclePilot, int vehicleSpeed, int vehicleArmor, int vehicleBody, 
-          int vehicleSensor, String vehicleNotes, int vehiclePrice, String vehicleAvailability)
+          int vehicleSensor, String vehicleNotes, int vehiclePrice, int vehicleAvailability,String legality)
   {
-    super(vehicleName, 0, vehiclePrice, vehicleAvailability, gearClass.vehicle);
+    super(vehicleName, 0, vehiclePrice, vehicleAvailability, gearClass.vehicle,legality);
     this.vehicleAcceleration = vehicleAcceleration;
     this.vehicleHandling = vehicleHandling;
     this.vehiclePilot = vehiclePilot;

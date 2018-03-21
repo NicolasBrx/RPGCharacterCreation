@@ -12,9 +12,9 @@ public class GearArmor extends Gear{
   }
 
   public GearArmor(String armorName, int armorRating, String armorNotes, int armorPrice,
-          String armorAvailability)
+          int armorAvailability,String legality)
   {
-    super(armorName, armorRating, armorPrice, armorAvailability, gearClass.armor);
+    super(armorName, armorRating, armorPrice, armorAvailability, gearClass.armor,legality);
     this.armorNotes = armorNotes;
   }
 
