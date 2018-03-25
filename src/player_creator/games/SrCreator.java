@@ -147,24 +147,24 @@ public class SrCreator extends PlayerCreator{
     boolean toReturn = true;
     
     this.attributes.put("body", 
-            new Attribute("body",(race.equalsIgnoreCase("dwarf") ? 3 :    // dwarf
+            new Attribute("body",(race.equalsIgnoreCase("dwarf") ? 3 :   // dwarf
                                   (race.equalsIgnoreCase("ork") ? 4 :    // ork
                                     (race.equalsIgnoreCase("troll") ? 5  // troll
                                     : 1) // other race
                                   ) // end ork
-                                 ) // race check
-                         )
-                       ); // end dwarf
+                                ) // race check
+                        )
+                      ); // end dwarf
     
     this.attributes.put("strength", 
-            new Attribute("strength",(race.equalsIgnoreCase("dwarf") ? 3 :    // dwarf
-                                  (race.equalsIgnoreCase("ork") ? 3 :    // ork
-                                    (race.equalsIgnoreCase("troll") ? 5  // troll
+            new Attribute("strength",(race.equalsIgnoreCase("dwarf") ? 3 : // dwarf
+                                  (race.equalsIgnoreCase("ork") ? 3 :      // ork
+                                    (race.equalsIgnoreCase("troll") ? 5    // troll
                                     : 1) // other race
                                   ) // end ork
-                                 ) // race check
-                         )
-                       ); // end dwarf
+                                ) // race check
+                        )
+                      ); // end dwarf
     
     this.attributes.put("agility", new Attribute("agility",(race.equalsIgnoreCase("elf") ? 2 : 1)));
     this.attributes.put("reaction",new Attribute("reaction",1));
