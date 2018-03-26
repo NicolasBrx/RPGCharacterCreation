@@ -4,7 +4,7 @@ import player_creator.games.shadowrun.gears.GearAugmentation;
 import player_creator.games.shadowrun.social.Contact;
 import player_creator.games.shadowrun.social.Identity;
 import player_creator.games.shadowrun.personal.Quality;
-import player_creator.games.shadowrun.personal.Skil;
+import player_creator.games.shadowrun.personal.Skill;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
@@ -27,8 +27,8 @@ public class SrCreator extends PlayerCreator{
   private String metatype;
   private int streetcred;
   private int publicAwareness;
+  private int initialKarma;       
   private int karma;
-  private int totalKarma;
   
   // attributes
   private HashMap<String,Attribute> attributes;
@@ -61,7 +61,7 @@ public class SrCreator extends PlayerCreator{
   // other information and data
   private ArrayList<String> raceAdvantages;
   private ArrayList<Identity> identityList;
-  private ArrayList<Skil> skillList;
+  private ArrayList<Skill> skillList;
   private ArrayList<Quality> qualityList;
   private ArrayList<Contact> contactList;
   private ArrayList<GearAugmentation> augmentationList;
@@ -71,8 +71,10 @@ public class SrCreator extends PlayerCreator{
    * 
    * @param playername 
    */
-  public SrCreator(String playername){
+  public SrCreator(String playername, int initialKarma){
     super(playername);
+    this.initialKarma = initialKarma;
+    this.karma = initialKarma;
     this.streetcred = 0;
     this.publicAwareness = 0;
     this.attributes = new HashMap<>();
@@ -121,7 +123,8 @@ public class SrCreator extends PlayerCreator{
    */
   @Override
   public boolean saveCharacter(){
-    finalizeCharacter();
+    try{finalizeCharacter();}
+    catch(RPGCCException e){System.exit(9);} // better ?
     boolean toReturn = true;
     try{
       XMLParser xml = new XMLParser();
@@ -246,14 +249,8 @@ public class SrCreator extends PlayerCreator{
     return toReturn;
   }
   
-  // TODO: choose qualities (spend and gain karma, warning for max gain/spend)
-  public boolean spendKarma(int karmaModifier){
-    boolean toReturn = true;
-    // used for qualities
-    return toReturn;
-  }
-  
   /**
+   * Beware that the cost of the fear has to be managed by the UI...
    * 
    * @param gear
    * @param remove
@@ -279,6 +276,8 @@ public class SrCreator extends PlayerCreator{
   }
   
   /**
+   * Beware that the cost of the augmentation has to be managed by the UI in the
+   * creation process 
    * 
    * @param augmentation
    * @param remove
@@ -309,31 +308,150 @@ public class SrCreator extends PlayerCreator{
         }
       }
     }
-    
-    
+    return toReturn;
+  }
+  
+  private boolean checkKarma(int karmaModifier){
+    boolean toReturn = true;
+    if(karmaModifier < 0){
+      if((this.karma + karmaModifier) < 0){
+        lastError = "Too much karma has been spent for contacts, qualities or "
+                  + "credits. There is no karma left.";
+      }
+    }
+    else{
+      if((this.karma + karmaModifier) >= (2 * this.initialKarma)){
+        lastError = "You cannot remove this contact, qualities or nuyens without "
+                  + "exceeding the total amount of allowed karma (" 
+                  + (2 * this.initialKarma) + ") with  the regained karma.";
+      }
+    }
     return toReturn;
   }
   
   /**
    * 
    * @param contact
-   * @param remove
+   * @param add
    * @return 
    */
-  public boolean addContact(Contact contact, boolean remove){
-    boolean toReturn = true;
-    if(!remove){
-      this.contactList.add(contact);
+  public boolean addContact(Contact contact, boolean add){
+    boolean toReturn;
+    if(add){
+      int karmaCost = contact.getContactConnection() + contact.getContactLoyalty();
+      toReturn = checkKarma(karmaCost * -1);
+      if(toReturn){
+        this.karma -= karmaCost;
+        this.contactList.add(contact);  
+      }
     }
     else{
       toReturn = false;
       lastError = "The contact has not been found in the gear list of the current character.";
       for(int i = 0 ; i < contactList.size() ; ++i){
         if(contactList.get(i).getContactName().equals(contact.getContactName())){
-          this.contactList.remove(i);
+          int karmaCost = contactList.get(i).getContactConnection() + contactList.get(i).getContactLoyalty();
+          toReturn = checkKarma(karmaCost);
+          if(toReturn){
+            this.contactList.remove(i);
+            lastError = "";
+          }
+        }
+      }
+    }
+    return toReturn;
+  }
+  
+  /**
+   * 
+   * @param quality
+   * @param add
+   * @return 
+   */
+  public boolean addQuality(Quality quality, boolean add){
+    boolean toReturn;
+    if(add){
+      int karmaCost = quality.getKarmaCost();
+      toReturn = checkKarma(karmaCost * -1);
+      if(toReturn){
+        this.karma -= karmaCost;
+        this.qualityList.add(quality);  
+      }
+    }
+    else{
+      toReturn = false;
+      lastError = "The contact has not been found in the gear list of the current character.";
+      for(int i = 0 ; i < contactList.size() ; ++i){
+        if(contactList.get(i).getContactName().equals(quality.getQualityName())){
+          int karmaCost = qualityList.get(i).getKarmaCost();
+          toReturn = checkKarma(karmaCost);
+          if(toReturn){
+            this.contactList.remove(i);
+            lastError = "";
+          }
+        }
+      }
+    }
+    return toReturn;
+  }
+  
+  /**
+   * Beware that this is only for karma tracking, the money gained or spent is 
+   * used to create the character and then has to be managed by the UI.
+   * 
+   * @param karmaCost
+   * @param add
+   * @return 
+   */
+  public boolean addNuyens(int karmaCost, boolean add){
+    boolean toReturn;
+    toReturn = checkKarma((add ? -1 : 1) * karmaCost);
+    if(toReturn){
+      this.karma += karmaCost  * (add ? -1 : 1);
+    }
+    return toReturn;
+  }
+  
+  /**
+   * 
+   * @param skill
+   * @param add
+   * @return 
+   */
+  public boolean modifySkill(Skill skill, boolean add){
+    boolean toReturn = false;
+    boolean found = false;
+    lastError = "The Skill has not been found in the skill list of this character.";
+    
+    for(Skill s : this.skillList){
+      if(s.getSkillName().equals(skill.getSkillName())){
+        found = true;
+        if(s.getSkillRating() == (add ? 6 : 0)){
+          lastError = "This skill rating must be between 0 and 6.";
+        }
+        else{
+          s.setSkillRating(s.getSkillRating() + (add ? 1 : -1));
           toReturn = true;
           lastError = "";
         }
+      }
+    }
+    
+    if(!found){
+      skill.setSkillRating(1);
+      this.skillList.add(skill);
+    }
+    
+    return toReturn;
+  }
+  public boolean addSpecialisation(String skillName, String specialisation){
+    boolean toReturn = false;
+    lastError = "The Skill has not been found in the skill list of this character.";
+    for(Skill s : this.skillList){
+      if(s.getSkillName().equals(skillName)){
+        toReturn = true;
+        lastError = "";
+        s.addSpecialisation(specialisation);
       }
     }
     return toReturn;
@@ -343,7 +461,7 @@ public class SrCreator extends PlayerCreator{
    * Compute all attributes derivated from the ones set during the 
    * character creation process.
    */
-  private void finalizeCharacter(){
+  private void finalizeCharacter() throws RPGCCException{
     this.initiative = (getIntuition() + getReaction() 
                     + ThreadLocalRandom.current().nextInt(1, 7));
     this.matrixInitiative = (getIntuition() + getReaction()
@@ -373,10 +491,8 @@ public class SrCreator extends PlayerCreator{
                         * ThreadLocalRandom.current().nextInt(1, 7))
                         + Integer.parseInt(lifeStyle.getStartingNuyens(this.lifeStyle).split("\\+")[1]);
     
-    // TODO: compute new attribute values (according to gear and other bonuses/maluses)
+    // TODO: compute new attribute values (according to gear and other bonuses/maluses)... when we have the intel
   }
-  
-  // TODO: final touches => check what can be done
   
   /****************************************************************************/
   /*****                    Getter and Setter Methods                     *****/
@@ -414,19 +530,19 @@ public class SrCreator extends PlayerCreator{
   }
 
   public int getKarma() {
-    return karma;
+    return initialKarma;
   }
 
   public void setKarma(int karma) {
-    this.karma = karma;
+    this.initialKarma = karma;
   }
 
   public int getTotalKarma() {
-    return totalKarma;
+    return karma;
   }
 
   public void setTotalKarma(int totalKarma) {
-    this.totalKarma = totalKarma;
+    this.karma = totalKarma;
   }
 
   public int getBody() {
@@ -629,11 +745,11 @@ public class SrCreator extends PlayerCreator{
     this.identityList = identityList;
   }
 
-  public ArrayList<Skil> getSkillList() {
+  public ArrayList<Skill> getSkillList() {
     return skillList;
   }
 
-  public void setSkillList(ArrayList<Skil> skillList) {
+  public void setSkillList(ArrayList<Skill> skillList) {
     this.skillList = skillList;
   }
 

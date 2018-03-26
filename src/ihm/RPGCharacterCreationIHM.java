@@ -31,7 +31,7 @@ public class RPGCharacterCreationIHM extends javax.swing.JFrame {
   /**
    * Load the right game mechanisms according to what has been choosen. It is 
    * dedicated to be set by the plugin RPGGameChooser. To be set by another
-   * component, whatever it is, it MUST consider the game as follows:
+   * component, whatever it is, it MUST consider the game as follows (for now):
    * - ADD for Advanced Dungeons and Dragons;
    * - SR for Shadowrun;
    * - Ac for Call of Cthulhu;

@@ -10,6 +10,7 @@ public class Quality {
   private String qualityDescription;
   private String qualityType;
   private String relatedSkillOrAttribute;
+  private int karmaCost;
 
   /**
    * 
@@ -23,13 +24,15 @@ public class Quality {
    * @param qualityDescription
    * @param qualityType 
    * @param relatedSkillOrAttribute 
+   * @param karmaCost 
    */
   public Quality(String qualityName, String qualityDescription, 
-          String qualityType,String relatedSkillOrAttribute){
+          String qualityType,String relatedSkillOrAttribute, int karmaCost){
     this.qualityName = qualityName;
     this.qualityDescription = qualityDescription;
     this.qualityType = qualityType;
     this.relatedSkillOrAttribute = relatedSkillOrAttribute;
+    this.karmaCost = karmaCost;
   }
 
   
@@ -66,5 +69,13 @@ public class Quality {
 
   public void setRelatedSkillOrAttribute(String relatedSkillOrAttribute) {
     this.relatedSkillOrAttribute = relatedSkillOrAttribute;
+  }
+
+  public int getKarmaCost() {
+    return karmaCost;
+  }
+
+  public void setKarmaCost(int karmaCost) {
+    this.karmaCost = karmaCost;
   }
 }

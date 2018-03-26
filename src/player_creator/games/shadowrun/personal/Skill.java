@@ -1,22 +1,26 @@
 package player_creator.games.shadowrun.personal;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Nicolas Brax
  */
-public class Skil {
+public class Skill {
   
   private String skillName;
   private int skillRating;
   private String skillType;
+  private ArrayList<String> specialisations;
   
   /**
    * 
    */
-  public Skil(){
+  public Skill(){
     this.skillName = "";
     this.skillRating = -1;
     this.skillType = "";
+    this.specialisations = new ArrayList<>();
   }
   
   /**
@@ -25,10 +29,11 @@ public class Skil {
    * @param rating
    * @param type 
    */
-  public Skil(String name, int rating, String type){
+  public Skill(String name, int rating, String type){
     this.skillName = name;
     this.skillRating = rating;
     this.skillType = type;
+    this.specialisations = new ArrayList<>();
   }
 
   
@@ -57,5 +62,9 @@ public class Skil {
 
   public void setSkillType(String skillType) {
     this.skillType = skillType;
+  }
+  
+  public void addSpecialisation(String specialisation){
+    this.specialisations.add(specialisation);
   }
 }

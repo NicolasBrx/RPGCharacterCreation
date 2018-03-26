@@ -14,6 +14,8 @@ public class Prioritizer {
   private final SpecialSkill specialSkill;
   private final RunnerType runnerType;
   
+  HashMap<String,Integer> priorities;
+  
   // computed according to global level (streetlevel, primeRunner or normal one)
   private final int karma;
   private final int gearRatingRestriction;
@@ -22,33 +24,23 @@ public class Prioritizer {
   private final int karmaRestrictions;
   
   // computed according to priority table
-  private final HashMap<String,Integer> specialAttributesAndMetatype; // {metatype,attributes}
-  private final int attributes;
-  private final int magicOrResonance;
-  private final ArrayList<Integer> magicOrResonanceSkill;             // {number,rating}
-  private final int spellsOrComplexForms;
-  private final int skills;
-  private final int groupSkills;
-  private final int resources;
+  private HashMap<String,Integer> specialAttributesAndMetatype; // {metatype,attributes}
+  private int attributes;
+  private int magicOrResonance;
+  private ArrayList<Integer> magicOrResonanceSkill;             // {number,rating}
+  private int spellsOrComplexForms;
+  private int skills;
+  private int groupSkills;
+  private int resources;
   
   /**
    * Constructor 
-   * @param runnerLevel
    * @param runnerType
    * @param specialSkill
-   * @param metatypePriority
-   * @param attributesPriority
-   * @param magicOrResonancePriority
-   * @param skillsPriority
-   * @param resourcePriority
    * @throws RPGCCException 
    */
-  public Prioritizer(String runnerLevel, RunnerType runnerType, SpecialSkill specialSkill,
-          int metatypePriority, int attributesPriority, int magicOrResonancePriority, 
-          int skillsPriority, int resourcePriority) throws RPGCCException
+  public Prioritizer(RunnerType runnerType, SpecialSkill specialSkill) throws RPGCCException
   {
-    //TODO: test if priorities are OK (not the same numbers)
-    //TODO: no contradiction (techno/adept/magician/...)
     
     //intel on the specificity of the character
     this.runnerType = runnerType;
@@ -61,15 +53,43 @@ public class Prioritizer {
     this.nuyenRestrictions = determineNuyenRestriction();
     this.karmaRestrictions = determineKarmaRestriction();
     
-    // according to priority table
-    this.specialAttributesAndMetatype = determineSpecialAttributes(metatypePriority);
-    this.attributes = determineAttributes(attributesPriority);
-    this.magicOrResonance = determineMagicOrResonance(magicOrResonancePriority);
-    this.magicOrResonanceSkill = determineMagicOrResonanceSkill(magicOrResonancePriority);
-    this.spellsOrComplexForms = determineSpellOrComplexForms(magicOrResonancePriority);
-    this.skills = determineSkills(skillsPriority);
-    this.groupSkills = determineGroupSkills(skillsPriority);
-    this.resources = determineResources(resourcePriority);
+    this.priorities = new HashMap<>();
+  }
+  
+  /**
+   * 
+   * @param metatypePriority
+   * @param attributesPriority
+   * @param magicOrResonancePriority
+   * @param skillsPriority
+   * @param resourcesPriority
+   * @return
+   * @throws RPGCCException 
+   */
+  public boolean setPriorities(int metatypePriority, int attributesPriority, 
+          int magicOrResonancePriority, int skillsPriority, int resourcesPriority)
+          throws RPGCCException
+  {
+    boolean toReturn = true;
+    this.priorities.put("metatype",metatypePriority);
+    this.priorities.put("attributes",attributesPriority);
+    this.priorities.put("MR",magicOrResonancePriority);
+    this.priorities.put("skills",skillsPriority);
+    this.priorities.put("resources",resourcesPriority);
+    toReturn = checkPriorities();
+    
+    if(toReturn){
+      this.specialAttributesAndMetatype = determineSpecialAttributes(metatypePriority);
+      this.attributes = determineAttributes(attributesPriority);
+      this.magicOrResonance = determineMagicOrResonance(magicOrResonancePriority);
+      this.magicOrResonanceSkill = determineMagicOrResonanceSkill(magicOrResonancePriority);
+      this.spellsOrComplexForms = determineSpellOrComplexForms(magicOrResonancePriority);
+      this.skills = determineSkills(skillsPriority);
+      this.groupSkills = determineGroupSkills(skillsPriority);
+      this.resources = determineResources(resourcesPriority);
+    }
+    
+    return toReturn;
   }
   
   /****************************************************************************/
@@ -181,6 +201,30 @@ public class Prioritizer {
 
   private int determineKarmaRestriction() { // for the contact... => multiplication  by charisma
     return (runnerType == RunnerType.streetLevelRunner ? 0 : (runnerType == RunnerType.primeRunner ? 6 : 3));
+  }
+  
+  /****************************************************************************/
+  /*****                         Tool Methods                             *****/
+  /****************************************************************************/
+  /**
+   * 
+   * @return 
+   */
+  private boolean checkPriorities(){
+    boolean toReturn = true;
+    // check all values are between 1 and 5
+    for(String s : this.priorities.keySet()){
+      toReturn = ((this.priorities.get(s) >= 1) && (this.priorities.get(s) <= 5));
+      // if all good, check that all vales are unique in the map
+      if(toReturn){
+        for(String other : this.priorities.keySet()){
+          if(!s.equals(other)){
+            toReturn = (this.priorities.get(s) != this.priorities.get(other));
+          }
+        }// for other
+      }// if toReturn
+    }// for s
+    return toReturn;
   }
 
   /****************************************************************************/
