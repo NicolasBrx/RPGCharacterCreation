@@ -70,6 +70,7 @@ public class SrCreator extends PlayerCreator{
   /**
    * 
    * @param playername 
+   * @param initialKarma 
    */
   public SrCreator(String playername, int initialKarma){
     super(playername);

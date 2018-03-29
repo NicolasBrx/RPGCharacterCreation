@@ -1,23 +1,61 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ihm.games;
+
+import ihm.CreationInterface;
+import ihm.PCGenericPanel;
+import player_creator.games.SrCreator;
 
 /**
  *
- * @author nicolas
+ * @author Nicolas Brax
  */
-public class SrPanel extends javax.swing.JPanel {
+public class SrPanel extends javax.swing.JPanel implements CreationInterface{
 
+  private SrCreator creator;
+  private boolean saveNeeded;
+  
   /**
    * Creates new form AcPCPanel
    */
   public SrPanel() {
     initComponents();
+    
+    jlblAvailableMetatypes.setText(" ");
+    jlblSpecialAttributesPoints.setText(" ");
+    jlblAttributesPoints.setText(" ");
+    jlblCredits.setText(" ");
   }
 
+  @Override
+  public boolean isSaveNeeded(){
+    return this.saveNeeded;
+  }
+  
+  @Override
+  public void saveCharacter(){
+    //modifySaveState(false);
+  }
+  
+  /**
+   * 
+   * @param playerName 
+   */
+  @Override
+  public void create(String playerName){
+    creator = new SrCreator(playerName,25);
+    
+    setInformation("You can now create a new ...");
+    
+    // + init des champs a saisir...
+  }
+  
+  /**
+   * 
+   * @param message 
+   */
+  private void setInformation(String message){
+    ((PCGenericPanel)this.getParent()).setInformation(message);
+  }
+  
   /**
    * This method is called from within the constructor to initialize the form.
    * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,19 +65,219 @@ public class SrPanel extends javax.swing.JPanel {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
+    jLabel1 = new javax.swing.JLabel();
+    jLabel2 = new javax.swing.JLabel();
+    jLabel3 = new javax.swing.JLabel();
+    jLabel4 = new javax.swing.JLabel();
+    jLabel5 = new javax.swing.JLabel();
+    jcbMetatype = new javax.swing.JComboBox<>();
+    jcbAttributes = new javax.swing.JComboBox<>();
+    jcbMR = new javax.swing.JComboBox<>();
+    jcbSkills = new javax.swing.JComboBox<>();
+    jcbRessources = new javax.swing.JComboBox<>();
+    jcbGodMode = new javax.swing.JCheckBox();
+    jbValidatePriorities = new javax.swing.JButton();
+    jbPreviousSubPanel = new javax.swing.JButton();
+    jbNextSubPanel = new javax.swing.JButton();
+    jbValidate = new javax.swing.JButton();
+    jbSave = new javax.swing.JButton();
+    jLabel6 = new javax.swing.JLabel();
+    jLabel7 = new javax.swing.JLabel();
+    jlblAvailableMetatypes = new javax.swing.JLabel();
+    jlblSpecialAttributesPoints = new javax.swing.JLabel();
+    jLabel8 = new javax.swing.JLabel();
+    jlblAttributesPoints = new javax.swing.JLabel();
+    jLabel9 = new javax.swing.JLabel();
+    jlblCredits = new javax.swing.JLabel();
+
+    setBorder(javax.swing.BorderFactory.createEtchedBorder());
+    setMaximumSize(new java.awt.Dimension(975, 520));
+    setMinimumSize(new java.awt.Dimension(975, 520));
+    setPreferredSize(new java.awt.Dimension(975, 520));
+
+    jLabel1.setText("Metatype");
+
+    jLabel2.setText("Attributs");
+
+    jLabel3.setText("Magie / Resonance");
+
+    jLabel4.setText("Compétences");
+
+    jLabel5.setText("Ressources");
+
+    jcbMetatype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+
+    jcbAttributes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+
+    jcbMR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+
+    jcbSkills.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+
+    jcbRessources.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+
+    jcbGodMode.setText("God Mode");
+
+    jbValidatePriorities.setText("Valider");
+
+    jbPreviousSubPanel.setText("<<");
+
+    jbNextSubPanel.setText(">>");
+
+    jbValidate.setText("Validate");
+
+    jbSave.setText("Save");
+
+    jLabel6.setText("Points attributs spéciaux :");
+
+    jLabel7.setText("Metatypes disponibles :");
+
+    jlblAvailableMetatypes.setText("jLabel8");
+
+    jlblSpecialAttributesPoints.setText("jLabel8");
+    jlblSpecialAttributesPoints.setMaximumSize(new java.awt.Dimension(50, 14));
+    jlblSpecialAttributesPoints.setMinimumSize(new java.awt.Dimension(50, 14));
+    jlblSpecialAttributesPoints.setPreferredSize(new java.awt.Dimension(50, 14));
+
+    jLabel8.setText("Points attributs :");
+
+    jlblAttributesPoints.setText("jLabel9");
+
+    jLabel9.setText("Crédits :");
+
+    jlblCredits.setText("jLabel10");
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 400, Short.MAX_VALUE)
+      .addGroup(layout.createSequentialGroup()
+        .addGap(113, 113, 113)
+        .addComponent(jbPreviousSubPanel)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(jbNextSubPanel)
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+          .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(jLabel6)
+              .addComponent(jlblSpecialAttributesPoints, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jLabel7)
+              .addComponent(jlblAvailableMetatypes))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jlblAttributesPoints))
+              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8))))
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(jLabel1)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jcbMetatype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(81, 81, 81)
+            .addComponent(jLabel2)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jcbAttributes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        .addGap(52, 52, 52)
+        .addComponent(jLabel3)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(jcbMR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+          .addGroup(layout.createSequentialGroup()
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jbValidate))
+          .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+            .addGap(54, 54, 54)
+            .addComponent(jLabel4)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jcbSkills, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(60, 60, 60)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(jLabel9)
+              .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jcbRessources, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+              .addComponent(jlblCredits))
+            .addGap(0, 16, Short.MAX_VALUE)))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jbSave, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jcbGodMode))
+          .addComponent(jbValidatePriorities, javax.swing.GroupLayout.Alignment.TRAILING))
+        .addGap(17, 17, 17))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 300, Short.MAX_VALUE)
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jLabel1)
+          .addComponent(jLabel2)
+          .addComponent(jLabel3)
+          .addComponent(jLabel4)
+          .addComponent(jLabel5)
+          .addComponent(jcbGodMode)
+          .addComponent(jcbMetatype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jcbAttributes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jcbMR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jcbSkills, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jcbRessources, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(4, 4, 4)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jbValidatePriorities)
+          .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jLabel7)
+              .addComponent(jLabel8)
+              .addComponent(jLabel9))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jlblAvailableMetatypes, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jlblAttributesPoints)
+              .addComponent(jlblCredits))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jLabel6)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jlblSpecialAttributesPoints, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 368, Short.MAX_VALUE)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jbPreviousSubPanel)
+          .addComponent(jbNextSubPanel)
+          .addComponent(jbValidate)
+          .addComponent(jbSave))
+        .addContainerGap())
     );
   }// </editor-fold>//GEN-END:initComponents
 
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JLabel jLabel1;
+  private javax.swing.JLabel jLabel2;
+  private javax.swing.JLabel jLabel3;
+  private javax.swing.JLabel jLabel4;
+  private javax.swing.JLabel jLabel5;
+  private javax.swing.JLabel jLabel6;
+  private javax.swing.JLabel jLabel7;
+  private javax.swing.JLabel jLabel8;
+  private javax.swing.JLabel jLabel9;
+  private javax.swing.JButton jbNextSubPanel;
+  private javax.swing.JButton jbPreviousSubPanel;
+  private javax.swing.JButton jbSave;
+  private javax.swing.JButton jbValidate;
+  private javax.swing.JButton jbValidatePriorities;
+  private javax.swing.JComboBox<String> jcbAttributes;
+  private javax.swing.JCheckBox jcbGodMode;
+  private javax.swing.JComboBox<String> jcbMR;
+  private javax.swing.JComboBox<String> jcbMetatype;
+  private javax.swing.JComboBox<String> jcbRessources;
+  private javax.swing.JComboBox<String> jcbSkills;
+  private javax.swing.JLabel jlblAttributesPoints;
+  private javax.swing.JLabel jlblAvailableMetatypes;
+  private javax.swing.JLabel jlblCredits;
+  private javax.swing.JLabel jlblSpecialAttributesPoints;
   // End of variables declaration//GEN-END:variables
 }

@@ -11,9 +11,9 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
-import player_creator.games.AcCreator;
-import player_creator.games.AddCreator;
-import player_creator.games.FsCreator;
+//import player_creator.games.AcCreator;
+//import player_creator.games.AddCreator;
+//import player_creator.games.FsCreator;
 import player_creator.games.SrCreator;
 
 /**
@@ -79,15 +79,15 @@ public class XMLParser {
       if(P13Creator.class.isInstance(character)){
         person = fillElementWithPatient13Specifics(person,(P13Creator)character);
       }
-      else if(AcCreator.class.isInstance(character)){
-        person = fillElementWithCthulhuSpecifics(person,(AcCreator)character);
-      }
-      else if(FsCreator.class.isInstance(character)){
-        person = fillElementWithFengShuiSpecifics(person,(FsCreator)character);
-      }
-      else if(AddCreator.class.isInstance(character)){
-        person = fillElementWithAddSpecifics(person,(AddCreator)character);
-      }
+//      else if(AcCreator.class.isInstance(character)){
+//        person = fillElementWithCthulhuSpecifics(person,(AcCreator)character);
+//      }
+//      else if(FsCreator.class.isInstance(character)){
+//        person = fillElementWithFengShuiSpecifics(person,(FsCreator)character);
+//      }
+//      else if(AddCreator.class.isInstance(character)){
+//        person = fillElementWithAddSpecifics(person,(AddCreator)character);
+//      }
       else if(SrCreator.class.isInstance(character)){
         person = fillElementWithShadowrunSpecifics(person,(SrCreator)character);
       }
@@ -158,38 +158,38 @@ public class XMLParser {
     return person;
   }
   
-  /**
-   * 
-   * @param person
-   * @param character
-   * @return 
-   */
-  private Element fillElementWithCthulhuSpecifics(Element person, AcCreator character){
-    
-    return person;
-  }
-  
-  /**
-   * 
-   * @param person
-   * @param character
-   * @return 
-   */
-  private Element fillElementWithFengShuiSpecifics(Element person, FsCreator character){
-    
-    return person;
-  }
-  
-  /**
-   * 
-   * @param person
-   * @param character
-   * @return 
-   */
-  private Element fillElementWithAddSpecifics(Element person, AddCreator character){
-    
-    return person;
-  }
+//  /**
+//   * 
+//   * @param person
+//   * @param character
+//   * @return 
+//   */
+//  private Element fillElementWithCthulhuSpecifics(Element person, AcCreator character){
+//    
+//    return person;
+//  }
+//  
+//  /**
+//   * 
+//   * @param person
+//   * @param character
+//   * @return 
+//   */
+//  private Element fillElementWithFengShuiSpecifics(Element person, FsCreator character){
+//    
+//    return person;
+//  }
+//  
+//  /**
+//   * 
+//   * @param person
+//   * @param character
+//   * @return 
+//   */
+//  private Element fillElementWithAddSpecifics(Element person, AddCreator character){
+//    
+//    return person;
+//  }
     
   
 }

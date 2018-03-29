@@ -1,6 +1,7 @@
 package ihm;
 
 import ihm.games.P13Panel;
+import ihm.games.SrPanel;
 import javax.swing.JTabbedPane;
 
 /**
@@ -48,6 +49,11 @@ public class PCGenericPanel extends javax.swing.JPanel {
       case "ADD":
         break;
       case "SR":
+        creation = new SrPanel();
+        add((SrPanel)creation);
+        setInformation("Please enter a player name to start the creation process.");
+        revalidate();
+        repaint();
         break;
       case "AC":
         break;

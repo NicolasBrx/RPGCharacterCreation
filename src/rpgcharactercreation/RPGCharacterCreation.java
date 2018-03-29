@@ -37,7 +37,8 @@ public class RPGCharacterCreation {
       ihm.setGame(args[0]);
     }
     else{
-      ihm.setGame("P13");
+      //ihm.setGame("P13");
+      ihm.setGame("SR");
     }
     ihm.setVisible(true);
   }
