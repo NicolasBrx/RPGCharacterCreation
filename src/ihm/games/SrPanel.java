@@ -3,6 +3,7 @@ package ihm.games;
 import ihm.CreationInterface;
 import ihm.PCGenericPanel;
 import player_creator.games.SrCreator;
+import player_creator.games.shadowrun.builder.Prioritizer;
 
 /**
  *
@@ -12,6 +13,7 @@ public class SrPanel extends javax.swing.JPanel implements CreationInterface{
 
   private SrCreator creator;
   private boolean saveNeeded;
+  private Prioritizer priorities;
   
   /**
    * Creates new form AcPCPanel
@@ -19,10 +21,17 @@ public class SrPanel extends javax.swing.JPanel implements CreationInterface{
   public SrPanel() {
     initComponents();
     
+    priorities = new Prioritizer();
+    
     jlblAvailableMetatypes.setText(" ");
     jlblSpecialAttributesPoints.setText(" ");
     jlblAttributesPoints.setText(" ");
     jlblCredits.setText(" ");
+    jlblMRPoints.setText(" ");
+    jlblMROther.setText(" ");
+    jlblSkillPoints.setText(" ");
+    jlblSkillGroupPoints.setText(" ");
+    
   }
 
   @Override
@@ -89,6 +98,16 @@ public class SrPanel extends javax.swing.JPanel implements CreationInterface{
     jlblAttributesPoints = new javax.swing.JLabel();
     jLabel9 = new javax.swing.JLabel();
     jlblCredits = new javax.swing.JLabel();
+    jLabel10 = new javax.swing.JLabel();
+    jlblMRPoints = new javax.swing.JLabel();
+    jLabel11 = new javax.swing.JLabel();
+    jlblMROther = new javax.swing.JLabel();
+    jLabel12 = new javax.swing.JLabel();
+    jlblSkillPoints = new javax.swing.JLabel();
+    jLabel13 = new javax.swing.JLabel();
+    jlblSkillGroupPoints = new javax.swing.JLabel();
+    jcbbRunnerType = new javax.swing.JComboBox<>();
+    jcbbSpecial = new javax.swing.JComboBox<>();
 
     setBorder(javax.swing.BorderFactory.createEtchedBorder());
     setMaximumSize(new java.awt.Dimension(975, 520));
@@ -146,6 +165,22 @@ public class SrPanel extends javax.swing.JPanel implements CreationInterface{
 
     jlblCredits.setText("jLabel10");
 
+    jLabel10.setText("M / R automatique :");
+
+    jlblMRPoints.setText("jLabel11");
+
+    jLabel11.setText("Autre :");
+
+    jlblMROther.setText("jLabel12");
+
+    jLabel12.setText("Points de compétences :");
+
+    jlblSkillPoints.setText("jLabel13");
+
+    jLabel13.setText("Points de groupes :");
+
+    jlblSkillGroupPoints.setText("jLabel14");
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
@@ -158,92 +193,132 @@ public class SrPanel extends javax.swing.JPanel implements CreationInterface{
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
           .addGroup(layout.createSequentialGroup()
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addComponent(jLabel6)
               .addComponent(jlblSpecialAttributesPoints, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
               .addComponent(jLabel7)
               .addComponent(jlblAvailableMetatypes))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jlblAttributesPoints))
-              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel8))))
+              .addComponent(jLabel8)
+              .addComponent(jlblAttributesPoints)))
           .addGroup(layout.createSequentialGroup()
             .addComponent(jLabel1)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jcbMetatype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(81, 81, 81)
+            .addGap(75, 75, 75)
             .addComponent(jLabel2)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jcbAttributes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        .addGap(52, 52, 52)
-        .addComponent(jLabel3)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(jcbMR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-          .addGroup(layout.createSequentialGroup()
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jbValidate))
-          .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-            .addGap(54, 54, 54)
-            .addComponent(jLabel4)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jcbSkills, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(60, 60, 60)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(jLabel9)
-              .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jcbRessources, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-              .addComponent(jlblCredits))
-            .addGap(0, 16, Short.MAX_VALUE)))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addGap(31, 31, 31)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jbSave, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jcbGodMode))
-          .addComponent(jbValidatePriorities, javax.swing.GroupLayout.Alignment.TRAILING))
-        .addGap(17, 17, 17))
+          .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jcbMR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+              .addComponent(jLabel10)
+              .addComponent(jlblMRPoints))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addGroup(layout.createSequentialGroup()
+                    .addComponent(jlblSkillGroupPoints)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbValidatePriorities))
+                  .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                      .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcbSkills, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                      .addComponent(jLabel12)
+                      .addComponent(jlblSkillPoints))
+                    .addGap(30, 30, 30)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                      .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcbRessources, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                        .addComponent(jcbGodMode))
+                      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                          .addComponent(jLabel9)
+                          .addComponent(jlblCredits))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                          .addComponent(jcbbRunnerType, 0, 136, Short.MAX_VALUE)
+                          .addComponent(jcbbSpecial, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                  .addGroup(layout.createSequentialGroup()
+                    .addComponent(jLabel13)
+                    .addGap(0, 0, Short.MAX_VALUE))))
+              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbValidate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbSave, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)))
+            .addGap(30, 30, 30))
+          .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(jLabel11)
+              .addComponent(jlblMROther))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jLabel1)
-          .addComponent(jLabel2)
-          .addComponent(jLabel3)
-          .addComponent(jLabel4)
-          .addComponent(jLabel5)
-          .addComponent(jcbGodMode)
-          .addComponent(jcbMetatype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jcbAttributes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jcbMR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jcbSkills, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jcbRessources, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(4, 4, 4)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(jbValidatePriorities)
           .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jLabel1)
+              .addComponent(jLabel2)
+              .addComponent(jLabel3)
+              .addComponent(jLabel4)
+              .addComponent(jLabel5)
+              .addComponent(jcbMetatype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jcbMR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jcbSkills, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jcbRessources, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jcbAttributes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jcbGodMode))
+            .addGap(4, 4, 4)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
               .addComponent(jLabel7)
               .addComponent(jLabel8)
-              .addComponent(jLabel9))
+              .addComponent(jLabel9)
+              .addComponent(jLabel10)
+              .addComponent(jLabel12)
+              .addComponent(jcbbRunnerType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
               .addComponent(jlblAvailableMetatypes, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(jlblAttributesPoints)
-              .addComponent(jlblCredits))
+              .addComponent(jlblCredits)
+              .addComponent(jlblMRPoints)
+              .addComponent(jlblSkillPoints)
+              .addComponent(jlblAttributesPoints))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jLabel6)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jlblSpecialAttributesPoints, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 368, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jLabel6)
+              .addComponent(jLabel11)
+              .addComponent(jLabel13))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addComponent(jcbbSpecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(13, 13, 13)))
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+            .addComponent(jlblSpecialAttributesPoints, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jlblMROther)
+            .addComponent(jlblSkillGroupPoints))
+          .addComponent(jbValidatePriorities))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 349, Short.MAX_VALUE)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jbPreviousSubPanel)
           .addComponent(jbNextSubPanel)
@@ -256,6 +331,10 @@ public class SrPanel extends javax.swing.JPanel implements CreationInterface{
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JLabel jLabel1;
+  private javax.swing.JLabel jLabel10;
+  private javax.swing.JLabel jLabel11;
+  private javax.swing.JLabel jLabel12;
+  private javax.swing.JLabel jLabel13;
   private javax.swing.JLabel jLabel2;
   private javax.swing.JLabel jLabel3;
   private javax.swing.JLabel jLabel4;
@@ -275,9 +354,15 @@ public class SrPanel extends javax.swing.JPanel implements CreationInterface{
   private javax.swing.JComboBox<String> jcbMetatype;
   private javax.swing.JComboBox<String> jcbRessources;
   private javax.swing.JComboBox<String> jcbSkills;
+  private javax.swing.JComboBox<String> jcbbRunnerType;
+  private javax.swing.JComboBox<String> jcbbSpecial;
   private javax.swing.JLabel jlblAttributesPoints;
   private javax.swing.JLabel jlblAvailableMetatypes;
   private javax.swing.JLabel jlblCredits;
+  private javax.swing.JLabel jlblMROther;
+  private javax.swing.JLabel jlblMRPoints;
+  private javax.swing.JLabel jlblSkillGroupPoints;
+  private javax.swing.JLabel jlblSkillPoints;
   private javax.swing.JLabel jlblSpecialAttributesPoints;
   // End of variables declaration//GEN-END:variables
 }
