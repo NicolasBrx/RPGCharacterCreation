@@ -21,8 +21,6 @@ public class SrPanel extends javax.swing.JPanel implements CreationInterface{
   public SrPanel() {
     initComponents();
     
-    priorities = new Prioritizer();
-    
     jlblAvailableMetatypes.setText(" ");
     jlblSpecialAttributesPoints.setText(" ");
     jlblAttributesPoints.setText(" ");
@@ -51,6 +49,8 @@ public class SrPanel extends javax.swing.JPanel implements CreationInterface{
   @Override
   public void create(String playerName){
     creator = new SrCreator(playerName,25);
+    
+    //enableFields(true);
     
     setInformation("You can now create a new ...");
     
@@ -318,7 +318,7 @@ public class SrPanel extends javax.swing.JPanel implements CreationInterface{
             .addComponent(jlblMROther)
             .addComponent(jlblSkillGroupPoints))
           .addComponent(jbValidatePriorities))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 349, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 346, Short.MAX_VALUE)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jbPreviousSubPanel)
           .addComponent(jbNextSubPanel)

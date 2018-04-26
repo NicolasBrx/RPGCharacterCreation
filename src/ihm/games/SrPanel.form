@@ -202,7 +202,7 @@
                   </Group>
                   <Component id="jbValidatePriorities" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="349" max="32767" attributes="0"/>
+              <EmptySpace pref="346" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbPreviousSubPanel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbNextSubPanel" alignment="3" min="-2" max="-2" attributes="0"/>
