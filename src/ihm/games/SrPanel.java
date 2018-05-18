@@ -4,6 +4,9 @@ import ihm.CreationInterface;
 import ihm.PCGenericPanel;
 import player_creator.games.SrCreator;
 import player_creator.games.shadowrun.builder.Prioritizer;
+import player_creator.games.shadowrun.builder.RunnerTypes;
+import player_creator.games.shadowrun.builder.SpecialSkills;
+import player_creator.games.shadowrun.builder.LifeStyles;
 
 /**
  *
@@ -30,6 +33,13 @@ public class SrPanel extends javax.swing.JPanel implements CreationInterface{
     jlblSkillPoints.setText(" ");
     jlblSkillGroupPoints.setText(" ");
     
+    for(RunnerTypes runnerType : RunnerTypes.values()){
+      jcbbRunnerType.addItem(runnerType.toString());
+    }
+    
+    for(SpecialSkills specialSkill : SpecialSkills.values()){
+      jcbbSpecial.addItem(specialSkill.toString());
+    }
   }
 
   @Override

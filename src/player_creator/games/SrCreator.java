@@ -10,9 +10,9 @@ import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 import player_creator.PlayerCreator;
 import player_creator.games.shadowrun.builder.Attribute;
-import player_creator.games.shadowrun.builder.LifeStyle;
-import player_creator.games.shadowrun.builder.RunnerType;
-import player_creator.games.shadowrun.builder.SpecialSkill;
+import player_creator.games.shadowrun.builder.LifeStyles;
+import player_creator.games.shadowrun.builder.RunnerTypes;
+import player_creator.games.shadowrun.builder.SpecialSkills;
 import player_creator.games.shadowrun.gears.Gear;
 import tools.RPGCCException;
 import tools.XMLParser;
@@ -34,9 +34,9 @@ public class SrCreator extends PlayerCreator{
   private HashMap<String,Attribute> attributes;
   
   // special knowledge
-  private SpecialSkill specialSkill;
-  private RunnerType runnerType;
-  private LifeStyle lifeStyle;
+  private SpecialSkills specialSkill;
+  private RunnerTypes runnerType;
+  private LifeStyles lifeStyle;
   
   // computed attributes
   private int initiative;
@@ -196,8 +196,8 @@ public class SrCreator extends PlayerCreator{
     
     // special attributes
     this.attributes.put("edge",new Attribute("edge",(race.equalsIgnoreCase("human") ? 2 : 1)));
-    this.attributes.put("magic",new Attribute("magic", (specialSkill == SpecialSkill.magician ? 1 : 0)));
-    this.attributes.put("resonance",new Attribute("resonance", (specialSkill == SpecialSkill.technomancer ? 1 : 0)));
+    this.attributes.put("magic",new Attribute("magic", (specialSkill == SpecialSkills.magician ? 1 : 0)));
+    this.attributes.put("resonance",new Attribute("resonance", (specialSkill == SpecialSkills.technomancer ? 1 : 0)));
     
     return toReturn;
   }
@@ -467,7 +467,7 @@ public class SrCreator extends PlayerCreator{
                     + ThreadLocalRandom.current().nextInt(1, 7));
     this.matrixInitiative = (getIntuition() + getReaction()
                           + ThreadLocalRandom.current().nextInt(1, 7));;
-    if(specialSkill == SpecialSkill.magician)
+    if(specialSkill == SpecialSkills.magician)
       this.astralInitiative = getIntuition() * 2
                             + ThreadLocalRandom.current().nextInt(1, 7)
                             + ThreadLocalRandom.current().nextInt(1, 7);  
@@ -770,11 +770,11 @@ public class SrCreator extends PlayerCreator{
     this.contactList = contactList;
   }
   
-  public SpecialSkill getSpecialSkill(){
+  public SpecialSkills getSpecialSkill(){
     return this.specialSkill;
   }
   
-  public RunnerType getRunnerType(){
+  public RunnerTypes getRunnerType(){
     return this.runnerType;
   }
 
@@ -818,11 +818,11 @@ public class SrCreator extends PlayerCreator{
     this.lifeCostAdjustment = lifeCostAdjustment;
   }
 
-  public LifeStyle getLifeStyle() {
+  public LifeStyles getLifeStyle() {
     return lifeStyle;
   }
 
-  public void setLifeStyle(LifeStyle lifeStyle) {
+  public void setLifeStyle(LifeStyles lifeStyle) {
     this.lifeStyle = lifeStyle;
   }
 

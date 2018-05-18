@@ -11,8 +11,8 @@ import tools.RPGCCException;
 public class Prioritizer {
   
   // intel on the specificity of the character
-  private final SpecialSkill specialSkill;
-  private final RunnerType runnerType;
+  private final SpecialSkills specialSkill;
+  private final RunnerTypes runnerType;
   
   HashMap<String,Integer> priorities;
   
@@ -39,7 +39,7 @@ public class Prioritizer {
    * @param specialSkill
    * @throws RPGCCException 
    */
-  public Prioritizer(RunnerType runnerType, SpecialSkill specialSkill) throws RPGCCException
+  public Prioritizer(RunnerTypes runnerType, SpecialSkills specialSkill) throws RPGCCException
   {
     
     //intel on the specificity of the character
@@ -120,9 +120,9 @@ public class Prioritizer {
   private int determineMagicOrResonance(int priority) throws RPGCCException{
     switch(priority){
       case 1: return 6;
-      case 2: return (specialSkill == SpecialSkill.adept ? 6 : (specialSkill == SpecialSkill.aspectedMagician ? 5 : 4));
-      case 3: return (specialSkill == SpecialSkill.adept ? 4 : 3);
-      case 4: return ((specialSkill == SpecialSkill.adept||specialSkill == SpecialSkill.aspectedMagician) ? 2 : 0);
+      case 2: return (specialSkill == SpecialSkills.adept ? 6 : (specialSkill == SpecialSkills.aspectedMagician ? 5 : 4));
+      case 3: return (specialSkill == SpecialSkills.adept ? 4 : 3);
+      case 4: return ((specialSkill == SpecialSkills.adept||specialSkill == SpecialSkills.aspectedMagician) ? 2 : 0);
       case 5: return 0;
       default: throw new RPGCCException("Invalid magic/resonance priority.");
     }
@@ -131,8 +131,8 @@ public class Prioritizer {
   private ArrayList<Integer> determineMagicOrResonanceSkill(int priority) throws RPGCCException{
     switch(priority){
       case 1: return new ArrayList<Integer>(){{add(2);add(5);}};
-      case 2: return new ArrayList<Integer>(){{add((specialSkill == SpecialSkill.adept||specialSkill == SpecialSkill.aspectedMagician) ? 1 : 2);add(4);}};
-      case 3: return (specialSkill == SpecialSkill.adept||specialSkill == SpecialSkill.aspectedMagician) ? new ArrayList<Integer>(){{add(1);add(2);}} : null;
+      case 2: return new ArrayList<Integer>(){{add((specialSkill == SpecialSkills.adept||specialSkill == SpecialSkills.aspectedMagician) ? 1 : 2);add(4);}};
+      case 3: return (specialSkill == SpecialSkills.adept||specialSkill == SpecialSkills.aspectedMagician) ? new ArrayList<Integer>(){{add(1);add(2);}} : null;
       case 4: case 5: return null;
       default: throw new RPGCCException("Invalid magic/resonance priority.");
     }
@@ -140,9 +140,9 @@ public class Prioritizer {
   
   private int determineSpellOrComplexForms(int priority) throws RPGCCException{
     switch(priority){
-      case 1: return (specialSkill == SpecialSkill.magician ? 10 : (specialSkill == SpecialSkill.technomancer ? 5 : 0));
-      case 2: return (specialSkill == SpecialSkill.magician ? 7 : (specialSkill == SpecialSkill.technomancer ? 2 : 0));
-      case 3: return (specialSkill == SpecialSkill.magician ? 5 : (specialSkill == SpecialSkill.technomancer ? 1 : 0));
+      case 1: return (specialSkill == SpecialSkills.magician ? 10 : (specialSkill == SpecialSkills.technomancer ? 5 : 0));
+      case 2: return (specialSkill == SpecialSkills.magician ? 7 : (specialSkill == SpecialSkills.technomancer ? 2 : 0));
+      case 3: return (specialSkill == SpecialSkills.magician ? 5 : (specialSkill == SpecialSkills.technomancer ? 1 : 0));
       case 4: case 5: return 0;
       default: throw new RPGCCException("Invalid magic/resonance priority.");
     }
@@ -174,33 +174,33 @@ public class Prioritizer {
   
   private int determineResources(int priority) throws RPGCCException{
     switch(priority){
-      case 1: return (runnerType == RunnerType.streetLevelRunner ? 75000 : (runnerType == RunnerType.primeRunner ? 500000 : 450000));
-      case 2: return (runnerType == RunnerType.streetLevelRunner ? 50000 : (runnerType == RunnerType.primeRunner ? 325000 : 275000));
-      case 3: return (runnerType == RunnerType.streetLevelRunner ? 25000 : (runnerType == RunnerType.primeRunner ? 210000 : 140000));
-      case 4: return (runnerType == RunnerType.streetLevelRunner ? 15000 : (runnerType == RunnerType.primeRunner ? 150000 : 50000));
-      case 5: return (runnerType == RunnerType.streetLevelRunner ? 6000 : (runnerType == RunnerType.primeRunner ? 100000 : 6000));
+      case 1: return (runnerType == RunnerTypes.streetLevelRunner ? 75000 : (runnerType == RunnerTypes.primeRunner ? 500000 : 450000));
+      case 2: return (runnerType == RunnerTypes.streetLevelRunner ? 50000 : (runnerType == RunnerTypes.primeRunner ? 325000 : 275000));
+      case 3: return (runnerType == RunnerTypes.streetLevelRunner ? 25000 : (runnerType == RunnerTypes.primeRunner ? 210000 : 140000));
+      case 4: return (runnerType == RunnerTypes.streetLevelRunner ? 15000 : (runnerType == RunnerTypes.primeRunner ? 150000 : 50000));
+      case 5: return (runnerType == RunnerTypes.streetLevelRunner ? 6000 : (runnerType == RunnerTypes.primeRunner ? 100000 : 6000));
       default: throw new RPGCCException("Invalid skills priority.");
     }
   }
   
   private int determineKarma() {
-    return (runnerType == RunnerType.streetLevelRunner ? 13 : (runnerType == RunnerType.primeRunner ? 35 : 25));
+    return (runnerType == RunnerTypes.streetLevelRunner ? 13 : (runnerType == RunnerTypes.primeRunner ? 35 : 25));
   }
 
   private int determineGearRatingRestriction() {
-    return (runnerType == RunnerType.streetLevelRunner ? 4 : (runnerType == RunnerType.primeRunner ? 6 : 5));
+    return (runnerType == RunnerTypes.streetLevelRunner ? 4 : (runnerType == RunnerTypes.primeRunner ? 6 : 5));
   }
 
   private int determineGearAvailabilityRestriction() {
-    return (runnerType == RunnerType.streetLevelRunner ? 10 : (runnerType == RunnerType.primeRunner ? 15 : 12));
+    return (runnerType == RunnerTypes.streetLevelRunner ? 10 : (runnerType == RunnerTypes.primeRunner ? 15 : 12));
   }
 
   private int determineNuyenRestriction() {
-    return (runnerType == RunnerType.streetLevelRunner ? 5 : (runnerType == RunnerType.primeRunner ? 25 : 15));
+    return (runnerType == RunnerTypes.streetLevelRunner ? 5 : (runnerType == RunnerTypes.primeRunner ? 25 : 15));
   }
 
   private int determineKarmaRestriction() { // for the contact... => multiplication  by charisma
-    return (runnerType == RunnerType.streetLevelRunner ? 0 : (runnerType == RunnerType.primeRunner ? 6 : 3));
+    return (runnerType == RunnerTypes.streetLevelRunner ? 0 : (runnerType == RunnerTypes.primeRunner ? 6 : 3));
   }
   
   /****************************************************************************/
@@ -230,11 +230,11 @@ public class Prioritizer {
   /****************************************************************************/
   /*****                         Getter Methods                           *****/
   /****************************************************************************/
-  public RunnerType getRunnerType(){
+  public RunnerTypes getRunnerType(){
     return this.runnerType;
   }
 
-  public SpecialSkill getSpecialSkill(){
+  public SpecialSkills getSpecialSkill(){
     return this.specialSkill;
   }
 

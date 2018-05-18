@@ -6,13 +6,49 @@ import tools.RPGCCException;
  *
  * @author Nicolas Brax
  */
-public enum LifeStyle {
-  Street,
-  Squat,
-  Low,
-  Middle,
-  High,
-  Luxury;
+public enum LifeStyles {
+  Street("Street"),
+  Squat("Squat"),
+  Low("Low"),
+  Middle("Middle"),
+  High("High"),
+  Luxury("Luxury");
+  
+  /**
+   * 
+   */
+  private final String text;
+  
+  /**
+   * 
+   * @param text 
+   */
+  LifeStyles(final String text){
+    this.text = text;
+  }
+  
+  /**
+   * 
+   * @param lifeText
+   * @return 
+   */
+  public LifeStyles getLifeStyle(String lifeText){
+    for(LifeStyles style : LifeStyles.values()){
+      if(style.text.equalsIgnoreCase(lifeText)){
+        return style;
+      }
+    }
+    return null;
+  }
+  
+  /**
+   * 
+   * @return 
+   */
+  @Override
+  public String toString(){
+    return text;
+  }
   
   /**
    * 
@@ -20,7 +56,7 @@ public enum LifeStyle {
    * @return 
    * @throws tools.RPGCCException 
    */
-  public int getCost(LifeStyle lf) throws RPGCCException{
+  public int getCost(LifeStyles lf) throws RPGCCException{
     switch(lf){
       case Street: return 0;
       case Squat:  return 500;
@@ -38,7 +74,7 @@ public enum LifeStyle {
    * @return
    * @throws RPGCCException 
    */
-  public String getStartingNuyens(LifeStyle lf) throws RPGCCException{
+  public String getStartingNuyens(LifeStyles lf) throws RPGCCException{
     switch(lf){
       case Street: return "1D6+20";
       case Squat:  return "2D6+40";
