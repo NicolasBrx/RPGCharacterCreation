@@ -395,7 +395,10 @@ public class SrPanel extends javax.swing.JPanel implements CreationInterface{
     // (attributes, skills, gears, qualities, ... repartition to see according to place and what's to be done)
     SrSubPanelOne subOne = new SrSubPanelOne();
     SrSubPanelTwo subTwo = new SrSubPanelTwo();
+    subOne.setVisible(true);
     jpSubs.add(subOne);
+    jpSubs.revalidate();
+    jpSubs.repaint();
     
   }//GEN-LAST:event_jbValidateActionPerformed
 
