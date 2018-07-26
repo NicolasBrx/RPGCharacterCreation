@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Laura>
+  <character godmode="no" name="Polaris" firstname="Laura" affected="no">
+    <sex>woman</sex>
+    <surname>Polaris</surname>
+    <age>32</age>
+    <weight>80.0</weight>
+    <size>161.0</size>
+    <eye>marron</eye>
+    <supervisor>Kemper</supervisor>
+    <room>B2</room>
+    <seniority>0</seniority>
+    <attributes>
+      <vitality>8</vitality>
+      <coldblood>12</coldblood>
+      <lucidity>6</lucidity>
+    </attributes>
+    <lineaments>
+      <Toto>2</Toto>
+      <Tutu>1</Tutu>
+      <Tata>-1</Tata>
+      <Titi>-2</Titi>
+    </lineaments>
+  </character>
+</Laura>

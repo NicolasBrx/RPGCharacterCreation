@@ -135,14 +135,39 @@ public class SrPanel extends javax.swing.JPanel implements CreationInterface{
     jLabel5.setText("Ressources");
 
     jcbMetatype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+    jcbMetatype.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jcbMetatypeActionPerformed(evt);
+      }
+    });
 
     jcbAttributes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+    jcbAttributes.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jcbAttributesActionPerformed(evt);
+      }
+    });
 
     jcbMR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+    jcbMR.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jcbMRActionPerformed(evt);
+      }
+    });
 
     jcbSkills.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+    jcbSkills.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jcbSkillsActionPerformed(evt);
+      }
+    });
 
     jcbRessources.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+    jcbRessources.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jcbRessourcesActionPerformed(evt);
+      }
+    });
 
     jcbGodMode.setText("God Mode");
 
@@ -153,6 +178,11 @@ public class SrPanel extends javax.swing.JPanel implements CreationInterface{
     jbNextSubPanel.setText(">>");
 
     jbValidate.setText("Validate");
+    jbValidate.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jbValidateActionPerformed(evt);
+      }
+    });
 
     jbSave.setText("Save");
 
@@ -337,6 +367,34 @@ public class SrPanel extends javax.swing.JPanel implements CreationInterface{
         .addContainerGap())
     );
   }// </editor-fold>//GEN-END:initComponents
+
+  private void jbValidateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbValidateActionPerformed
+    // Once validate button is clicked
+    
+    // Check all numbers are good and allow to pursue character creation by instanciation of the subpanels 
+    // (attributes, skills, gears, qualities, ... repartition to see according to place and what's to be done)
+    
+  }//GEN-LAST:event_jbValidateActionPerformed
+
+  private void jcbMetatypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbMetatypeActionPerformed
+    // inform about available metatyptes and special points according to the priority choosen
+  }//GEN-LAST:event_jcbMetatypeActionPerformed
+
+  private void jcbAttributesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAttributesActionPerformed
+    // inform about available attribute points according to the priority choosen
+  }//GEN-LAST:event_jcbAttributesActionPerformed
+
+  private void jcbMRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbMRActionPerformed
+    // inform about magic resistance and other magic/techno bonuses according to the priority choosen
+  }//GEN-LAST:event_jcbMRActionPerformed
+
+  private void jcbSkillsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSkillsActionPerformed
+    // inform about available skill points according to the priority choosen
+  }//GEN-LAST:event_jcbSkillsActionPerformed
+
+  private void jcbRessourcesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbRessourcesActionPerformed
+    // inform about available credit resources according to the priority choosen
+  }//GEN-LAST:event_jcbRessourcesActionPerformed
 
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
