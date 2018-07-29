@@ -6,7 +6,6 @@ import player_creator.games.SrCreator;
 import player_creator.games.shadowrun.builder.Prioritizer;
 import player_creator.games.shadowrun.builder.RunnerTypes;
 import player_creator.games.shadowrun.builder.SpecialSkills;
-import player_creator.games.shadowrun.builder.LifeStyles;
 
 /**
  *
@@ -393,12 +392,14 @@ public class SrPanel extends javax.swing.JPanel implements CreationInterface{
     
     // Check all numbers are good and allow to pursue character creation by instanciation of the subpanels 
     // (attributes, skills, gears, qualities, ... repartition to see according to place and what's to be done)
+    /*
     SrSubPanelOne subOne = new SrSubPanelOne();
     SrSubPanelTwo subTwo = new SrSubPanelTwo();
     subOne.setVisible(true);
     jpSubs.add(subOne);
     jpSubs.revalidate();
     jpSubs.repaint();
+    */
     
   }//GEN-LAST:event_jbValidateActionPerformed
 
